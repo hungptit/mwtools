@@ -1,0 +1,865 @@
+function [test] = tsubsys2model(point)
+% Test suite for Simulink.SubSystem.convertToModelReference
+%
+
+% Copyright 2003-2012 The MathWorks, Inc.
+%
+%----------------------------------
+% Do not modify this code block.
+%----------------------------------
+% Create an null variable 'point' if it doesn't already exist,
+% to prevent bogus warnings in function calls.
+testharness;                     % Run the tests and report results
+  
+  
+function [test,testparams]=setup(test,testparams)
+%SETUP Create variables, figures, pcode, etc., for use in all testpoints.
+% Store these in fields of the testparams structure.
+% Even if you do not intend to use testparams, create the
+% variable anyway to avoid bogus warnings in function calls.
+  testparams = slrtw_remove_drool(testparams,'setup');
+  testparams.wsVars_before = evalin('base', 'who;'); 
+  testparams.rec = qeinitpm;
+  testparams.qefilteredout.lvlTwo2 = 'g729642';
+  
+function test = cleanup(test,testparams)
+%CLEANUP Close figure windows created by setup.
+  test_cleanup(testparams);
+  testparams = slrtw_remove_drool(testparams,'cleanup');
+  qeinitpm(testparams.rec);
+  
+
+%-----------------------------------------------------------------------------
+function test_cleanup(testparams)
+testparams.wsVars_after = evalin('base', 'who;');
+extra = setdiff(testparams.wsVars_after, testparams.wsVars_before);
+if(~isempty(extra))
+    assignin('base', 'extra', extra);
+    evalin('base', 'clear(extra{1:end})');
+    evalin('base', 'clear extra');
+end % if
+    
+%CLEANUP 
+
+function i_jump
+%I_JUMP Throw error to cause jump out of try scope.
+
+   if isempty(lasterr)
+     error('')
+   else
+     error(lasterr)
+   end
+
+%end i_jump
+
+function msgIdPref = msgIdPref_l
+   msgIdPref = 'Simulink:modelReference:convertToModelReference_';
+%endfunction  msgIdPref_l
+
+
+%------------------------------------------------------------------------------
+
+% **************************************************
+% *                                                *
+% *      This test is full.  Please do not add     *
+% *        additional testpoints to the file.      *
+% *                                                *
+% **************************************************
+
+%% -----------------------------------------------------------------------
+function test = lvlTwo_neg1(test, testparams)
+% Negative test for number of input argument. 
+
+  model = 'mdlref_conversion';
+  load_system(model);
+  c1 = onCleanup(@() rtwtestclosemodel(model));
+  
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+  
+  qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidNumInputs', ...
+      @() Simulink.SubSystem.convertToModelReference(model));
+  
+%------------------------------------------------------------------------------
+function test = lvlTwo_neg2(test, testparams)
+  tmpDir = qeWorkingDir();%#ok
+  
+  % The first input must be a subsystem block
+  model    = 'mInvalidBlockType';
+  mdlRef   = 'mynewmodel';
+  scopeBlk = [model '/Scope'];
+  load_system(model);
+  c1 = onCleanup(@() rtwtestclosemodel(model));
+   
+  qeVerifyError('Simulink:modelReference:invalidSSType', ...
+      @() Simulink.SubSystem.convertToModelReference(scopeBlk, mdlRef));
+  
+%------------------------------------------------------------------------------
+% Fix g307407
+function test = lvlTwo_neg3(test, testparams)
+  tmpDir = qeWorkingDir();%#ok
+                          
+  % The second input must be char string containing a model name
+  model = 'mdlref_conversion';
+  
+  load_system(model);
+  c1 = onCleanup(@() rtwtestclosemodel(model));
+  
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+  set_param(model,'SignalResolutionControl','UseLocalSettings');
+  
+  subsys = 'mdlref_conversion/Bus Counter';
+
+  % The second input parameter must be a valid model name
+  qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidModelRef', ...
+                @() Simulink.SubSystem.convertToModelReference(subsys, 'foo xxx'));
+  
+  qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidModelRef', ...
+                @() Simulink.SubSystem.convertToModelReference(subsys, 1));
+  
+  % The output model should not exist in the path
+  qeVerifyError('Simulink:modelReference:convertToModelReference_ModelRefFileExisted', ...
+                @() Simulink.SubSystem.convertToModelReference(subsys, 'mqesl_vdp'));
+  
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_neg4(test, testparams)
+  tmpDir = qeWorkingDir();%#ok
+  
+  % Invalid simulation status
+  model = 'mdlref_conversion';
+  mdlRef = 'mynewmodel';
+  load_system(model);
+  c1 = onCleanup(@() rtwtestclosemodel(model));
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+  
+  mdlref_conversion([],[],[],'compile');  
+  
+  ssBlk = 'mdlref_conversion/Bus Counter';
+  qeVerifyError('Simulink:modelReference:convertToModelReference_BadSimulationStatus', ...
+      @() Simulink.SubSystem.convertToModelReference(ssBlk, mdlRef));  
+  
+%------------------------------------------------------------------------------
+function test = lvlTwo_neg5(test, testparams)
+% Invalid value for ReplaceSubsystem. It must be sim or rtw.
+  model = 'msigspec_bus';
+  load_system(model);
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');   
+  ssBlk = 'msigspec_bus/Subsystem1';
+  
+  qeVerifyError('Simulink:modelReference:convertToModelReference_ReplaceSubsystem', ...
+      @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model','ReplaceSubsystem', 'a'));
+  
+  close_system(model, 0);
+
+%endfunction
+
+  
+%------------------------------------------------------------------------------
+function test = lvlTwo_neg6(test, testparams)
+% Invalid value for BuildTarget. It must be sim or rtw.
+  model = 'msigspec_bus';
+  load_system(model);
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+  ssBlk = 'msigspec_bus/Subsystem1';
+    
+  qeVerifyError('Simulink:modelReference:convertToModelReference_BuildTarget', ...
+      @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model','BuildTarget', 1));  
+  
+  close_system(model, 0);
+
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_neg7(test, testparams)
+% Property and values must come in pair
+  model = 'msigspec_bus';
+  load_system(model);
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+  ssBlk = 'msigspec_bus/Subsystem1';
+    
+  qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidNumNameValuePair', ...
+      @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model','BuildTarget'));
+  
+  close_system(model, 0);
+
+%endfunction
+   
+%------------------------------------------------------------------------------
+function test = lvlTwo_neg9(test, testparams)
+% Invalid input option
+  model = 'mconversionMuxInBus';
+  load_system(model);
+  
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+  set_param(model, 'InlineParams', 'On');
+  ssBlk = 'mconversionMuxInBus/ToConvert';
+  
+  qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidInputArgument', ...
+      @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model','InvalidArg', true));
+  
+  close_system(model, 0);
+    
+%------------------------------------------------------------------------------
+function test = lvlTwo_neg10(test, testparams)
+% Test for InvalidSignalResolution
+
+    tmpDir = qeWorkingDir(); %#ok
+    modelName = 'mInvalidSignalResolution';    
+    subsys = [modelName, '/Bus Counter'];
+    
+    load_system(modelName);        
+    c1 = onCleanup(@() rtwtestclosemodel(modelName, true));
+    
+    qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidSignalResolution', ...
+                  @() Simulink.SubSystem.convertToModelReference(subsys, 'fooxxx'));
+    
+    % Test for warning
+    wID = {'Simulink:modelReference:convertToModelReference_InvalidSignalResolution', ...
+           'Simulink:utility:slUtilityCompBusCannotUseSignalNameForBusName'};
+    test_for_force_option_with_warning(subsys, wID);    
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_neg11(test, testparams)
+% Invalid value for Force. It must be true/false.
+  model = 'msigspec_bus';
+  load_system(model);
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');    
+  ssBlk = 'msigspec_bus/Subsystem1';
+  
+  qeVerifyError('Simulink:modelReference:convertToModelReference_Force', ...
+      @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model','Force', 3));
+  
+  close_system(model, 0);
+
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg1(test, testparams)
+% Test for invalid subsystem types
+    modelName = 'mInvalidSubsys';
+    load_system(modelName);
+    oc1 = onCleanup(@() rtwtestclosemodel(modelName, true)); 
+    
+    % set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+    % set_param(model,'SignalResolutionControl','UseLocalSettings');
+    
+    subsysBlks = {[modelName '/EML'], ...
+                  [modelName '/For'], ...
+                  [modelName '/If Action Subsystem'], ...
+                  [modelName '/Mask'], ...
+                  [modelName '/Physmod'], ...
+                  [modelName '/StateflowChart'], ...
+                  [modelName '/Subsystem1'], ...
+                  [modelName '/Truth Table'], ...
+                  [modelName '/Virtual'], ...
+                  [modelName '/While'], ...
+                  [modelName '/Subsystem1/ParentHasMask'], ...
+                  [modelName '/Virtual/B1'], ...
+                  [modelName '/ForEach Subsystem']};
+
+    numSubSys = length(subsysBlks);
+    
+    % Init the expected error ids
+    errIds = cell(numSubSys,1);
+    errIds{1}  = {'Simulink:modelReference:invalidSSTypeStateflow'};
+    errIds{2}  = {'Simulink:modelReference:invalidSSTypeFor'};
+    errIds{3}  = {'Simulink:modelReference:invalidSSTypeAction'};
+    errIds{4}  = {'Simulink:modelReference:convertToModelReference_InvalidSubsystemUnderMask'};
+    errIds{5}  = {'Simulink:modelReference:invalidSSTypePhysMod'};
+    errIds{6}  = {'Simulink:modelReference:invalidSSTypeStateflow'};
+    errIds{7}  = {'Simulink:modelReference:invalidSSTypeVirtual'};
+    errIds{8}  = {'Simulink:modelReference:invalidSSTypeStateflow'};
+    errIds{9}  = {'Simulink:modelReference:invalidSSTypeVirtual'};
+    errIds{10} = {'Simulink:modelReference:invalidSSTypeWhile'};
+    errIds{11} = {'Simulink:modelReference:convertToModelReference_InvalidSubsystemUnderMask'};
+    errIds{12} = {'Simulink:modelReference:invalidSSType'};
+    errIds{13} = {'Simulink:modelReference:invalidSSTypeForEach'};
+    
+    for idx = 1:numSubSys   
+        ssBlk = subsysBlks{idx};
+        disp(errIds{idx});
+        qeVerifyError(errIds{idx}, @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model'));
+    end
+    
+    % Convert interator subsystems under mask
+    qeVerifyError('Simulink:modelReference:invalidSSTypeFor', ...
+                  @() Simulink.SubSystem.convertToModelReference([modelName '/MaskedFor'], 'my_new_model', 'Force', true));
+    
+    qeVerifyError('Simulink:modelReference:invalidSSTypeForEach', ...
+                  @() Simulink.SubSystem.convertToModelReference([modelName '/MaskedForEach'], 'my_new_model', 'Force', true));
+    
+    qeVerifyError('Simulink:modelReference:invalidSSTypeWhile', ...
+                  @() Simulink.SubSystem.convertToModelReference([modelName '/MaskedWhile'], 'my_new_model', 'Force', true));
+    
+    % Convert read protected interator subsystems 
+    qeVerifyError('Simulink:modelReference:invalidSSTypeFor', ...
+                  @() Simulink.SubSystem.convertToModelReference([modelName '/ReadProtectedFor'], 'my_new_model', 'Force', true));
+    
+    qeVerifyError('Simulink:modelReference:invalidSSTypeForEach', ...
+                  @() Simulink.SubSystem.convertToModelReference([modelName '/ReadProtectedForEach'], 'my_new_model', 'Force', true));
+    
+    qeVerifyError('Simulink:modelReference:invalidSSTypeWhile', ...
+                  @() Simulink.SubSystem.convertToModelReference([modelName '/ReadProtectedWhile'], 'my_new_model', 'Force', true));
+    
+    % Test for warning
+    ssBlk = [modelName '/Subsystem1/ParentHasMask'];
+    wID = {'Simulink:modelReference:convertToModelReference_InvalidSubsystemUnderMask'};
+    
+    supIDs = qeSuppressWarningID({'Simulink:Engine:InputNotConnected',...
+                        'Simulink:Engine:OutputNotConnected',...
+                        'Simulink:Engine:UsingDefaultMaxStepSize',...
+                        'Simulink:blocks:SubsysReadProtectErr', ...
+                        'Simulink:blocks:InvActSubsysConnection'});
+    
+    test_for_force_option_with_warning(ssBlk, wID);
+    
+    supIDs.delete;
+    
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg2(test, testparams)
+% Invalid simulation status
+  model = 'msigspec_bus';
+  load_system(model);
+  oc1 = onCleanup(@() rtwtestclosemodel(model)); 
+  oc2 = onCleanup(@() rtwtestclosemodel('my_new_model'));
+  
+  tmpDir = qeWorkingDir();%#ok
+ 
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+  set_param(model,'SignalResolutionControl','UseLocalSettings');
+     
+  ssBlk = 'msigspec_bus/Subsystem1';
+  
+  qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidSubsystemConstInput', ...
+                @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model'));
+
+  % Test for warning
+  wID = {'Simulink:modelReference:convertToModelReference_InvalidSubsystemConstInput', ...
+         'Simulink:modelReference:convertToModelReference_inportInvalidDownStreamSampleTimeErr', ...
+         'Simulink:utility:slUtilityCompBusCannotUseSignalNameForBusName'};
+      
+  test_for_force_option_with_warning(ssBlk, wID);
+  
+  rtwtestclosemodel(model);
+
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg3(test, testparams)
+% Stateflow exported graphical function and
+% machine
+model = 'msf_gfdemo';
+newmodel = 'my_new_model';
+load_system(model);
+oc1 = onCleanup(@() rtwtestclosemodel(model));
+oc2 = onCleanup(@() rtwtestclosemodel(newmodel));
+tmpDir = qeWorkingDir();%#ok
+
+set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+set_param(model,'SignalResolutionControl','UseLocalSettings');
+
+% Test for error
+ssBlk = 'msf_gfdemo/machineParentedData';
+qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidSubsystemStateflow', ...
+    @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel));
+
+% Test for error
+expMsgId = 'Simulink:modelReference:convertToModelReference_InvalidSubsystemStateflow';
+ssBlk = 'msf_gfdemo/exportedGraphicalFcn';
+qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidSubsystemStateflow', ...
+    @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel));
+
+% Test for warning
+expWarnIds = {'Simulink:modelReference:convertToModelReference_InvalidSubsystemStateflow'};
+test = qeVerifyWarning(expWarnIds, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel, ...
+    'Force', true, 'ReplaceSubsystem', true));
+
+close_system(model, 0);
+
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg4(test, testparams)
+% Invalid simulation status
+  model = 'mfcncalloutput';
+  load_system(model);
+  
+  [startdir, testdir, test, hadErr] = rtwtestsetup(test);
+  
+  set_param(model, 'StrictBusMsg', 'ErrorLevel1');
+  set_param(model,'SignalResolutionControl','UseLocalSettings');
+   
+  ssBlk = 'mfcncalloutput/Subsystem';
+  qeVerifyError('Simulink:modelReference:convertToModelReference_InvalidSubsystemFcnCallOutput', ...
+      @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model'));
+  
+  close_system(model, 0);
+  rtwtestcleanup(startdir, testdir);
+
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg5(test, testparams)
+% Test for sample time related errors and warnings
+tmpDir = qeWorkingDir();%#ok
+
+model = 'mmixedts';
+newmodel = 'my_new_model';
+load_system(model);
+oc1 = onCleanup(@() rtwtestclosemodel(model));
+oc2 = onCleanup(@() rtwtestclosemodel(newmodel));
+
+set_param(model,'SignalResolutionControl','UseLocalSettings');
+
+% Error for bus signal with mixed sample time
+expErrId  = 'Simulink:modelReference:convertToModelReference_BusWithMixedSampleTimes';
+expWarnId = 'Simulink:modelReference:convertToModelReference_outportInvalidUpStreamSampleTimeWarn';
+
+ssBlk = 'mmixedts/SS';
+qeVerifyWarning(expWarnId, @() qeVerifyError(expErrId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel)));
+
+% Error for input bus with known sample time in trigger subsystems
+ssBlk = 'mmixedts/SS1/SS2';
+qeVerifyError('Simulink:modelReference:convertToModelReference_BusWithKnownTsInTriggerSS', ...
+    @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model'));
+
+% Error for sample time mist match in down-stream blocks
+ssBlk = 'mmixedts/SS2';
+qeVerifyError('Simulink:modelReference:convertToModelReference_inportInvalidDownStreamSampleTimeErr', ...
+    @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model'));
+
+% Error for sample time mistake in up-stream blocks
+ssBlk = 'mmixedts/SS3';
+qeVerifyError('Simulink:modelReference:convertToModelReference_outportInvalidUpStreamSampleTimeErr', ...
+    @() Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model'));
+
+% Test for warning
+expWarnIds = 'Simulink:modelReference:convertToModelReference_outportInvalidUpStreamSampleTimeErr';
+test = qeVerifyWarning(expWarnIds, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel, ...
+    'Force', true, 'ReplaceSubsystem', true));
+
+% Close the model
+close_system(model, 0);
+  
+  
+%endfunction
+
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_downstream_sample_time_warn(test, testparams)
+% Test for InvalidDownStreamSampleTimeWarn
+   model = 'msigspec_bus2';
+   needCleanup = 0;
+   try    
+     [startdir, testdir, test, hadErr] = rtwtestsetup(test);
+     if hadErr, i_jump; end;
+     needCleanup = 1;
+     
+     expWarnId = 'Simulink:modelReference:convertToModelReference_inportInvalidDownStreamSampleTimeWarn';          
+     load_system(model);
+     set_param(model,'SignalResolutionControl','UseLocalSettings');
+     ssBlk = 'msigspec_bus2/Subsystem2';
+     Simulink.SubSystem.convertToModelReference(ssBlk, 'my_new_model', 'ReplaceSubsystem', true);
+
+     [warn, warnid] = lastwarn; %#ok
+     test = qeverify(test, {warnid, expWarnId});  
+   catch
+     disp(['*>Test failed due to error:', lasterr]);
+     test = qeverify(test, {1,0,'==','testdesc',['Failed '...
+                         'when converting a model to use model reference']});
+   end
+   rtwtestclosemodel(model);
+   rtwtestclosemodel('my_new_model');
+   if needCleanup
+     rtwtestcleanup(startdir, testdir);
+   end
+   
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg6(test, testparams)
+% Test for local data store memory blocks crossing subsystem boundary
+tmpDir = qeWorkingDir();%#ok
+model = 'mdatastore';
+newmodel = 'my_new_model';
+load_system(model);
+oc1 = onCleanup(@() rtwtestclosemodel(model));
+oc2 = onCleanup(@() rtwtestclosemodel(newmodel));
+
+set_param(model,'SignalResolutionControl','UseLocalSettings');
+
+expMsgId = 'Simulink:modelReference:convertToModelReference_InvalidSubsystemLocalDataStoreCrossSys';
+ssBlk = 'mdatastore/SS';
+qeVerifyError(expMsgId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel));
+  
+expWarnId = {'Simulink:Engine:UsingDiscreteSolver', ...
+    'Simulink:modelReference:convertToModelReference_InvalidSubsystemLocalDataStoreCrossSys'};
+test = qeVerifyWarning(expWarnId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel, ...
+    'Force', true, 'ReplaceSubsystem', true));
+close_system(model, 0);
+
+% Test
+tmpDir = qeWorkingDir();%#ok
+model = 'massign';
+load_system(model);
+oc1 = onCleanup(@() rtwtestclosemodel(model));
+oc2 = onCleanup(@() rtwtestclosemodel(newmodel));
+
+set_param(model,'SignalResolutionControl','UseLocalSettings');
+
+expMsgId = 'Simulink:modelReference:convertToModelReference_InvalidSubsystemLocalDataStoreCrossSys';
+ssBlk = 'massign/For SS1/SS';
+qeVerifyError(expMsgId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel));
+close_system(model, 0);
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg7(test, testparams)
+% Test for local dwork crossing subsystem boundary
+% See description for errorid Simulink:modelReference:DisallowNonIterAssignmentBlocks
+% in simulink source code for more information.
+tmpDir = qeWorkingDir();%#ok
+model = 'massign';
+newmodel = 'my_new_model';
+load_system(model);
+oc1 = onCleanup(@() rtwtestclosemodel(model));
+oc2 = onCleanup(@() rtwtestclosemodel(newmodel));
+
+set_param(model,'SignalResolutionControl','UseLocalSettings');
+expMsgId = 'Simulink:modelReference:convertToModelReference_InvalidSubsystemDWorkCrossSys';
+
+ssBlk = 'massign/For SS/SS';
+
+% Test for error
+qeVerifyError(expMsgId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel));
+
+% Test for warning
+expWarnId = 'Simulink:modelReference:convertToModelReference_InvalidSubsystemDWorkCrossSys';
+test = qeVerifyWarning(expWarnId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel, ...
+    'Force', true, 'ReplaceSubsystem', true));
+
+close_system(model, 0);
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg8(test, testparams)
+% Wide function call input ports
+tmpDir = qeWorkingDir();%#ok
+model = 'mwidefcncall';
+newmodel = 'my_new_model';
+load_system(model);
+oc1 = onCleanup(@() rtwtestclosemodel(model));
+oc2 = onCleanup(@() rtwtestclosemodel(newmodel));
+
+ssBlk = 'mwidefcncall/fcncall_subsys';
+expMsgId = 'Simulink:modelReference:convertToModelReference_InvalidSubsystemWideFcnCallPort';
+qeVerifyError(expMsgId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel));
+
+% Test for warning
+expWarnId = 'Simulink:modelReference:convertToModelReference_InvalidSubsystemWideFcnCallPort';
+test = qeVerifyWarning(expWarnId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel, ...
+    'Force', true, 'ReplaceSubsystem', true));
+
+close_system(model, 0);
+ 
+%endfunction
+
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg9(test, testparams)
+% Do not replace the subsystem block with Model block if
+% the utility function fails to save the bus objects
+
+%In reference to geck 482613
+sw1= qeSuppressWarningID('Simulink:utility:slUtilityCompBusCannotUseSignalNameForBusName');
+
+model = 'mdlref_conversion';
+needCleanup = 0;
+try    
+    [startdir, testdir, test, hadErr] = rtwtestsetup(test);
+    if hadErr, i_jump; end;
+    needCleanup = 1;
+    
+    lasterr('');
+    lastwarn('');
+    
+    ssBlk = [model '/Bus Counter'];
+    mdlRef = 'mynew_model';
+    fileName = [mdlRef, '_bus.m'];
+    
+    load_system(model);
+    set_param(model,'SignalResolutionControl','UseLocalSettings');
+    fid = fopen(fileName,'wt');
+    if fid == -1
+        test = qeverify(test, {1, 0, '==','testdesc', ...
+                            ['Failed to create ' fileName]});
+    else
+        st = fclose(fid);
+        test = qeverify(test, {st, 0, '==','testdesc', ...
+                            ['Failed to close ' fileName]});
+        try
+            % This will error out because mdlref_conversion_bus.m exists
+            Simulink.SubSystem.convertToModelReference(...
+                ssBlk, mdlRef, ...
+                'ReplaceSubsystem', true, ...
+                'BusSaveFormat', 'Cell');
+            test = qeverify(test, {1, 0, '==','testdesc', ...
+                                'Conversion should have been failed'});
+        catch
+            blkType = get_param(ssBlk, 'BlockType');
+            test = qeverify(test, {blkType, 'SubSystem', '=='});
+        end
+    end
+catch
+    disp(['*>Test failed due to error:', lasterr]);
+    test = qeverify(test, {1,0,'==','testdesc','Failed ...'});
+end
+rtwtestclosemodel(model);
+rtwtestclosemodel('mynew_model');
+if needCleanup
+    rtwtestcleanup(startdir, testdir);
+end
+%endfunction
+
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_invalid_subsys_neg10(test, testparams)
+% Tunable parameter tables is not empty
+tmpDir = qeWorkingDir();%#ok
+model = 'mreuse_basic9';
+newmodel = 'my_new_model';
+load_system(model);
+oc1 = onCleanup(@() rtwtestclosemodel(model));
+oc2 = onCleanup(@() rtwtestclosemodel(newmodel));
+
+ssBlk = 'mreuse_basic9/ss2';
+  
+expMsgId = 'Simulink:modelReference:convertToModelReference_TunableVarsTabelNotEmpty';
+qeVerifyError(expMsgId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel));
+
+% Test for warning
+expWarnId = 'Simulink:modelReference:convertToModelReference_TunableVarsTabelNotEmpty';
+test = qeVerifyWarning(expWarnId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel, ...
+    'Force', true, 'ReplaceSubsystem', true));
+
+close_system(model, 0);
+%endfunction
+
+
+%------------------------------------------------------------------------------
+function test = lvlTwo_g194074(test, testparams)
+% Test for input port connection to Merge block (g194074)
+tmpDir = qeWorkingDir();%#ok
+model = 'mmerge';
+newmodel = 'my_new_model';
+load_system(model);
+oc1 = onCleanup(@() rtwtestclosemodel(model));
+oc2 = onCleanup(@() rtwtestclosemodel(newmodel));
+set_param(model,'SignalResolutionControl','UseLocalSettings');
+ssBlk = 'mmerge/SS';
+
+% Test for error
+expMsgId = 'Simulink:modelReference:convertToModelReference_InvalidMergeConnection';
+test = qeVerifyError(expMsgId, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel));
+
+% Test for warning
+expWarnIds = {'Simulink:Engine:InputNotConnected', ...
+    'Simulink:Engine:OutputNotConnected', ...
+    'Simulink:modelReference:convertToModelReference_InvalidMergeConnection'};
+test = qeVerifyWarning(expWarnIds, @() Simulink.SubSystem.convertToModelReference(ssBlk, newmodel, ...
+    'Force', true, 'ReplaceSubsystem', true));
+
+%endfunction
+%------------------------------------------------------------------------------
+function test = lvlTwo_g194074_2(test, testparams)
+% Test for input port connection to Merge block (g194074)
+  
+  lasterr('');
+  needCleanup = 0;
+
+  model = 'mmerge';
+  load_system(model);
+  set_param(model,'SignalResolutionControl','UseLocalSettings');
+   
+  try    
+    [startdir, testdir, test, hadErr] = rtwtestsetup(test);
+    if hadErr, i_jump; end;
+    needCleanup = 1;
+    
+    load_system(model);
+    subsys = 'mmerge/SS2';
+    mdlRef = 'my_new_model';
+    [s, mdlRefH] = Simulink.SubSystem.convertToModelReference(subsys, mdlRef);
+    
+    blkType = get_param(mdlRefH,'BlockType');
+    
+    test = qeverify(test, {s, true}, {blkType, 'ModelReference'});
+    
+    newmdl = get_param(mdlRefH,'parent');
+    close_system(newmdl, 0);
+  catch
+    disp(['*>Test failed due to error:', lasterr]);
+    test = qeverify(test, {1,0,'==','testdesc',['Failed '...
+                        'when converting a model to using model reference']});
+  end
+  rtwtestclosemodel(model);
+  rtwtestclosemodel('my_new_model');
+  if needCleanup
+    rtwtestcleanup(startdir, testdir);
+  end
+%end function
+
+%------------------------------------------------------------------------------
+function test = lvlTwo1(test, testparams)
+% Make sure we can convert the demo using the new utility function
+
+%In reference to geck 482613
+sw1= qeSuppressWarningID('Simulink:utility:slUtilityCompBusCannotUseSignalNameForBusName');
+    
+  mdl    = 'mdlref_conversion';
+  subsys = 'mdlref_conversion/Bus Counter';
+  mdlRef = 'myNewModel';
+  baseFileName = 'bmdlref_conversion';
+
+  test = htest_subsys2model(test, baseFileName, mdl, subsys, mdlRef);
+
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo2(test, testparams)
+% Test for block with multiple input
+  mdl    = 'mwrc04_fullvehicle_mod';
+  subsys = 'mwrc04_fullvehicle_mod/ECU';
+  mdlRef = 'myNewModel';
+  baseFileName = 'bwrc04_fullvehicle_mod';
+  
+  load_system(mdl);
+  evalin('base','load dwrc04_fullvehicle.mat;');
+  set_param(mdl, 'StrictBusMsg', 'ErrorLevel1');
+  set_param(mdl, 'SignalResolutionControl', 'UseLocalSettings');
+
+  % Inline parameter is off in this model
+  % Test for error  
+  qeVerifyError('Simulink:modelReference:convertToModelReference_InlineParamsOff', ...
+      @() Simulink.SubSystem.convertToModelReference(subsys, 'myNewModel'));
+    
+  % Test for warning
+  [test, wId] = test_for_force_option_l(test, subsys);
+  test = qeverify(test, {wId, 'Simulink:modelReference:convertToModelReference_InlineParameter'});
+  % The subsystem have been replace by a Model block.
+  % close the model before other testing steps
+  close_system(mdl, 0);
+  
+  load_system(mdl);
+  set_param(mdl, 'StrictBusMsg', 'ErrorLevel1');
+  set_param(mdl, 'SignalResolutionControl', 'UseLocalSettings');
+  set_param(mdl, 'InlineParams', 'on')
+  test = htest_subsys2model(test, baseFileName, mdl, subsys, mdlRef);
+  close_system(mdl, 0);
+%endfunction
+
+%------------------------------------------------------------------------------
+function test = lvlTwo3(test, testparams)
+% Convert a subsystem to Model. Do not replace the subsystem with Model block
+
+%In reference to geck 482613
+sw1= qeSuppressWarningID('Simulink:utility:slUtilityCompBusCannotUseSignalNameForBusName');
+
+  mdl    = 'mdlref_conversion';
+  subsys = 'mdlref_conversion/Bus Counter';
+  refMdl = 'myNewModel';
+  
+  lasterr('');
+  needCleanup = 0;
+
+  oldListOfOpenModels = find_system('flat');
+  
+  try    
+    [startdir, testdir, test, hadErr] = rtwtestsetup(test);
+    if hadErr, i_jump; end;
+    needCleanup = 1;
+    
+    load_system(mdl);
+    set_param(mdl, 'StrictBusMsg', 'ErrorLevel1');
+    set_param(mdl,'SignalResolutionControl','UseLocalSettings');
+    [s, mdlRefH] = Simulink.SubSystem.convertToModelReference(subsys, refMdl);
+    
+    blkType = get_param(mdlRefH,'BlockType');
+    
+    test = qeverify(test, {s, true},{blkType, 'ModelReference'});
+    
+    % Make sure StrictBusMsg for new model is set to ErrorLevel1
+    load_system(refMdl);
+    busMsg = get_param(refMdl, 'StrictBusMsg');
+    
+    test = qeverify(test, {busMsg, 'ErrorLevel1'});
+    
+  catch
+    disp(['*>Test failed due to error:', lasterr]);
+    test = qeverify(test, {1,0,'==','testdesc',['Failed '...
+                        'when converting a model to using model reference']});
+  end
+  
+  newListOfOpenModels = find_system('flat');
+  modelsToClose = setdiff(newListOfOpenModels, oldListOfOpenModels);
+  
+  for mdlIdx = 1:length(modelsToClose)
+    rtwtestclosemodel(modelsToClose{mdlIdx});
+  end
+  
+  if needCleanup
+    rtwtestcleanup(startdir, testdir);
+  end
+%endfunction
+
+%------------------------------------------------------------------------------
+function [test, warnId, cmdOutput] = test_for_force_option_l(test, ssBlk)
+   warnId       = '';
+   cmdOutput = '';
+   needCleanup = 0;
+   try    
+     [startdir, testdir, test, hadErr] = rtwtestsetup(test);
+     if hadErr, i_jump; end;
+     needCleanup = 1;
+     lasterr('');
+     lastwarn('');
+     
+     cmd = ['Simulink.SubSystem.convertToModelReference(''',ssBlk, ''', ''mynewmdl'', ', ...
+            '''Force'', true, ''ReplaceSubsystem'', true)'];
+     cmdOutput = evalc(cmd);
+     cmdOutput = regexprep(cmdOutput, '\n', ' ');
+     [warnStr, warnId] = lastwarn;
+     close_system('mynewmdl', 0);
+   end
+ 
+   test = qeverify(test, {lasterr, '' });
+   
+   if needCleanup
+       rtwtestcleanup(startdir, testdir);
+   end
+   
+%endfunction
+
+%------------------------------------------------------------------------------
+function test_for_force_option_with_warning(ssBlk, wID)
+
+tmpDir = qeWorkingDir(); %#ok
+qeVerifyWarning(wID, ...
+                @() Simulink.SubSystem.convertToModelReference(ssBlk, 'mynewmdl', ...
+            'Force', true, 'ReplaceSubsystem', true));
+
+close_system('mynewmdl', 0);
+   
+%endfunction
+
+
+%------------------------------------------------------------------------------
+
+% **************************************************
+% *                                                *
+% *      This test is full.  Please do not add     *
+% *        additional testpoints to the file.      *
+% *                                                *
+% **************************************************
+

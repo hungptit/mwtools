@@ -1,0 +1,1160 @@
+# LocalWords:  CGenerator
+Model {
+  Name			  "mert_buses"
+  Version		  7.6
+  MdlSubVersion		  0
+  GraphicalInterface {
+    NumRootInports	    1
+    Inport {
+      BusObject		      "BusObject"
+      Name		      "BusObject"
+    }
+    NumRootOutports	    1
+    Outport {
+      BusObject		      ""
+      BusOutputAsStruct	      "off"
+      Name		      ""
+    }
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.449"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+  }
+  Description		  "Algorithm Design"
+  SavedCharacterEncoding  "windows-1252"
+  PostLoadFcn		  "clear elems;\nelems(1) = Simulink.BusElement;\nelems(1).Name = 'a1';\nelems(1).Dimensions = 4;\nelem"
+  "s(1).DimensionsMode = 'Fixed';\nelems(1).DataType = 'fixdt(0,16,4, ''DataTypeOverride'', ''Off'')';\nelems(1).Sample"
+  "Time = -1;\nelems(1).Complexity = 'real';\nelems(1).SamplingMode = 'Sample based';\n\nBusObject = Simulink.Bus;\nBus"
+  "Object.HeaderFile = '';\nBusObject.Description = sprintf('');\nBusObject.Elements = elems;\nassignin('base', 'BusObj"
+  "ect', BusObject)"
+  SaveDefaultBlockParams  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  MaxMDLFileLineLength	  120
+  CloseFcn		  "rtwprivate ssgencode ModelCloseRequest msig_init_values"
+  Created		  "Tue Sep 22 13:29:52 1998"
+  Creator		  "The MathWorks Inc."
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "mkachmar"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Fri Jun 18 09:59:23 2010"
+  RTWModifiedTimeStamp	  198755961
+  ModelVersionFormat	  "1.%<AutoIncrement:449>"
+  ConfigurationManager	  "none"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  off
+  ShowMaskWithParameters  off
+  ShowModelReferenceVariance off
+  ShowRequirementLinks	  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  on
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  off
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  SimulationMode	  "normal"
+  RTW.AutosarInterface {
+    $PropName		    "RTWFcnClass"
+    $ObjectID		    1
+    Version		    "1"
+    Name		    "AutosarInterface"
+    Array {
+      Type		      "Handle"
+      Dimension		      15
+      RTW.AutosarIOSpec {
+	$ObjectID		2
+	SLObjectName		"Out2"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out2"
+	InterfaceName		"Out2"
+	DataElement		"Out2"
+	ServiceName		"Out2"
+	ServiceOperation	"Out2"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			5
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		3
+	SLObjectName		"Out3"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out3"
+	InterfaceName		"Out3"
+	DataElement		"Out3"
+	ServiceName		"Out3"
+	ServiceOperation	"Out3"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			9
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		4
+	SLObjectName		"Out1"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out1"
+	InterfaceName		"Out1"
+	DataElement		"Out1"
+	ServiceName		"Out1"
+	ServiceOperation	"Out1"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			8
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		5
+	SLObjectName		"Out5"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out5"
+	InterfaceName		"Out5"
+	DataElement		"Out5"
+	ServiceName		"Out5"
+	ServiceOperation	"Out5"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			11
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		6
+	SLObjectName		"Out6"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out6"
+	InterfaceName		"Out6"
+	DataElement		"Out6"
+	ServiceName		"Out6"
+	ServiceOperation	"Out6"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			6
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		7
+	SLObjectName		"Out4"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out4"
+	InterfaceName		"Out4"
+	DataElement		"Out4"
+	ServiceName		"Out4"
+	ServiceOperation	"Out4"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			10
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		8
+	SLObjectName		"BusPort"
+	SLObjectType		"Inport"
+	DataAccessMode		"ImplicitReceive"
+	AutosarPort		"BusPort"
+	InterfaceName		"BusPort"
+	DataElement		"BusPort"
+	ServiceName		"BusPort"
+	ServiceOperation	"BusPort"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			1
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		9
+	SLObjectName		"in_enum"
+	SLObjectType		"Inport"
+	DataAccessMode		"ImplicitReceive"
+	AutosarPort		"in_enum"
+	InterfaceName		"in_enum"
+	DataElement		"in_enum"
+	ServiceName		"in_enum"
+	ServiceOperation	"in_enum"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			2
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		10
+	SLObjectName		"in_fixpt1"
+	SLObjectType		"Inport"
+	DataAccessMode		"ImplicitReceive"
+	AutosarPort		"in_fixpt1"
+	InterfaceName		"in_fixpt1"
+	DataElement		"in_fixpt1"
+	ServiceName		"in_fixpt1"
+	ServiceOperation	"in_fixpt1"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			3
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		11
+	SLObjectName		"BusPort1"
+	SLObjectType		"Inport"
+	DataAccessMode		"ImplicitReceive"
+	AutosarPort		"BusPort1"
+	InterfaceName		"BusPort1"
+	DataElement		"BusPort1"
+	ServiceName		"BusPort1"
+	ServiceOperation	"BusPort1"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			4
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		12
+	SLObjectName		"Out9"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out9"
+	InterfaceName		"Out9"
+	DataElement		"Out9"
+	ServiceName		"Out9"
+	ServiceOperation	"Out9"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			1
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		13
+	SLObjectName		"Out11"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out11"
+	InterfaceName		"Out11"
+	DataElement		"Out11"
+	ServiceName		"Out11"
+	ServiceOperation	"Out11"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			2
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		14
+	SLObjectName		"out_enum"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"out_enum"
+	InterfaceName		"out_enum"
+	DataElement		"out_enum"
+	ServiceName		"out_enum"
+	ServiceOperation	"out_enum"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			3
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		15
+	SLObjectName		"out_fixpt1"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"out_fixpt1"
+	InterfaceName		"out_fixpt1"
+	DataElement		"out_fixpt1"
+	ServiceName		"out_fixpt1"
+	ServiceOperation	"out_fixpt1"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			4
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		16
+	SLObjectName		"Out7"
+	SLObjectType		"Outport"
+	DataAccessMode		"ImplicitSend"
+	AutosarPort		"Out7"
+	InterfaceName		"Out7"
+	DataElement		"Out7"
+	ServiceName		"Out7"
+	ServiceOperation	"Out7"
+	ServiceInterface	"/AUTOSAR/Services/ServiceName"
+	PortNum			7
+	ErrorReceiverInPortNum	1
+	QueueLength		1
+      }
+      PropName		      "ArgSpecData"
+    }
+    Array {
+      Type		      "Handle"
+      Dimension		      15
+      RTW.AutosarIOSpec {
+	$ObjectID		2
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		3
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		4
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		5
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		6
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		7
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		8
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		9
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		10
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		11
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		12
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		13
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		14
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		15
+      }
+      RTW.AutosarIOSpec {
+	$ObjectID		16
+      }
+      PropName		      "Data"
+    }
+    Array {
+      Type		      "Handle"
+      Dimension		      1
+      RTW.AutosarEventSpec {
+	$ObjectID		17
+	EventType		"TimingEvent"
+	EventName		"Event_mtest_Step"
+	ExecutionPeriod		0.1
+      }
+      PropName		      "Event"
+    }
+    InitRunnableName	    "Runnable_mtest_Init"
+    PeriodicRunnableName    "Runnable_mtest_Step"
+    InitEventName	    "Event_mtest_Init"
+    PeriodicEventName	    "Event_mtest_Step"
+    InterfacePackageName    "/mtest_pkg/mtest_if"
+    ComponentName	    "/mtest_pkg/mtest_swc/mtest"
+    InternalBehaviorName    "/mtest_pkg/mtest_ib/mtest"
+    ImplementationName	    "/mtest_pkg/mtest_imp/mtest"
+    DataTypePackageName	    "/mtest_pkg/mtest_dt"
+    SampleTime		    0.1
+    IsServerOperation	    0
+    ServerPortName	    "port"
+    ServerOperationPrototype "op(IN uint8 In1, IN uint8 In2, IN uint32 In3, OUT uint32 Out2, OUT uint8 Out3, OUT uint8"
+    " Out1, OUT double Out5, OUT uint32 Out6, OUT uint32 Out4)"
+    ServerInterfaceName	    "interface"
+    ServerType		    "Application software"
+    SampleTimeInheritedStr  "Inherited"
+  }
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "ReferencedWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "d"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  CovForceBlockReductionOff on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  CovModelRefEnable	  "Off"
+  CovExternalEMLEnable	  off
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "oneshot"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  off
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock off
+  BufferReuse		  on
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      18
+      Version		      "1.10.0"
+      Array {
+	Type			"Handle"
+	Dimension		8
+	Simulink.SolverCC {
+	  $ObjectID		  19
+	  Version		  "1.10.0"
+	  StartTime		  "0.0"
+	  StopTime		  "10"
+	  AbsTol		  "auto"
+	  FixedStep		  "auto"
+	  InitialStep		  "auto"
+	  MaxNumMinSteps	  "-1"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  SolverMode		  "SingleTasking"
+	  ConcurrentTasks	  off
+	  Solver		  "FixedStepDiscrete"
+	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	  Array {
+	    Type		    "Struct"
+	    Dimension		    1
+	    MATStruct {
+	      SampleTime	      "1"
+	      Offset		      "0"
+	      Priority		      [41.0]
+	    }
+	    PropName		    "SampleTimeProperty"
+	  }
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  20
+	  Version		  "1.10.0"
+	  Decimation		  "1"
+	  ExternalInput		  "inputSeries__AnzX{1}, inputSeries__AnzX{2}"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "StructureWithTime"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  off
+	  DSMLogging		  off
+	  InspectSignalLogs	  off
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "sigsOut"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  21
+	  Version		  "1.10.0"
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  InlineParams		  on
+	  UseIntDivNetSlope	  off
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  on
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnhancedBackFolding	  off
+	  StrengthReduction	  off
+	  ExpressionFolding	  on
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  ExpressionDepthLimit	  2147483647
+	  FoldNonRolledExpr	  on
+	  LocalBlockOutputs	  on
+	  RollThreshold		  5
+	  SystemCodeInlineAuto	  off
+	  StateBitsets		  on
+	  DataBitsets		  on
+	  UseTempVars		  on
+	  ZeroExternalMemoryAtStartup off
+	  ZeroInternalMemoryAtStartup off
+	  InitFltsAndDblsToZero	  off
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  on
+	  EfficientMapNaN2IntZero off
+	  OptimizeModelRefInitCode on
+	  LifeSpan		  "1"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  off
+	  SimCompilerOptimization "Off"
+	  AccelVerboseBuild	  off
+	  AccelParallelForEachSubsystem	on
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  22
+	  Version		  "1.10.0"
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"warning"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg on
+	  CheckExecutionContextRuntimeOutputMsg	on
+	  SignalResolutionControl "UseLocalSettings"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "none"
+	  InheritedTsInSrcMsg	  "warning"
+	  DiscreteInheritContinuousMsg "warning"
+	  MultiTaskDSMMsg	  "error"
+	  MultiTaskCondExecSysMsg "error"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  TasksWithSamePriorityMsg "warning"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "none"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "Use local settings"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  SFcnCompatibilityMsg	  "none"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "error"
+	  RootOutportRequireBusObject "none"
+	  AssertControl		  "UseLocalSettings"
+	  EnableOverflowDetection off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  ModelReferenceCSMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "ErrorOnBusTreatedAsVector"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  LoggingUnavailableSignals "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  23
+	  Version		  "1.10.0"
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdLargestAtomicInteger "Char"
+	  ProdLargestAtomicFloat  "None"
+	  ProdIntDivRoundTo	  "Zero"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  64
+	  ProdShiftRightIntArith  on
+	  ProdHWDeviceType	  "Specified"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetTypeEmulationWarnSuppressLevel 0
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Generic->32-bit Embedded Processor"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  24
+	  Version		  "1.10.0"
+	  UpdateModelReferenceTargets "IfOutOfDate"
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  25
+	  Version		  "1.10.0"
+	  SFSimEnableDebug	  on
+	  SFSimOverflowDetection  on
+	  SFSimEcho		  on
+	  SimBlas		  on
+	  SimCtrlC		  on
+	  SimExtrinsic		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  off
+	  SimBuildMode		  "sf_incremental_build"
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  26
+	  Version		  "1.10.0"
+	  SystemTargetFile	  "ert.tlc"
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  GenerateMakefile	  on
+	  TemplateMakefile	  "ert_default_tmf"
+	  Description		  "Real-Time Workshop Embedded Coder"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  ProcessScriptMode	  "Default"
+	  ConfigurationMode	  "Optimized"
+	  ProcessScript		  "ert_make_rtw_hook"
+	  ConfigAtBuild		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  IncludeERTFirstTime	  off
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateCodeInfo	  on
+	  GenerateSLWebview	  off
+	  GenerateCodeMetricsReport off
+	  RTWCompilerOptimization "Off"
+	  CheckMdlBeforeBuild	  "Off"
+	  CustomRebuildMode	  "OnUpdate"
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      27
+	      Version		      "1.10.0"
+	      ForceParamTrailComments on
+	      GenerateComments	      on
+	      IgnoreCustomStorageClasses off
+	      IgnoreTestpoints	      off
+	      IncHierarchyInIds	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      IncAutoGenComments      off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      IncDataTypeInIds	      off
+	      MangleLength	      1
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      DefineNamingRule	      "None"
+	      ParamNamingRule	      "None"
+	      SignalNamingRule	      "None"
+	      InsertBlockDesc	      on
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	    }
+	    Simulink.ERTTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      28
+	      Version		      "1.10.0"
+	      TargetFcnLib	      "ansi_tfl_table_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      TargetFunctionLibrary   "ANSI_C"
+	      UtilityFuncGeneration   "Auto"
+	      ERTMultiwordTypeDef     "System defined"
+	      ERTCodeCoverageTool     "None"
+	      ERTMultiwordLength      256
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      GenerateSampleERTMain   on
+	      GenerateTestInterfaces  off
+	      IsPILTarget	      off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant on
+	      CompOptLevelCompliant   on
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Use local settings"
+	      CombineOutputUpdateFcns on
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      ERTFirstTimeCompliant   on
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    on
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      off
+	      MultiInstanceERTCode    off
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   off
+	      SupportNonInlinedSFcns  off
+	      SupportVariableSizeSignals off
+	      EnableShiftOperators    on
+	      ParenthesesLevel	      "Nominal"
+	      PortableWordSizes	      off
+	      ModelStepFunctionPrototypeControlCompliant on
+	      CPPClassGenCompliant    on
+	      AutosarCompliant	      off
+	      GenerateErtSFunction    off
+	      CreateSILPILBlock	      "None"
+	      GenerateASAP2	      off
+	      ExtMode		      off
+	      ExtModeTransport	      0
+	      ExtModeStaticAlloc      off
+	      ExtModeStaticAllocSize  1000000
+	      ExtModeTesting	      off
+	      ExtModeMexFile	      "ext_comm"
+	      ExtModeIntrfLevel	      "Level1"
+	      InlinedParameterPlacement	"NonHierarchical"
+	      TargetOS		      "BareBoardExample"
+	      MultiInstanceErrorCode  "Error"
+	      RateGroupingCode	      on
+	      RootIOFormat	      "Individual arguments"
+	      RTWCAPISignals	      off
+	      RTWCAPIParams	      off
+	      RTWCAPIStates	      off
+	      RTWCAPIRootIO	      off
+	      ERTSrcFileBannerTemplate "ert_code_template.cgt"
+	      ERTHdrFileBannerTemplate "ert_code_template.cgt"
+	      ERTDataSrcFileTemplate  "ert_code_template.cgt"
+	      ERTDataHdrFileTemplate  "ert_code_template.cgt"
+	      ERTCustomFileTemplate   "example_file_process.tlc"
+	      CoverageDialogOpen      "off"
+	      ModuleNamingRule	      "Unspecified"
+	      SignalDisplayLevel      10
+	      ParamTuneLevel	      10
+	      GlobalDataDefinition    "Auto"
+	      DataDefinitionFile      "global.c"
+	      GlobalDataReference     "Auto"
+	      ERTFilePackagingFormat  "Modular"
+	      DataReferenceFile	      "global.h"
+	      GRTInterface	      off
+	      PreserveExpressionOrder off
+	      PreserveIfCondition     off
+	      ConvertIfToSwitch	      off
+	      PreserveExternInFcnDecls on
+	      EnableUserReplacementTypes off
+	      Array {
+		Type			"Struct"
+		Dimension		1
+		MATStruct {
+		  double		  ""
+		  single		  ""
+		  int32			  ""
+		  int16			  ""
+		  int8			  ""
+		  uint32		  ""
+		  uint16		  ""
+		  uint8			  ""
+		  boolean		  ""
+		  int			  ""
+		  uint			  ""
+		  char			  ""
+		}
+		PropName		"ReplacementTypes"
+	      }
+	      MemSecPackage	      "--- None ---"
+	      MemSecDataConstants     "Default"
+	      MemSecDataIO	      "Default"
+	      MemSecDataInternal      "Default"
+	      MemSecDataParameters    "Default"
+	      MemSecFuncInitTerm      "Default"
+	      MemSecFuncExecute	      "Default"
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      CurrentDlgPage	      "Data Import//Export"
+      ConfigPrmDlgPosition    " [ 472, 161, 1448, 992 ] "
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    18
+  }
+  WSDataSource		  "MAT-File"
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    UseDisplayTextAsClickCallback off
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      LatchByDelayingOutsideSignal off
+      LatchInputForFeedbackSignals off
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      SourceOfInitialOutputValue "Dialog"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      CheckFcnCallInpInsideContextMsg off
+      SystemSampleTime	      "-1"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
+      MinMaxOverflowLogging   "UseLocalSettings"
+      Variant		      off
+      GeneratePreprocessorConditionals off
+    }
+    Block {
+      BlockType		      ZeroOrderHold
+      SampleTime	      "1"
+    }
+  }
+  System {
+    Name		    "mert_buses"
+    Location		    [20, 80, 636, 489]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "104"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    780
+    Block {
+      BlockType		      Inport
+      Name		      "BusObject"
+      SID		      555
+      Position		      [35, 148, 65, 162]
+      IconDisplay	      "Port number"
+      OutDataTypeStr	      "Bus: BusObject"
+      BusOutputAsStruct	      on
+      Interpolate	      off
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "atomicSubsys"
+      SID		      772
+      Ports		      [1, 1]
+      Position		      [230, 13, 330, 297]
+      TreatAsAtomicUnit	      on
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"atomicSubsys"
+	Location		[120, 367, 327, 644]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  SID			  773
+	  Position		  [25, 33, 55, 47]
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  ZeroOrderHold
+	  Name			  "Zero-Order\nHold2"
+	  SID			  767
+	  Position		  [80, 25, 115, 55]
+	  SampleTime		  "-1"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  SID			  774
+	  Position		  [140, 33, 170, 47]
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "Zero-Order\nHold2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Zero-Order\nHold2"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      Outport
+      Name		      "Out11"
+      SID		      556
+      Position		      [435, 148, 465, 162]
+      ShowName		      off
+      FontName		      "Arial"
+      FontSize		      12
+      FontWeight	      "bold"
+      IconDisplay	      "Port number"
+    }
+    Line {
+      SrcBlock		      "BusObject"
+      SrcPort		      1
+      DstBlock		      "atomicSubsys"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "atomicSubsys"
+      SrcPort		      1
+      DstBlock		      "Out11"
+      DstPort		      1
+    }
+    Annotation {
+      Name		      "Copyright 2010 The MathWorks, Inc."
+      Position		      [260, 359]
+    }
+  }
+}
+# Finite State Machines
+#
+#    Stateflow Version 7.5 (R2010a) dated Jun  9 2010, 12:05:55
+#
+#
+
+
+Stateflow {
+  machine {
+    id			    1
+    name		    "mert_buses"
+    created		    "09-Dec-2009 11:18:31"
+    isLibrary		    0
+    firstTarget		    2
+    sfVersion		    75014000.000003
+  }
+  target {
+    id			    2
+    name		    "sfun"
+    description		    "Default Simulink S-Function Target."
+    machine		    1
+    linkNode		    [1 0 3]
+  }
+  target {
+    id			    3
+    name		    "rtw"
+    machine		    1
+    linkNode		    [1 2 0]
+  }
+}

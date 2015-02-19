@@ -1,0 +1,2017 @@
+# $Revision: 1.1.6.1 $	
+Model {
+  Name			  "testfx"
+  Version		  6.0
+  GraphicalInterface {
+    NumRootInports	    4
+    Inport {
+      Name		      "In1"
+    }
+    Inport {
+      Name		      "In2"
+    }
+    Inport {
+      Name		      "In3"
+    }
+    Inport {
+      Name		      "In4"
+    }
+    NumRootOutports	    4
+    Outport {
+      BusObject		      ""
+      BusOutputAsStruct	      "off"
+      Name		      "Out1"
+    }
+    Outport {
+      BusObject		      ""
+      BusOutputAsStruct	      "off"
+      Name		      "Out2"
+    }
+    Outport {
+      BusObject		      ""
+      BusOutputAsStruct	      "off"
+      Name		      "Out3"
+    }
+    Outport {
+      BusObject		      ""
+      BusOutputAsStruct	      "off"
+      Name		      "Out4"
+    }
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.37"
+    NumTestPointedSignals   0
+  }
+  SaveDefaultBlockParams  on
+  SampleTimeColors	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  on
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowViewerIcons	  on
+  SortedOrder		  off
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  PreSaveFcn		  "; "
+  CloseFcn		  "rtwprivate ssgencode ModelCloseRequest testfx; "
+  InitFcn		  "; "
+  StartFcn		  "; "
+  StopFcn		  "; "
+  Created		  "Mon Apr  5 13:31:43 2004"
+  Creator		  "myunt"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "myunt"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Tue Apr  6 11:56:39 2004"
+  ModelVersionFormat	  "1.%<AutoIncrement:37>"
+  ConfigurationManager	  "None"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock off
+  BufferReuse		  on
+  ProdHWDeviceType	  "32-bit Generic"
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      1
+      Version		      "1.0.4"
+      Array {
+	Type			"Handle"
+	Dimension		7
+	Simulink.SolverCC {
+	  $ObjectID		  2
+	  Version		  "1.0.4"
+	  StartTime		  "0.0"
+	  StopTime		  "10.0"
+	  AbsTol		  "auto"
+	  FixedStep		  "auto"
+	  InitialStep		  "auto"
+	  MaxNumMinSteps	  "-1"
+	  MaxOrder		  5
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  RelTol		  "1e-3"
+	  SolverMode		  "Auto"
+	  Solver		  "ode45"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  RateTranMode		  "Deterministic"
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  3
+	  Version		  "1.0.4"
+	  Decimation		  "1"
+	  ExternalInput		  "[t, u]"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  on
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveFormat		  "Array"
+	  SaveOutput		  on
+	  SaveState		  off
+	  SaveTime		  on
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "logsout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  Refine		  "1"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  4
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    5
+	    Cell		    "ZeroExternalMemoryAtStartup"
+	    Cell		    "ZeroInternalMemoryAtStartup"
+	    Cell		    "InitFltsAndDblsToZero"
+	    Cell		    "OptimizeModelRefInitCode"
+	    Cell		    "NoFixptDivByZeroProtection"
+	    PropName		    "DisabledProps"
+	  }
+	  Version		  "1.0.4"
+	  BlockReduction	  on
+	  BooleanDataType	  on
+	  ConditionallyExecuteInputs on
+	  ConditionalExecOptimization "on_for_testing"
+	  InlineParams		  off
+	  InlineInvariantSignals  on
+	  OptimizeBlockIOStorage  on
+	  BufferReuse		  on
+	  EnforceIntegerDowncast  on
+	  ExpressionFolding	  on
+	  FoldNonRolledExpr	  on
+	  LocalBlockOutputs	  on
+	  ParameterPooling	  on
+	  RollThreshold		  5
+	  SystemCodeInlineAuto	  off
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  UseTempVars		  off
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  on
+	  NoFixptDivByZeroProtection off
+	  OptimizeModelRefInitCode off
+	  LifeSpan		  "inf"
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  5
+	  Version		  "1.0.4"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  CheckSSInitialOutputMsg on
+	  CheckExecutionContextPreStartOutputMsg on
+	  CheckExecutionContextRuntimeOutputMsg	on
+	  SignalResolutionControl "TryResolveAllWithWarning"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  SolverPrmCheckMsg	  "warning"
+	  InheritedTsInSrcMsg	  "warning"
+	  DiscreteInheritContinuousMsg "warning"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterPrecisionLossMsg "warning"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  SFcnCompatibilityMsg	  "none"
+	  UniqueDataStoreMsg	  "none"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  EnableOverflowDetection off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  ModelReferenceCSMismatchMessage "none"
+	  ModelReferenceSimTargetVerbose off
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  6
+	  Version		  "1.0.4"
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdIntDivRoundTo	  "Undefined"
+	  ProdEndianess		  "Unspecified"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdHWDeviceType	  "32-bit Generic"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetShiftRightIntArith on
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetTypeEmulationWarnSuppressLevel 0
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "Specified"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  7
+	  Version		  "1.0.4"
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  CheckModelReferenceTargetMessage "error"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  8
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    1
+	    Cell		    "IncludeHyperlinkInReport"
+	    PropName		    "DisabledProps"
+	  }
+	  Version		  "1.0.4"
+	  SystemTargetFile	  "grt.tlc"
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  TemplateMakefile	  "grt_default_tmf"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  ProcessScriptMode	  "Default"
+	  ConfigurationMode	  "Optimized"
+	  ConfigAtBuild		  off
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      9
+	      Array {
+		Type			"Cell"
+		Dimension		9
+		Cell			"IgnoreCustomStorageClasses"
+		Cell			"InsertBlockDesc"
+		Cell			"SFDataObjDesc"
+		Cell			"SimulinkDataObjDesc"
+		Cell			"DefineNamingRule"
+		Cell			"SignalNamingRule"
+		Cell			"ParamNamingRule"
+		Cell			"InlinedPrmAccess"
+		Cell			"CustomSymbolStr"
+		PropName		"DisabledProps"
+	      }
+	      Version		      "1.0.4"
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      IgnoreCustomStorageClasses on
+	      IncHierarchyInIds	      off
+	      MaxIdLength	      31
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement off
+	      IncAutoGenComments      off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      IncDataTypeInIds	      off
+	      PrefixModelToSubsysFcnNames on
+	      CustomSymbolStr	      "$R$N$M"
+	      MangleLength	      1
+	      DefineNamingRule	      "None"
+	      ParamNamingRule	      "None"
+	      SignalNamingRule	      "None"
+	      InsertBlockDesc	      off
+	      SimulinkBlockComments   on
+	      EnableCustomComments    off
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	    }
+	    Simulink.GRTTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      10
+	      Array {
+		Type			"Cell"
+		Dimension		12
+		Cell			"IncludeMdlTerminateFcn"
+		Cell			"CombineOutputUpdateFcns"
+		Cell			"SuppressErrorStatus"
+		Cell			"ERTCustomFileBanners"
+		Cell			"GenerateSampleERTMain"
+		Cell			"MultiInstanceERTCode"
+		Cell			"PurelyIntegerCode"
+		Cell			"SupportNonFinite"
+		Cell			"SupportComplex"
+		Cell			"SupportAbsoluteTime"
+		Cell			"SupportContinuousTime"
+		Cell			"SupportNonInlinedSFcns"
+		PropName		"DisabledProps"
+	      }
+	      Version		      "1.0.4"
+	      TargetFcnLib	      "ansi_tfl_tmw.mat"
+	      GenFloatMathFcnCalls    "ANSI_C"
+	      UtilityFuncGeneration   "Auto"
+	      GenerateFullHeader      on
+	      GenerateSampleERTMain   off
+	      IsPILTarget	      off
+	      ModelReferenceCompliant on
+	      IncludeMdlTerminateFcn  on
+	      CombineOutputUpdateFcns off
+	      SuppressErrorStatus     off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    off
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   on
+	      SupportNonInlinedSFcns  on
+	      ExtMode		      off
+	      ExtModeStaticAlloc      off
+	      ExtModeTesting	      off
+	      ExtModeStaticAllocSize  1000000
+	      ExtModeTransport	      0
+	      ExtModeMexFile	      "ext_comm"
+	      RTWCAPISignals	      off
+	      RTWCAPIParams	      off
+	      RTWCAPIStates	      off
+	      GenerateASAP2	      off
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      SimulationMode	      "normal"
+      CurrentDlgPage	      "Solver"
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    1
+  }
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      BusCreator
+      Inputs		      "4"
+      DisplayOption	      "none"
+      BusObject		      "BusObject"
+      NonVirtualBus	      off
+    }
+    Block {
+      BlockType		      DataTypeConversion
+      OutDataTypeMode	      "Inherit via back propagation"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      ConvertRealWorld	      "Real World Value (RWV)"
+      RndMeth		      "Zero"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      SystemSampleTime	      "-1"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Sum
+      IconShape		      "rectangular"
+      Inputs		      "++"
+      InputSameDT	      on
+      OutDataTypeMode	      "Same as first input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      UnitDelay
+      X0		      "0"
+      SampleTime	      "1"
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "testfx"
+    Location		    [594, 96, 1173, 436]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      Inport
+      Name		      "In1"
+      Position		      [45, 68, 75, 82]
+      IconDisplay	      "Port number"
+      LatchInput	      off
+    }
+    Block {
+      BlockType		      Inport
+      Name		      "In2"
+      Position		      [45, 123, 75, 137]
+      Port		      "2"
+      IconDisplay	      "Port number"
+      LatchInput	      off
+    }
+    Block {
+      BlockType		      Inport
+      Name		      "In3"
+      Position		      [45, 178, 75, 192]
+      Port		      "3"
+      IconDisplay	      "Port number"
+      LatchInput	      off
+    }
+    Block {
+      BlockType		      Inport
+      Name		      "In4"
+      Position		      [50, 233, 80, 247]
+      Port		      "4"
+      IconDisplay	      "Port number"
+      LatchInput	      off
+    }
+    Block {
+      BlockType		      DataTypeConversion
+      Name		      "D2A"
+      Position		      [420, 56, 465, 94]
+      OutDataTypeMode	      "double"
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	off
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+    }
+    Block {
+      BlockType		      DataTypeConversion
+      Name		      "D2A1"
+      Position		      [420, 111, 465, 149]
+      OutDataTypeMode	      "double"
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	off
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+    }
+    Block {
+      BlockType		      DataTypeConversion
+      Name		      "D2A2"
+      Position		      [425, 166, 470, 204]
+      OutDataTypeMode	      "double"
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	off
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+    }
+    Block {
+      BlockType		      DataTypeConversion
+      Name		      "D2A3"
+      Position		      [425, 221, 470, 259]
+      OutDataTypeMode	      "double"
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	off
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+    }
+    Block {
+      BlockType		      BusCreator
+      Name		      "SIGNALBUSCreator"
+      Ports		      [1, 1]
+      Position		      [110, 221, 115, 259]
+      DialogController	      "Simulink.DDGSource_Bus"
+      Inputs		      "1"
+      DisplayOption	      "bar"
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+      Port {
+	PortNumber		1
+	ShowPropagatedSignals	"on"
+	RTWStorageClass		"Auto"
+	DataLoggingNameMode	"SignalName"
+	ShowSigGenPortName	on
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Subsystem"
+      Ports		      [4, 4]
+      Position		      [205, 50, 325, 265]
+      TreatAsAtomicUnit	      on
+      MinAlgLoopOccurrences   off
+      PropExecContextAcrossSSBoundary on
+      RTWSystemCode	      "Auto"
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+      Port {
+	PortType		0
+	PortNumber		2
+	ShowSigGenPortName	on
+      }
+      Port {
+	PortType		0
+	PortNumber		3
+	ShowSigGenPortName	on
+      }
+      Port {
+	PortType		0
+	PortNumber		4
+	ShowSigGenPortName	on
+      }
+      System {
+	Name			"Subsystem"
+	Location		[385, 145, 776, 755]
+	Open			on
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  Position		  [15, 58, 45, 72]
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "In2"
+	  Position		  [15, 188, 45, 202]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "In3"
+	  Position		  [15, 343, 45, 357]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "In4"
+	  Position		  [15, 508, 45, 522]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	  Port {
+	    PortNumber		    1
+	    ShowPropagatedSignals   "on"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	    ShowSigGenPortName	    on
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "DTOVer_Off"
+	  Ports			  [1, 1]
+	  Position		  [85, 27, 160, 103]
+	  ForegroundColor	  "red"
+	  FontName		  "Arial"
+	  FontSize		  14
+	  FontWeight		  "bold"
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextAcrossSSBoundary on
+	  RTWSystemCode		  "Auto"
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	  System {
+	    Name		    "DTOVer_Off"
+	    Location		    [8, 419, 632, 841]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In1"
+	      Position		      [15, 78, 45, 92]
+	      IconDisplay	      "Port number"
+	      DataType		      "Specify via dialog"
+	      OutScaling	      "2^-8"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Combine Terms"
+	      Ports		      [2, 1]
+	      Position		      [360, 11, 395, 309]
+	      Inputs		      "+-"
+	      InputSameDT	      off
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	      Port {
+		PortType		0
+		PortNumber		2
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Denominator Terms"
+	      Ports		      [1, 1]
+	      Position		      [235, 216, 275, 254]
+	      SourceBlock	      "simulink/Discrete/Weighted\nMoving Aver"
+"age"
+	      SourceType	      "Weighted Moving Average"
+	      mgainval		      "dden(2:length(dden))"
+	      vinit		      "0.0"
+	      samptime		      "tsamp"
+	      GainDataTypeScalingMode "Specify via dialog"
+	      GainDataType	      "BaseType"
+	      MatRadixGroup	      "Best Precision: Element-wise"
+	      GainScaling	      "2^-14"
+	      OutputDataTypeScalingMode	"Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      LockScale		      "off"
+	      RndMeth		      "Floor"
+	      DoSatur		      "on"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Down Cast"
+	      Position		      [465, 141, 510, 179]
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "BaseType"
+	      OutScaling	      "2^(-5)"
+	      RndMeth		      "Floor"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Numerator Terms"
+	      Ports		      [1, 1]
+	      Position		      [230, 65, 270, 105]
+	      SourceBlock	      "simulink/Discrete/Weighted\nMoving Aver"
+"age"
+	      SourceType	      "Weighted Moving Average"
+	      mgainval		      "dnum"
+	      vinit		      "0.0"
+	      samptime		      "tsamp"
+	      GainDataTypeScalingMode "Specify via dialog"
+	      GainDataType	      "BaseType"
+	      MatRadixGroup	      "Best Precision: Element-wise"
+	      GainScaling	      "2^-14"
+	      OutputDataTypeScalingMode	"Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      LockScale		      "off"
+	      RndMeth		      "Floor"
+	      DoSatur		      "on"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      UnitDelay
+	      Name		      "Prev Out"
+	      Position		      [105, 216, 145, 254]
+	      X0		      "0.0"
+	      SampleTime	      "tsamp"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Up Cast"
+	      Position		      [105, 66, 150, 104]
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "BaseType"
+	      OutScaling	      "2^(-14)"
+	      RndMeth		      "Floor"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [555, 125, 585, 140]
+	      Orientation	      "up"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	      InitialOutput	      "0"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Down Cast"
+	      SrcPort		      1
+	      Points		      [55, 0]
+	      Branch {
+		DstBlock		"Out1"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 240; -495, 0; 0, -165]
+		DstBlock		"Prev Out"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "In1"
+	      SrcPort		      1
+	      DstBlock		      "Up Cast"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Up Cast"
+	      SrcPort		      1
+	      DstBlock		      "Numerator Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Prev Out"
+	      SrcPort		      1
+	      DstBlock		      "Denominator Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Numerator Terms"
+	      SrcPort		      1
+	      DstBlock		      "Combine Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Denominator Terms"
+	      SrcPort		      1
+	      DstBlock		      "Combine Terms"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Combine Terms"
+	      SrcPort		      1
+	      DstBlock		      "Down Cast"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Reduce Output from\nAccumulator Size to"
+"\nBase Memory Size"
+	      Position		      [491, 223]
+	    }
+	    Annotation {
+	      Name		      "Combine Numerator \nand Denominator \nC"
+"ontributions to TF\nin Accumulator"
+	      Position		      [382, 359]
+	    }
+	    Annotation {
+	      Name		      "Store Most\nRecent Output\nIn Memory fo"
+"r\nOne Sample Time"
+	      Position		      [127, 303]
+	    }
+	    Annotation {
+	      Name		      "Multiply and Accumulate\nMost Recent Ou"
+"tputs and\nDenominator Coefficients\nin Accumulator"
+	      Position		      [261, 306]
+	    }
+	    Annotation {
+	      Name		      "Multiply and Accumulate\nMost Recent In"
+"puts and\nNumerator Coefficients\nin Accumulator"
+	      Position		      [251, 154]
+	    }
+	    Annotation {
+	      Name		      "Convert from \nA2D Type\nto BaseType"
+	      Position		      [128, 146]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "DTOVer_ScaledDouble"
+	  Ports			  [1, 1]
+	  Position		  [135, 477, 210, 553]
+	  ForegroundColor	  "red"
+	  FontName		  "Arial"
+	  FontSize		  14
+	  FontWeight		  "bold"
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextAcrossSSBoundary on
+	  RTWSystemCode		  "Auto"
+	  DataTypeOverride	  "ScaledDoubles"
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	  System {
+	    Name		    "DTOVer_ScaledDouble"
+	    Location		    [8, 419, 632, 841]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In2"
+	      Position		      [15, 78, 45, 92]
+	      IconDisplay	      "Port number"
+	      DataType		      "Specify via dialog"
+	      OutScaling	      "2^-8"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Combine Terms"
+	      Ports		      [2, 1]
+	      Position		      [360, 11, 395, 309]
+	      Inputs		      "+-"
+	      InputSameDT	      off
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	      Port {
+		PortType		0
+		PortNumber		2
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Denominator Terms"
+	      Ports		      [1, 1]
+	      Position		      [235, 216, 275, 254]
+	      SourceBlock	      "simulink/Discrete/Weighted\nMoving Aver"
+"age"
+	      SourceType	      "Weighted Moving Average"
+	      mgainval		      "dden(2:length(dden))"
+	      vinit		      "0.0"
+	      samptime		      "tsamp"
+	      GainDataTypeScalingMode "Specify via dialog"
+	      GainDataType	      "BaseType"
+	      MatRadixGroup	      "Best Precision: Element-wise"
+	      GainScaling	      "2^-14"
+	      OutputDataTypeScalingMode	"Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      LockScale		      "off"
+	      RndMeth		      "Floor"
+	      DoSatur		      "on"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Down Cast"
+	      Position		      [465, 141, 510, 179]
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "BaseType"
+	      OutScaling	      "2^(-5)"
+	      RndMeth		      "Floor"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Numerator Terms"
+	      Ports		      [1, 1]
+	      Position		      [270, 65, 310, 105]
+	      SourceBlock	      "simulink/Discrete/Weighted\nMoving Aver"
+"age"
+	      SourceType	      "Weighted Moving Average"
+	      mgainval		      "dnum"
+	      vinit		      "0.0"
+	      samptime		      "tsamp"
+	      GainDataTypeScalingMode "Specify via dialog"
+	      GainDataType	      "BaseType"
+	      MatRadixGroup	      "Best Precision: Element-wise"
+	      GainScaling	      "2^-14"
+	      OutputDataTypeScalingMode	"Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      LockScale		      "off"
+	      RndMeth		      "Floor"
+	      DoSatur		      "on"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      UnitDelay
+	      Name		      "Prev Out"
+	      Position		      [105, 216, 145, 254]
+	      X0		      "0.0"
+	      SampleTime	      "tsamp"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Up Cast"
+	      Position		      [155, 66, 200, 104]
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "BaseType"
+	      OutScaling	      "2^(-14)"
+	      RndMeth		      "Floor"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [555, 125, 585, 140]
+	      Orientation	      "up"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	      InitialOutput	      "0"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Down Cast"
+	      SrcPort		      1
+	      Points		      [55, 0]
+	      Branch {
+		DstBlock		"Out1"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 240; -495, 0; 0, -165]
+		DstBlock		"Prev Out"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "In2"
+	      SrcPort		      1
+	      DstBlock		      "Up Cast"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Up Cast"
+	      SrcPort		      1
+	      DstBlock		      "Numerator Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Prev Out"
+	      SrcPort		      1
+	      DstBlock		      "Denominator Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Numerator Terms"
+	      SrcPort		      1
+	      DstBlock		      "Combine Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Denominator Terms"
+	      SrcPort		      1
+	      DstBlock		      "Combine Terms"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Combine Terms"
+	      SrcPort		      1
+	      DstBlock		      "Down Cast"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Position		      [34, 128]
+	    }
+	    Annotation {
+	      Name		      "Reduce Output from\nAccumulator Size to"
+"\nBase Memory Size"
+	      Position		      [491, 223]
+	    }
+	    Annotation {
+	      Name		      "Combine Numerator \nand Denominator \nC"
+"ontributions to TF\nin Accumulator"
+	      Position		      [382, 359]
+	    }
+	    Annotation {
+	      Name		      "Store Most\nRecent Output\nIn Memory fo"
+"r\nOne Sample Time"
+	      Position		      [127, 303]
+	    }
+	    Annotation {
+	      Name		      "Multiply and Accumulate\nMost Recent Ou"
+"tputs and\nDenominator Coefficients\nin Accumulator"
+	      Position		      [261, 306]
+	    }
+	    Annotation {
+	      Name		      "Multiply and Accumulate\nMost Recent In"
+"puts and\nNumerator Coefficients\nin Accumulator"
+	      Position		      [251, 154]
+	    }
+	    Annotation {
+	      Name		      "Convert from \nA2D Type\nto BaseType"
+	      Position		      [128, 146]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "DTOVer_TrueDouble"
+	  Ports			  [1, 1]
+	  Position		  [85, 157, 160, 233]
+	  ForegroundColor	  "red"
+	  FontName		  "Arial"
+	  FontSize		  14
+	  FontWeight		  "bold"
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextAcrossSSBoundary on
+	  RTWSystemCode		  "Auto"
+	  DataTypeOverride	  "TrueDoubles"
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	  System {
+	    Name		    "DTOVer_TrueDouble"
+	    Location		    [497, 467, 1121, 889]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In2"
+	      Position		      [15, 78, 45, 92]
+	      IconDisplay	      "Port number"
+	      DataType		      "Specify via dialog"
+	      OutScaling	      "2^-8"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Combine Terms"
+	      Ports		      [2, 1]
+	      Position		      [360, 11, 395, 309]
+	      Inputs		      "+-"
+	      InputSameDT	      off
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	      Port {
+		PortType		0
+		PortNumber		2
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Denominator Terms"
+	      Ports		      [1, 1]
+	      Position		      [235, 216, 275, 254]
+	      SourceBlock	      "simulink/Discrete/Weighted\nMoving Aver"
+"age"
+	      SourceType	      "Weighted Moving Average"
+	      mgainval		      "dden(2:length(dden))"
+	      vinit		      "0.0"
+	      samptime		      "tsamp"
+	      GainDataTypeScalingMode "Specify via dialog"
+	      GainDataType	      "BaseType"
+	      MatRadixGroup	      "Best Precision: Element-wise"
+	      GainScaling	      "2^-14"
+	      OutputDataTypeScalingMode	"Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      LockScale		      "off"
+	      RndMeth		      "Floor"
+	      DoSatur		      "on"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Down Cast"
+	      Position		      [465, 141, 510, 179]
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "BaseType"
+	      OutScaling	      "2^(-5)"
+	      RndMeth		      "Floor"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Numerator Terms"
+	      Ports		      [1, 1]
+	      Position		      [230, 65, 270, 105]
+	      SourceBlock	      "simulink/Discrete/Weighted\nMoving Aver"
+"age"
+	      SourceType	      "Weighted Moving Average"
+	      mgainval		      "dnum"
+	      vinit		      "0.0"
+	      samptime		      "tsamp"
+	      GainDataTypeScalingMode "Specify via dialog"
+	      GainDataType	      "BaseType"
+	      MatRadixGroup	      "Best Precision: Element-wise"
+	      GainScaling	      "2^-14"
+	      OutputDataTypeScalingMode	"Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      LockScale		      "off"
+	      RndMeth		      "Floor"
+	      DoSatur		      "on"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      UnitDelay
+	      Name		      "Prev Out"
+	      Position		      [105, 216, 145, 254]
+	      X0		      "0.0"
+	      SampleTime	      "tsamp"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Up Cast"
+	      Position		      [105, 66, 150, 104]
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "BaseType"
+	      OutScaling	      "2^(-14)"
+	      RndMeth		      "Floor"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [555, 125, 585, 140]
+	      Orientation	      "up"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	      InitialOutput	      "0"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Combine Terms"
+	      SrcPort		      1
+	      DstBlock		      "Down Cast"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Denominator Terms"
+	      SrcPort		      1
+	      DstBlock		      "Combine Terms"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Numerator Terms"
+	      SrcPort		      1
+	      DstBlock		      "Combine Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Prev Out"
+	      SrcPort		      1
+	      DstBlock		      "Denominator Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Up Cast"
+	      SrcPort		      1
+	      DstBlock		      "Numerator Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "In2"
+	      SrcPort		      1
+	      DstBlock		      "Up Cast"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Down Cast"
+	      SrcPort		      1
+	      Points		      [55, 0]
+	      Branch {
+		Points			[0, 240; -495, 0; 0, -165]
+		DstBlock		"Prev Out"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"Out1"
+		DstPort			1
+	      }
+	    }
+	    Annotation {
+	      Name		      "Convert from \nA2D Type\nto BaseType"
+	      Position		      [128, 146]
+	    }
+	    Annotation {
+	      Name		      "Multiply and Accumulate\nMost Recent In"
+"puts and\nNumerator Coefficients\nin Accumulator"
+	      Position		      [251, 154]
+	    }
+	    Annotation {
+	      Name		      "Multiply and Accumulate\nMost Recent Ou"
+"tputs and\nDenominator Coefficients\nin Accumulator"
+	      Position		      [261, 306]
+	    }
+	    Annotation {
+	      Name		      "Store Most\nRecent Output\nIn Memory fo"
+"r\nOne Sample Time"
+	      Position		      [127, 303]
+	    }
+	    Annotation {
+	      Name		      "Combine Numerator \nand Denominator \nC"
+"ontributions to TF\nin Accumulator"
+	      Position		      [382, 359]
+	    }
+	    Annotation {
+	      Name		      "Reduce Output from\nAccumulator Size to"
+"\nBase Memory Size"
+	      Position		      [491, 223]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "DTOVer_TrueSingle"
+	  Ports			  [1, 1]
+	  Position		  [85, 312, 160, 388]
+	  ForegroundColor	  "red"
+	  FontName		  "Arial"
+	  FontSize		  14
+	  FontWeight		  "bold"
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextAcrossSSBoundary on
+	  RTWSystemCode		  "Auto"
+	  DataTypeOverride	  "TrueSingles"
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	  System {
+	    Name		    "DTOVer_TrueSingle"
+	    Location		    [8, 419, 632, 841]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In2"
+	      Position		      [20, 78, 50, 92]
+	      IconDisplay	      "Port number"
+	      DataType		      "Specify via dialog"
+	      OutScaling	      "2^-8"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Combine Terms"
+	      Ports		      [2, 1]
+	      Position		      [360, 11, 395, 309]
+	      Inputs		      "+-"
+	      InputSameDT	      off
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	      Port {
+		PortType		0
+		PortNumber		2
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Denominator Terms"
+	      Ports		      [1, 1]
+	      Position		      [235, 216, 275, 254]
+	      SourceBlock	      "simulink/Discrete/Weighted\nMoving Aver"
+"age"
+	      SourceType	      "Weighted Moving Average"
+	      mgainval		      "dden(2:length(dden))"
+	      vinit		      "0.0"
+	      samptime		      "tsamp"
+	      GainDataTypeScalingMode "Specify via dialog"
+	      GainDataType	      "BaseType"
+	      MatRadixGroup	      "Best Precision: Element-wise"
+	      GainScaling	      "2^-14"
+	      OutputDataTypeScalingMode	"Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      LockScale		      "off"
+	      RndMeth		      "Floor"
+	      DoSatur		      "on"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Down Cast"
+	      Position		      [465, 141, 510, 179]
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "BaseType"
+	      OutScaling	      "2^(-5)"
+	      RndMeth		      "Floor"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Numerator Terms"
+	      Ports		      [1, 1]
+	      Position		      [230, 65, 270, 105]
+	      SourceBlock	      "simulink/Discrete/Weighted\nMoving Aver"
+"age"
+	      SourceType	      "Weighted Moving Average"
+	      mgainval		      "dnum"
+	      vinit		      "0.0"
+	      samptime		      "tsamp"
+	      GainDataTypeScalingMode "Specify via dialog"
+	      GainDataType	      "BaseType"
+	      MatRadixGroup	      "Best Precision: Element-wise"
+	      GainScaling	      "2^-14"
+	      OutputDataTypeScalingMode	"Specify via dialog"
+	      OutDataType	      "AccumType"
+	      OutScaling	      "2^(-12)"
+	      LockScale		      "off"
+	      RndMeth		      "Floor"
+	      DoSatur		      "on"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      UnitDelay
+	      Name		      "Prev Out"
+	      Position		      [105, 216, 145, 254]
+	      X0		      "0.0"
+	      SampleTime	      "tsamp"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      DataTypeConversion
+	      Name		      "Up Cast"
+	      Position		      [105, 66, 150, 104]
+	      OutDataTypeMode	      "Specify via dialog"
+	      OutDataType	      "BaseType"
+	      OutScaling	      "2^(-14)"
+	      RndMeth		      "Floor"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [555, 125, 585, 140]
+	      Orientation	      "up"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	      InitialOutput	      "0"
+	      Port {
+		PortType		0
+		PortNumber		1
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Down Cast"
+	      SrcPort		      1
+	      Points		      [55, 0]
+	      Branch {
+		DstBlock		"Out1"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 240; -495, 0; 0, -165]
+		DstBlock		"Prev Out"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "In2"
+	      SrcPort		      1
+	      DstBlock		      "Up Cast"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Up Cast"
+	      SrcPort		      1
+	      DstBlock		      "Numerator Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Prev Out"
+	      SrcPort		      1
+	      DstBlock		      "Denominator Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Numerator Terms"
+	      SrcPort		      1
+	      DstBlock		      "Combine Terms"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Denominator Terms"
+	      SrcPort		      1
+	      DstBlock		      "Combine Terms"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Combine Terms"
+	      SrcPort		      1
+	      DstBlock		      "Down Cast"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "Reduce Output from\nAccumulator Size to"
+"\nBase Memory Size"
+	      Position		      [491, 223]
+	    }
+	    Annotation {
+	      Name		      "Combine Numerator \nand Denominator \nC"
+"ontributions to TF\nin Accumulator"
+	      Position		      [382, 359]
+	    }
+	    Annotation {
+	      Name		      "Store Most\nRecent Output\nIn Memory fo"
+"r\nOne Sample Time"
+	      Position		      [127, 303]
+	    }
+	    Annotation {
+	      Name		      "Multiply and Accumulate\nMost Recent Ou"
+"tputs and\nDenominator Coefficients\nin Accumulator"
+	      Position		      [261, 306]
+	    }
+	    Annotation {
+	      Name		      "Multiply and Accumulate\nMost Recent In"
+"puts and\nNumerator Coefficients\nin Accumulator"
+	      Position		      [251, 154]
+	    }
+	    Annotation {
+	      Name		      "Convert from \nA2D Type\nto BaseType"
+	      Position		      [128, 146]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 1]
+	  Position		  [80, 496, 85, 534]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "1"
+	  DisplayOption		  "bar"
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  Position		  [185, 58, 215, 72]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out2"
+	  Position		  [185, 188, 215, 202]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out3"
+	  Position		  [185, 343, 215, 357]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out4"
+	  Position		  [235, 508, 265, 522]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	  Port {
+	    PortType		    0
+	    PortNumber		    1
+	    ShowSigGenPortName	    on
+	  }
+	}
+	Line {
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "DTOVer_Off"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "DTOVer_Off"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "In2"
+	  SrcPort		  1
+	  DstBlock		  "DTOVer_TrueDouble"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "DTOVer_TrueDouble"
+	  SrcPort		  1
+	  DstBlock		  "Out2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "In3"
+	  SrcPort		  1
+	  DstBlock		  "DTOVer_TrueSingle"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "DTOVer_TrueSingle"
+	  SrcPort		  1
+	  DstBlock		  "Out3"
+	  DstPort		  1
+	}
+	Line {
+	  Labels		  [0, 0]
+	  SrcBlock		  "In4"
+	  SrcPort		  1
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  DstBlock		  "DTOVer_ScaledDouble"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "DTOVer_ScaledDouble"
+	  SrcPort		  1
+	  DstBlock		  "Out4"
+	  DstPort		  1
+	}
+	Annotation {
+	  Position		  [182, 533]
+	}
+      }
+    }
+    Block {
+      BlockType		      Outport
+      Name		      "Out1"
+      Position		      [490, 68, 520, 82]
+      IconDisplay	      "Port number"
+      BusOutputAsStruct	      off
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+    }
+    Block {
+      BlockType		      Outport
+      Name		      "Out2"
+      Position		      [495, 123, 525, 137]
+      Port		      "2"
+      IconDisplay	      "Port number"
+      BusOutputAsStruct	      off
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+    }
+    Block {
+      BlockType		      Outport
+      Name		      "Out3"
+      Position		      [495, 178, 525, 192]
+      Port		      "3"
+      IconDisplay	      "Port number"
+      BusOutputAsStruct	      off
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+    }
+    Block {
+      BlockType		      Outport
+      Name		      "Out4"
+      Position		      [495, 233, 525, 247]
+      Port		      "4"
+      IconDisplay	      "Port number"
+      BusOutputAsStruct	      off
+      Port {
+	PortType		0
+	PortNumber		1
+	ShowSigGenPortName	on
+      }
+    }
+    Line {
+      SrcBlock		      "In1"
+      SrcPort		      1
+      DstBlock		      "Subsystem"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Subsystem"
+      SrcPort		      1
+      DstBlock		      "D2A"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "D2A"
+      SrcPort		      1
+      DstBlock		      "Out1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Subsystem"
+      SrcPort		      2
+      DstBlock		      "D2A1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "D2A1"
+      SrcPort		      1
+      DstBlock		      "Out2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "In3"
+      SrcPort		      1
+      DstBlock		      "Subsystem"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "Subsystem"
+      SrcPort		      3
+      DstBlock		      "D2A2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "D2A2"
+      SrcPort		      1
+      DstBlock		      "Out3"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Subsystem"
+      SrcPort		      4
+      DstBlock		      "D2A3"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "D2A3"
+      SrcPort		      1
+      DstBlock		      "Out4"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "In2"
+      SrcPort		      1
+      DstBlock		      "Subsystem"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "In4"
+      SrcPort		      1
+      DstBlock		      "SIGNALBUSCreator"
+      DstPort		      1
+    }
+    Line {
+      Labels		      [0, 0]
+      SrcBlock		      "SIGNALBUSCreator"
+      SrcPort		      1
+      DstBlock		      "Subsystem"
+      DstPort		      4
+    }
+  }
+}

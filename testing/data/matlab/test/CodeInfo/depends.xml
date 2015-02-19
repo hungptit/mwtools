@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2011 The MathWorks, Inc. -->
+
+<depends xsi:noNamespaceSchemaLocation="../../../../tools/matlab/harness/depends.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <productset>
+    <product>simulink</product>
+    <product>ecoder</product>
+    <product>simulinkcoder</product>
+  </productset>
+</depends>
+

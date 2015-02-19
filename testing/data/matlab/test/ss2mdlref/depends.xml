@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file was generated as part of the depends.xml proposal listed here: -->
+<!-- http://inside.mathworks.com/wiki/License_Dependency_Restriction_TaRT_Proposal -->
+<!-- Resource page for depends.xml:-->
+<!-- http://inside.mathworks.com/wiki/Resource_Page_for_depends.xml_Test_Infrastructure -->
+<!-- Copyright 2009-2011 The MathWorks, Inc. -->
+<depends xsi:noNamespaceSchemaLocation="../../../../tools/matlab/harness/depends.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <productset>
+    <product>stateflow</product>
+    
+    <product>ecoder</product>
+    <product>simulinkcoder</product>
+    <product>simulink</product>
+    <product>simulinkcoder</product>
+    <product>dsp</product>
+    <product>simulink</product>
+    <product>simscape</product>
+    <product>simmechanics</product>
+  <product>fixedpoint</product></productset>
+</depends>

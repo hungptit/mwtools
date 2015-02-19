@@ -1,0 +1,489 @@
+SBT> setenv HOME /home/hungdang
+SBT> SbConfigEnv:
+SBT>    ALTERAD_LICENSE_FILE=1717@lm-altera-01,1717@lm-altera-02,1717@lm-altera-03
+SBT>    ALTERNATE_EDITOR=emacs
+SBT>    BH_USE_CACHED_3P_ROOT=1
+SBT>    BH_USE_CXX_MODULES=1
+SBT>    BH_USE_JAVA_7=u11
+SBT>    BH_USE_LINUX_GCC47=1
+SBT>    BH_USE_NEW_SETMWE=1
+SBT>    BH_USE_REBASE_V2=1
+SBT>    BIOS_INSTALL_DIR=/mathworks/hub/share/apps/TexasInstruments/CCS/CCStudio_v3.3_SR12/CCStudio_v3.3/bios_5_33_05
+SBT>    BISON_SIMPLE=/mathworks/hub/share/apps/BuildTools/1.4/share/bison.simple
+SBT>    BSL_EVMC6747_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/CCS/CCStudio_v3.3_SR12/CCStudio_v3.3/boards/evmc6747_v1
+SBT>    BSL_EVMDM642_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/dm642/boards/evmdm642
+SBT>    BSL_EVMDM6437_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/dm6437/boards/evmdm6437_v2
+SBT>    BUILD_HARNESS=/mathworks/hub/share/apps/iat/build_harness/R2013b/428503/glnxa64
+SBT>    BUILD_TOOLS=/mathworks/hub/share/apps/BuildTools
+SBT>    BUILD_TOOLS_BASE=/mathworks/hub/share/apps/BuildTools/1.4.1/glnxa64
+SBT>    BUILD_TOOLS_CORE=/mathworks/hub/share/apps/BuildTools
+SBT>    BUILD_TOOLS_PERL=/mathworks/hub/share/apps/BuildTools/Linux/glibc-2.3.6/x86_64/perl/perl-5.8.8-tmw-027
+SBT>    BUILD_USING_MATLAB_SESSIONS_LIMIT=24:20,32:26
+SBT>    BULLSEYE_ROOT=/mathworks/hub/share/apps/BuildTools/Bullseye/8p7.9/glnxa64
+SBT>    BULLSEYE_ROOT_SIL=/mathworks/hub/share/apps/BuildTools/BullseyeSIL/v8.4.19/glnxa64
+SBT>    BULLSEYE_WORK_DIR=/local-ssd/sandbox/Aslrtw/bullseye
+SBT>    C64XP_IMGLIB_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C64Plus/imglib_v201
+SBT>    C64X_IMGLIB_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C6400/imglib_v104b
+SBT>    C672X_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C672x/v2.0
+SBT>    C674x_DSP_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C6747/C674x_dsp_1_00_00_03
+SBT>    CDS_LICENSE_FILE=1717@lm-cadence-01,1717@lm-cadence-02,1717@lm-cadence-03
+SBT>    CDS_LIC_FILE=1717@lm-cadence-01,1717@lm-cadence-02,1717@lm-cadence-03
+SBT>    CDS_LIC_ONLY=1
+SBT>    CH_ENABLE_UMBRELLA_TYPES=1
+SBT>    CLUSTER_WARNING_LOCKDOWN=         test/toolbox/fixpoint/DataTypeOverride         test/toolbox/fixpoint/DerivedMinMax         test/toolbox/fixpoint/ID79         test/toolbox/fixpoint/NetSlopeViaDiv         test/toolbox/fixpoint/RangeAnalysisForAutoscale         test/toolbox/fixpoint/ZWMR         test/toolbox/fixpoint/abs         test/toolbox/fixpoint/bitop         test/toolbox/fixpoint/buses         test/toolbox/fixpoint/c99         test/toolbox/fixpoint/cast         test/toolbox/fixpoint/complex         test/toolbox/fixpoint/demos         test/toolbox/fixpoint/division         test/toolbox/fixpoint/emulate_rtw         test/toolbox/fixpoint/fixpt_autoscale         test/toolbox/fixpoint/fixpt_mdlref         test/toolbox/fixpoint/fixpt_rtw         test/toolbox/fixpoint/fixpt_rtw2         test/toolbox/fixpoint/fxp_siglog         test/toolbox/fixpoint/fxptui         test/toolbox/fixpoint/heavy_duty_mult         test/toolbox/fixpoint/license         test/toolbox/fixpoint/matrix         test/toolbox/fixpoint/mdladv         test/toolbox/fixpoint/megma         test/toolbox/fixpoint/memoryfootprint         test/toolbox/fixpoint/multiword         test/toolbox/fixpoint/nicersum         test/toolbox/fixpoint/ntsui         test/toolbox/fixpoint/ps_annotations         test/toolbox/fixpoint/relop         test/toolbox/fixpoint/rtw33         test/toolbox/fixpoint/simplest_rounding         test/toolbox/fixpoint/slfxplib         test/toolbox/fixpoint/spark         test/toolbox/fixpoint/unit         test/toolbox/fixpoint/vlogic         test/toolbox/simulink/blocks/CPPCodeGen          test/toolbox/simulink/blocks/CSH          test/toolbox/simulink/blocks/CrossBlockFeatures          test/toolbox/simulink/blocks/Simulink_Extras          test/toolbox/simulink/blocks/help          test/toolbox/simulink/blocks/lib_AdditionalMathDiscrete         test/toolbox/simulink/blocks/lib_Continuous/common          test/toolbox/simulink/blocks/lib_Discontinuities         test/toolbox/simulink/blocks/lib_Discrete         test/toolbox/simulink/blocks/lib_LogicandBitOperations         test/toolbox/simulink/blocks/lib_LookupTables         test/toolbox/simulink/blocks/lib_MathOperations         test/toolbox/simulink/blocks/lib_SignalAttributes         test/toolbox/simulink/blocks/lib_SignalRouting         test/toolbox/simulink/blocks/lib_Sinks         test/toolbox/simulink/blocks/lib_Sources         test/toolbox/simulink/blocks/saveAs          test/toolbox/simulink/coreblocks/lib_Discontinuities         test/toolbox/simulink/coreblocks/lib_Discrete         test/toolbox/simulink/coreblocks/lib_LogicandBitOperations         test/toolbox/simulink/coreblocks/lib_LookupTables         test/toolbox/simulink/coreblocks/lib_MathOperations         test/toolbox/simulink/coreblocks/lib_SignalAttributes         test/toolbox/simulink/coreblocks/lib_SignalRouting         test/toolbox/simulink/coreblocks/lib_Sources         test/toolbox/simulink/simdemos       
+SBT>    COLORTERM=gnome-terminal
+SBT>    COLUMNS=189
+SBT>    COMPONENTS_TO_BUILD=              3p/bisect       3p/ocaml_collection       3p/proversl       autosar.*       autosave_helper       bootstrap       cgir.*       checksum_testtools       coder.*       configset_resources       connectivity.*       coder_crl_tests.*       covrt.*       dastudio.*       des.*       dvo.*       ecoder.*       emf.*       eml.*       ert.*       fix.*       float2fixed.*       glee.*       glue.*       hdl.*       industry_.*       lcc64       m3i.*       matlabcoder.*       matlabhdlcoder.*       mcos_factory.*       mg_resources       mlreportgen_tools       mwsupport_openjade       pil.*       plccoder.*       reqmgt.*       Rptgen.*       rptgen.*       rtw.*       sfeml.*       shared_a.*       (?!.*(_doc_).*)shared_c.*       shared_d.*       shared_h.*       shared_mlreportgen.*       shared_r.*       shared_s.*       shared_u.*       simdemos.*       simevents.*       simstruct       simul.*       (?!.*(_doc_).*)sl.*       sqldb.*       src_fixpoint       stateflow.*       targetcommon.*       connector.*                     3p/docbook-xsl       3p/qt       buildtools       matlab_java_project_api.*       matlab_java_project_impl.*       matlab_testtools_tests       matlab_desktop_tests        SLDD.*       matlab_guide_tests.*                     aero.*       arduino.*       comm.*       comparisons.*       compiler_tests       control.*       do_qualkit.*       dsp.*       edalink.*       embedded.*       filterdesign.*       hwconnect.*       idelink.*       ident_tests.*       iec_certkit.*       imaq.*       images.*       incisive.*       mcr       mcr_deps.*       mbc.*       model.*       mpc.*       phased_coder_test.*       (?!.*(_doc_).*)physmod/.*       polyspace/.*       qualkits.*       realtime.*       robust.*       rfblks_demos.*       sb2sl.*       sdi.*       shared_control_tests       shared_e.*       shared_f.*       shared_t.*       signal.*       simbio.*       simrf.*       sldo_tests       stats.*       stm.*       symbolic.*       system.*       targetpkg.*       targetsupportpkgs.*       vision.*       vnt.*       xpc.*        daq_system_tests       fuzzy_codegen_tests       industry_toyotadenso_tests       matlab_tests       matlab_toolbox_tests       mbc_system_tests       nnet_doc_tests       nnet_system_tests       nnet_tests       rfblks_tests       shared_measure_tests       slvnv_doc_tests               
+SBT>    COMPONENT_HARNESS=/mathworks/hub/share/apps/iat/component_harness/R2013b/428180/glnxa64
+SBT>    CONFIG_DIR=/local-ssd/sandbox/Aslrtw/matlab/config
+SBT>    COVAUTOSAVE=0
+SBT>    COVFILE=/local-ssd/sandbox/Aslrtw/bullseye/covfile_glnxa64.cov
+SBT>    COVLM=/mathworks/hub/share/apps/BuildTools/Bullseye/8p4.0/LicenseManager_linux
+SBT>    CSLR_DM6437_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/dm6437/boards/dvsdk_1_01_00_15/psp_1_00_02_00/pspdrivers/soc/dm6437/dsp/inc
+SBT>    CSL_C6455_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C6455/boards/dsk6455_v2
+SBT>    CVSROOT=//src/CVS/devel
+SBT>    DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ygm9t13X53,guid=7995dfcc4e0fa2eeef933ec300000049
+SBT>    DDK_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/dm642/boards/evmdm642/drivers
+SBT>    DEFAULT_INSTALL_3P_RELEASE=R2013b
+SBT>    DEFAULT_SANDBOX=/mathworks/devel/sandbox/hungdang/
+SBT>    DEFAULT_TEST_RunEnvironment=ScopedPath
+SBT>    DESKTOP_SESSION=gnome
+SBT>    DISPLAY=:0.0
+SBT>    DISTCC_DIR=/tmp/hungdang
+SBT>    DOXYGEN_BINDIR=/mathworks/hub/share/apps/BuildTools/tools/glnxa64/doxygen/v1.8.3.1/bin
+SBT>    DOXYGEN_DOT_BINDIR=/usr/bin
+SBT>    DSP2802x_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/device_support/f2802x/v129
+SBT>    DSP2803x_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/device_support/f2803x/v125
+SBT>    DSP2804x_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/c28/DSP2804x/v130
+SBT>    DSP2806x_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/device_support/f2806x/v120
+SBT>    DSP2834x_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/device_support/c2834x/v112
+SBT>    DVSDK_EVMDM6437_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/dm6437/boards/dvsdk_1_01_00_15
+SBT>    ECLIPSE_ROOTDIR=/mathworks/hub/share/apps/Eclipse
+SBT>    EDA_INSTALLATION_BASE_DIR=/mathworks/hub/share/apps/HDLTools
+SBT>    EDA_OPN_SRC_BASE=/mathworks/hub/share/apps/HDLTools/OpenSource
+SBT>    EDITOR=emacs
+SBT>    EDMA3LLD_BIOS5_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C6747/edma3_lld_01_06_00_01
+SBT>    EMMA_COV=/local-ssd/sandbox/Aslrtw/emma/javacov_glnxa64.ec
+SBT>    EMMA_FILTER=/local-ssd/sandbox/Aslrtw/emma/filter.txt
+SBT>    EMMA_META=/local-ssd/sandbox/Aslrtw/emma/javacov_glnxa64.em
+SBT>    EMMA_ROOT=/mathworks/hub/share/apps/BuildTools/Emma/2.1.5320sp1
+SBT>    EMMA_WORK=/local-ssd/sandbox/Aslrtw/emma
+SBT>    FALLBACK_INSTALL_3P_RELEASE=R2013a
+SBT>    FLASH_2802x_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2802x/v201
+SBT>    FLASH_2803x_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2803x/v100
+SBT>    FLASH_2806x_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2806x/v100
+SBT>    FLASH_28232_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2823x/28232/v210
+SBT>    FLASH_28234_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2823x/28234/v210
+SBT>    FLASH_28235_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2823x/28235/v210
+SBT>    FLASH_28332_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2833x/28332/v210
+SBT>    FLASH_28334_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2833x/28334/v210
+SBT>    FLASH_28335_API_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C2000/controlSUITE/v2.3.1/libs/utilities/flash_api/2833x/28335/v210
+SBT>    GDMSESSION=gnome
+SBT>    GDM_LANG=C
+SBT>    GDM_XSERVER_LOCATION=local
+SBT>    GHS_LMHOST=@ghlicencsesrv.mathworks.com
+SBT>    GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+SBT>    GNOME_KEYRING_CONTROL=/tmp/keyring-ShGDgE
+SBT>    GROUP=users
+SBT>    GTK_RC_FILES=/etc/gtk/gtkrc:/home/hungdang/.gtkrc-1.2-gnome2
+SBT>    HOME=/home/hungdang
+SBT>    HOST=hungdang-deb6-64
+SBT>    HOSTTYPE=x86_64-linux
+SBT>    HUB=//mathworks/hub
+SBT>    INCISIV_111=/mathworks/hub/share/apps/HDLTools/IUS/IUS-111-tmw-000/tools.lnx86/bin/64bit
+SBT>    INCISIV_1227=/mathworks/hub/share/apps/HDLTools/IUS/12.2.7/tools.lnx86/bin/64bit
+SBT>    INCISIV_LATEST=/mathworks/hub/share/apps/HDLTools/IUS/12.2.7/tools.lnx86/bin/64bit
+SBT>    INSTALLPACKAGES_REDIRECT=1
+SBT>    ISBAT2=1
+SBT>    LANG=C
+SBT>    LARGE_TEST_DATA_ROOT=/mathworks/hub/qe/test_data
+SBT>    LD_LIBRARY_PATH=
+SBT>    LIBUSB_1012=/mathworks/hub/share/apps/HDLTools/lib/libusb/64bit
+SBT>    LIBUSB_LATEST=/mathworks/hub/share/apps/HDLTools/lib/libusb/64bit
+SBT>    LINES=58
+SBT>    LOCATION=AH
+SBT>    LOGNAME=hungdang
+SBT>    MACHTYPE=x86_64
+SBT>    MAKE_INCLUDE_DIR=/local-ssd/sandbox/Aslrtw/matlab/makerules
+SBT>    MANPATH=/mathworks/hub/3rdparty/internal/407203/glnxa64/gcc-4.7.2/man:/mathworks/hub/share/apps/bat/bat2.20.10/doc/man:/usr/local/apps/bat/perl/perl-5.8.8-tmw-025/man:/mathworks/hub/share/sbtools/help/man:/mathworks/hub/share/sbtools/external-apps/man:/usr/local/man:/usr/local/share/man:/usr/share/man
+SBT>    MATLAB_MEM_MGR=debug
+SBT>    METAMAIL_TMPDIR=/home/hungdang/Rdecode
+SBT>    MGLS_LICENSE_FILE=1717@lm-modelsim-01,1717@lm-modelsim-02,1717@lm-modelsim-03
+SBT>    MKCDIMAGES_SCRATCH_DIR=//mathworks/devel/bat/scratch
+SBT>    MODELSIM_101a=/mathworks/hub/share/apps/HDLTools/ModelSim/modelsim-10.1a-tmw-000/modeltech/bin
+SBT>    MODELSIM_101c=/mathworks/hub/share/apps/HDLTools/ModelSim/modelsim-10.1c-tmw-000/modeltech/bin
+SBT>    MODELSIM_102=/mathworks/hub/share/apps/HDLTools/ModelSim/10.2/questa_sim/bin
+SBT>    MODELSIM_LATEST=/mathworks/hub/share/apps/HDLTools/ModelSim/10.2/questa_sim/bin
+SBT>    MONTAVISTA_ROOTDIR=/mathworks/hub/share/apps/TexasInstruments/MontaVista
+SBT>    MULTI_ROOTDIR=/mathworks/hub/share/apps/BuildTools/compilers/glnx86/GHS/MULTI
+SBT>    MWESAVE=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
+SBT>    MWE_ARCH=glnxa64
+SBT>    MWE_CLUSTER=Aslrtw
+SBT>    MWE_INSTALL=/local-ssd/sandbox/Aslrtw/matlab
+SBT>    MWE_TOOLS=/mathworks/hub/share/apps/bat/bat2.20.10
+SBT>    MWE_VERSION=/local-ssd/sandbox/Aslrtw
+SBT>    MW_ANCHOR=/local-ssd/sandbox/Aslrtw
+SBT>    MW_ARCH=glnxa64
+SBT>    MW_CLUSTER=Aslrtw
+SBT>    MW_COMPILER_ROOT=/mathworks/hub/3rdparty/internal/407203/glnxa64/gcc-4.7.2
+SBT>    MW_CPU_ARCH=x86_64
+SBT>    MW_DEBUG_SETUP_SH=/local-ssd/sandbox/Aslrtw/matlab/derived/glnxa64/debug_setup/debug_setup.sh
+SBT>    MW_EXTRA_MAKE_FLAGS=--keep-going
+SBT>    MW_GCC_VER=4.7.2
+SBT>    MW_GDBINIT=/local-ssd/sandbox/Aslrtw/matlab/derived/glnxa64/debug_setup/.gdbinit
+SBT>    MW_VNCSERVER=/mathworks/hub/share/apps/TigerVNC/v1.1.0/glnxa64/TigerVNC/bin/vncserver
+SBT>    NDK_INSTALL_DIR=/mathworks/hub/share/apps/TexasInstruments/C6000/NDK/NDK182
+SBT>    NDK_INSTALL_DIR_DM6437=/mathworks/hub/share/apps/TexasInstruments/dm6437/boards/dvsdk_1_01_00_15/ndk_1_92_00_22_eval
+SBT>    NDK_INSTALL_DIR_v2_00_00=/mathworks/hub/share/apps/TexasInstruments/C6747/ndk_2_0_0
+SBT>    NLSPATH=/usr/share/locale/%L/LC_MESSAGES/%N.cat
+SBT>    ORBIT_SOCKETDIR=/tmp/orbit-hungdang
+SBT>    ORGANIZATION=The MathWorks, Inc., Natick, MA 01760
+SBT>    OSTYPE=linux
+SBT>    PACKAGE_HARNESS=/mathworks/hub/share/apps/iat/package_harness/R2013b/430190/glnxa64
+SBT>    PACKAGE_ROOT=matlab/derived/packages
+SBT>    PATCH_GET=0
+SBT>    PATH=/mathworks/hub/3rdparty/internal/407203/glnxa64/gcc-4.7.2/bin:/mathworks/hub/3rdparty/internal/426703/glnxa64/gdb-7.5.1/bin:/mathworks/hub/3rdparty/internal/423940/glnxa64/gmake/bin:/mathworks/hub/share/apps/BuildTools/1.4.1/glnxa64/bin:/mathworks/hub/share/apps/BuildTools/Linux/glibc-2.3.6/x86_64/perl/perl-5.8.8-tmw-027/bin:/mathworks/hub/share/apps/iat/tools/bat3/441751/bin:/mathworks/hub/share/apps/iat/package_harness/R2013b/430190/glnxa64/bin:/mathworks/hub/share/apps/iat/component_harness/R2013b/428180/glnxa64/bin:/mathworks/hub/share/apps/iat/test_harness/R2013b/ii7/433877/bin:/mathworks/hub/bat/common/bin:/local-ssd/sandbox/Aslrtw/matlab/bin:/mathworks/hub/share/apps/bat/bat2.20.10/glnxa64:/mathworks/hub/share/apps/bat/bat2.20.10/share:/mathworks/hub/3rdparty/internal/359885/glnxa64/Clang/bin/:/usr/local/apps/bat/perl/perl-5.8.8-tmw-025/bin:/mathworks/hub/share/sbtools/bin/glnxa64:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/local/netbin:/hub/share/bin:/local/hungdang//working/scripts:/home/hungdang//Public/sbtools
+SBT>    PH_FINISH_INSTALL_LIB=/local-ssd/sandbox/Aslrtw/matlab/install/tools/ph_finish_install/lib
+SBT>    PH_FINISH_INSTALL_MOD=MW::PHFinishInstall
+SBT>    PH_INSTALL_VERBOSE=1
+SBT>    PH_LOCK_SCM_ALIGNMENT=1
+SBT>    PH_USE_NEW_SETMWE=1
+SBT>    PH_WRITE_TEXT_MANIFEST=1
+SBT>    POC_IGNORE_EXEMPTIONS=1
+SBT>    PSP_EVMC6747_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/C6747/pspdrivers_01_20_00
+SBT>    PSP_EVMDM6437_INSTALLDIR=/mathworks/hub/share/apps/TexasInstruments/dm6437/boards/dvsdk_1_01_00_15/psp_1_00_02_00
+SBT>    PWD=/local-ssd/sandbox/Aslrtw
+SBT>    QE_DOMINANT_PLATFORM=GLNXA64
+SBT>    QUARTUS_11=/mathworks/hub/share/apps/HDLTools/Altera/QuartusII-11.0-tmw-000/Linux/quartus/bin
+SBT>    QUARTUS_12=/mathworks/hub/share/apps/HDLTools/Altera/QuartusII-12.0-tmw-000/Linux/quartus/bin
+SBT>    QUARTUS_121=/mathworks/hub/share/apps/HDLTools/Altera/QuartusII-12.1-tmw-000/Linux/quartus/bin
+SBT>    QUARTUS_64bit=1
+SBT>    QUARTUS_LATEST=/mathworks/hub/share/apps/HDLTools/Altera/QuartusII-12.1-tmw-000/Linux/quartus/bin
+SBT>    REMOTEHOST=
+SBT>    ROOT_3P_BASE=//mathworks/hub/3rdparty
+SBT>    SAM_BUILD_WIN32=1
+SBT>    SBARCH=glnxa64
+SBT>    SBM_MISSING_VARS=MWE_ARCH,MWE_TOOLS,TEMP,TMPDIR,TMP
+SBT>    SBM_SAVED_HOME=/home/hungdang
+SBT>    SBM_SAVED_MANPATH=/usr/local/apps/bat/perl/perl-5.8.8-tmw-025/man:/mathworks/hub/share/sbtools/help/man:/mathworks/hub/share/sbtools/external-apps/man:/usr/local/man:/usr/local/share/man:/usr/share/man
+SBT>    SBM_SAVED_PATH=/mathworks/hub/3rdparty/internal/359885/glnxa64/Clang/bin/:/usr/local/apps/bat/perl/perl-5.8.8-tmw-025/bin:/mathworks/hub/share/sbtools/bin/glnxa64:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/local/netbin:/hub/bat/share/bin:/hub/share/bin:/local/hungdang//working/scripts:/home/hungdang//Public/sbtools
+SBT>    SBTOOLS_LOC=/mathworks/hub/share/sbtools
+SBT>    SBTOOLS_RELEASE_ROOT=/mathworks/hub/share/sbtools/release
+SBT>    SB_START_PWD=/local-ssd/sandbox/Aslrtw
+SBT>    SCM_CHECK_ALL_UNOWNED=1
+SBT>    SCM_CHECK_CTB_UNOWNED=1
+SBT>    SC_TOOLS=/mathworks/hub/share/apps/iat/tools/sc/R2013b/423485/glnxa64
+SBT>    SESSION_MANAGER=local/hungdang-deb6-64:@/tmp/.ICE-unix/3962,unix/hungdang-deb6-64:/tmp/.ICE-unix/3962
+SBT>    SHELL=/usr/local/bin/tcsh
+SBT>    SHLVL=1
+SBT>    SIMSNAPSHOT=1
+SBT>    SMOKE_MEDIA=packages
+SBT>    SNPSLMD_LICENSE_FILE=1818@lm-synopsys-01,1818@lm-synopsys-02,1818@lm-synopsys-03
+SBT>    SSG_MANPATH=/usr/local/man:/usr/local/share/man:/usr/share/man
+SBT>    SSG_SYSID=Debian-6.0.5
+SBT>    SSH_AGENT_PID=4039
+SBT>    SSH_AUTH_SOCK=/tmp/keyring-ShGDgE/ssh
+SBT>    STELLARISTOOLS_ROOTDIR=/mathworks/hub/share/apps/TexasInstruments/StellarisTools
+SBT>    SYSTEMC_BASE_PATH=/mathworks/hub/share/apps/HDLTools/OpenSource/SystemC
+SBT>    SYSTEMC_INC_PATH=/mathworks/hub/share/apps/HDLTools/OpenSource/SystemC/systemc-2.3.0/include
+SBT>    SYSTEMC_LIB_NAME=libsystemc-gcc-4.4.6.a
+SBT>    SYSTEMC_LIB_PATH=/mathworks/hub/share/apps/HDLTools/OpenSource/SystemC/systemc-2.3.0/lib/glnxa64
+SBT>    TERM=xterm
+SBT>    TEST_HARNESS=/mathworks/hub/share/apps/iat/test_harness/R2013b/ii7/433877
+SBT>    TI2804x_COMMON_HEADER=/mathworks/hub/share/apps/TexasInstruments/C2000/c28/DSP2804x/v130/DSP2804x_common/include
+SBT>    TI2804x_COMMON_SRC=/mathworks/hub/share/apps/TexasInstruments/C2000/c28/DSP2804x/v130/DSP2804x_common/source
+SBT>    TI2804x_HEADER=/mathworks/hub/share/apps/TexasInstruments/C2000/c28/DSP2804x/v130/DSP2804x_headers/include
+SBT>    TI2804x_SRC=/mathworks/hub/share/apps/TexasInstruments/C2000/c28/DSP2804x/v130/DSP2804x_headers/source
+SBT>    TICCS_ECLIPSEV5_ROOTDIR=/mathworks/hub/share/apps/TexasInstruments/CCS/CCS_v5.1/linux
+SBT>    TICCS_ECLIPSE_ROOTDIR=/mathworks/hub/share/apps/TexasInstruments/CCS
+SBT>    TLM_INC_PATH=/mathworks/hub/share/apps/HDLTools/OpenSource/SystemC/systemc-2.3.0/include
+SBT>    TMPDIR=/tmp
+SBT>    TMW_NETWORK_CCS_HOME=/mathworks/hub/share/apps/TexasInstruments/CCS
+SBT>    TR_CONFIG_DIR=/local-ssd/sandbox/Aslrtw/matlab/config/testrequirements
+SBT>    TZ=EST5EDT
+SBT>    TestRequirements_harness_LDRA_LICENSE=1
+SBT>    USER=hungdang
+SBT>    USERNAME=hungdang
+SBT>    VENDOR=unknown
+SBT>    VISUAL=emacs
+SBT>    WINDOWID=27262980
+SBT>    WINDOWPATH=7
+SBT>    XAUTHORITY=/tmp/.gdm2Q1JXW
+SBT>    XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/:/usr/share/gdm/
+SBT>    XILINXD_LICENSE_FILE=1717@lm-xilinx-01,1717@lm-xilinx-02,1717@lm-xilinx-03
+SBT>    XILINX_101=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/XilinxISE-10.1-tmw-001/Linux/ISE
+SBT>    XILINX_114=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/XilinxISE-11.4-tmw-001/Linux/ISE
+SBT>    XILINX_121=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/XilinxISE-12.1-tmw-001/Linux/ISE
+SBT>    XILINX_131=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/XilinxISE-13.1-tmw-000/Linux/ISE_DS/ISE
+SBT>    XILINX_131new=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/XilinxISE-13.1-tmw-001/Linux/ISE_DS/ISE
+SBT>    XILINX_134=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/XilinxISE-13.4-tmw-001/Linux/ISE_DS/ISE
+SBT>    XILINX_141=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/XilinxISE-14.1-tmw-001/Linux/ISE_DS/ISE
+SBT>    XILINX_142=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/XilinxISE-14.2-tmw-000/Linux/14.2/ISE_DS/ISE
+SBT>    XILINX_144=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/14.4/Lin/14.4/ISE_DS/ISE
+SBT>    XILINX_LATEST=/mathworks/hub/share/apps/HDLTools/Xilinx_ISE/14.4/Lin/14.4/ISE_DS/ISE
+SBT>    XILINX_SYSGEN_LD_ROOT=/mathworks/hub/share/apps/HDLTools/Altera/QuartusII-12.1-tmw-001/Linux/quartus/dsp_builder/bin64:/mathworks/hub/share/apps/HDLTools/Altera/QuartusII-12.1-tmw-001/Linux/quartus/dspba/Blocksets/BaseBlocks/linux64
+SBT>    d=/local-ssd/hungdang
+SBT>    j=/mathworks/devel/jobarchive
+SBT>    l=/local/hungdang
+SBT>    presbPATH=/usr/local/bin:/usr/bin:/bin:/sbin:/usr/local/netbin:/hub/bat/share/bin:/hub/share/bin
+SBT>    s=/mathworks/devel/sandbox/hungdang
+SBT> EndSbConfigEnv.
+SBT> 
+SBT> running nice -18 /mathworks/hub/share/sbtools/bin/glnxa64/sbsetrlimit -rlimit_as 4294967296 /local-ssd/sandbox/Aslrtw/matlab/bin/matlab -r "runsuite('matlab/test/toolbox/simulink/modelref/ss2mdlref/tExportedFunction.m'); exit;" -memmgr fastdebug -timing -nodesktop -nosplash
+Information enclosed between the next two dashed lines is for internal use only!
+-------------------------------------------------------------------
+Setting up symbol path environment ..
+Launching MATLAB_MEM_MGR="fastdebug" /local-ssd/sandbox/Aslrtw/matlab/bin/glnxa64/MATLAB -r "runsuite('matlab/test/toolbox/simulink/modelref/ss2mdlref/tExportedFunction.m'); exit;" -nosplash -nodesktop -timing 1369153802355989 1369153802598703 [PID = 17170]
+-------------------------------------------------------------------
+[?1h=Opening timing log /home/hungdang/timing_log.17170 ..
+
+                                                                                   < M A T L A B (R) >
+                                                                         Copyright 1984-2013 The MathWorks, Inc.
+                                                                         R2013b (8.2.0.173529) 64-bit (glnxa64)
+                                                                                       May 1, 2013
+
+  Toolbox Path Cache read in 0.19 seconds.
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/shared/spcuilib/slscopes/src/blocks/scope_register] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/idelink/supportpackages/adivdsp/util] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/realtime/targets/beagleboard/blocks/mex] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/shared/sdr/sdru/bin/glnxa64] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/realtime/targets/raspberrypi/blocks/mex] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/shared/sdr/sdrf/lib/win64] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/shared/sdr/sdrf/bin/win64] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/shared/sdr/sdrf/lib/win32] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/shared/sdr/sdrf/bin/win32] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/realtime/targets/overo/blocks/mex] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/realtime/targets/pandaboard/blocks/mex] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/target/supportpackages/arm_cortex_m/blocks/mex] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/toolbox/target/supportpackages/arm_cortex_m/blocks/masks] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/phased/shared] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/phased/phased/cachefiles] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/test/tools/realtime/qesupportpkg] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/incisive/packages] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/modelsim/packages] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/desuite/tools] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/signal/shared] 
+[Warning: Name is nonexistent or not a directory: /local-ssd/sandbox/Aslrtw/matlab/test/tools/hmi/hmi] 
+MATLAB Path initialized in 1.93 seconds.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+ans =
+     []
+    MATLAB Startup Performance Metrics (In Seconds)
+
+total   item     gap      description
+=====================================
+ 0.24   0.24    0.00   MATLAB script       
+ 1.04   0.79   -0.00   main                
+ 1.11   0.07    0.01   LM Startup          
+ 1.22   0.00    0.10   splash              
+ 2.68   0.88    0.58      InitSunVM        
+ 6.24   3.41    0.15      PostVMInit       
+ 6.24   4.44    0.58     mljInit           
+ 6.24   4.44    0.58   Java initialization 
+ 6.25   0.02    0.00   hgInitialize        
+ 6.27   0.01    0.00   psParser            
+ 6.59   0.19    0.13   cachepath           
+ 9.14   1.93    0.62     matlabpath        
+14.42   7.83    0.00   matlabrc            
+=====================================
+Items shown account for 94.3% of total startup time [TIMER: 1 MHz]
+
+[Warning: Cannot run HG2 tests on Linux because MESA libraries are not on the LD_LIBRARY_PATH.  Restart MATLAB with the -softwareopengllinux option to enable testing of HG2, which is BaT's
+configuration for Linux.] 
+[> In batTestConfig>l_doOpenglConfig at 163
+  In batTestConfig at 14
+  In batrunsuite at 62
+  In runsuite at 251] 
+Using software OpenGL for testing on Linux.
+
+TEST FILE LIST FOR YOUR SUBMISSION:
+-----------------------------------
+/local-ssd/sandbox/Aslrtw/matlab/test/toolbox/simulink/modelref/ss2mdlref/tExportedFunction.m
+
+
+*** Entering directory :: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/simulink/modelref/ss2mdlref at :: 21-May-2013 12:30:26 ***
+
+*** Session information :: HOSTNAME:hungdang-deb6-64 ***
+*** ATTRIBUTES_BEGIN ***
+      device: <None>
+   scheduler: <None>
+    executor: <None>
+     harness: <None>
+*** ATTRIBUTES_END ***
+MATLAB version 8.2.0.173529 (R2013b), built on May 1, 2013
+
+[?1h=[?1h=[?1h=[?1h=[?1h=[?1h=[?1h=[?1h=21-May-2013 12:30:44 :: Running test : test/toolbox/simulink/modelref/ss2mdlref/tExportedFunction('lvlAll')
+[?1h=[?1h=[?1h=[?1h=[?1h=[?1h=[?1h=### Successfully converted Subsystem to Model reference block
+[?1h=[?1h=[?1h=[?1h=[?1h=[?1h=[?1h=TempDirDrool: we drooled the following files/directories in tempdir:
+	New files:
+		.java_pid20678
+		.java_pid22700
+		.java_pid22803
+		.java_pid23153
+		.java_pid23330
+		.java_pid25011
+		ccEFqTpg.s
+		mupkr0IATf4
+		mwslx_Space_in_the_name_tpfbd10e27_f275_4fad_9ab9_bf9d75c7accf
+		mwslx_f12345678910111213141516171819202122232425262728293031323334_tp439e11b5_13e4_4672_b52f_d01e93af8cd4
+		mwslx_mInvalidSignalResolution_tpc7b2362e_308b_4068_9c46_6f663a850744
+		mwslx_mInvalidSubsys_tp19ec6a1f_ecc7_4105_8bff_e562a99f966d
+		mwslx_mStateflowDSMBasicNameMapping_tp07d25e7c_e428_4037_917b_373b3122be9d
+		mwslx_mblibv1_tp39f392c4_fa0d_4a36_b793_7fc0deb174f5
+		mwslx_menabport_noio_tp5c8050f3_f1af_4390_a80c_a59f256af2f7
+		mwslx_msiglabel_in_tp540197ef_ddc4_4564_ac18_a40f48dd155e
+		mwslx_msiglabel_out_tp16500308_c0f5_49a2_a468_d510728d4379
+		mwslx_msigspec_bus_tp8d3a071e_e026_4276_b277_166dd9ebddd9
+		mwslx_myNewModel_xyz_tp6ab4d7b5_b250_4128_948c_addcaef39043
+		mwslx_myNewModel_xyz_tpa2bb8134_98d7_4fcb_8d8c_b70d9190a101
+		mwslx_myNewModel_xyz_tpd3a85d3c_c692_4f7e_9c8f_9a1f345708f9
+		mwslx_myNewModel_xyz_tpf62e254f_fb25_4fdc_98b5_d242b2c1d4d1
+		mwslx_simulink_tp3c440922_ee0c_49fc_94b6_3f7417e612c1
+		tp000e56fb_f38f_4f97_900e_5b095527a517.xml
+		tp0572f990_755a_4639_b30d_ea746f6d8d73WarningDetectorLog.xml
+		tp0c18d004_e999_43bb_aadf_cd535b786fd3
+		tp0ff8efc9_cdfc_4318_840b_23c3ddb6793e
+		tp21a31698_de0f_408e_8a15_b776421b1a88.xml
+		tp22a1a7ab_87c2_4e06_a7b6_565ef49f8e65WarningDetectorLog.xml
+		tp2d35eb38_7d0c_4918_a384_ef9eaf897451.xml
+		tp2eab0452_b870_45d9_82c9_23d021099409.xml
+		tp302ab41a_hungdang-deb6-64
+		tp35316a63_d8f3_4480_8bff_b45f991eef97
+		tp3955e830_e3f1_4898_8be3_f04ade97520f
+		tp57df6803_hungdang-deb6-64
+		tp57f0a80e_hungdang-deb6-64
+		tp62c13734_daad_4fb8_b351_e2d55f2134c0.xml
+		tp644a81dd_fa01_47d0_aca0_ac093611c32a.xml
+		tp6d9902b9_e3b9_4633_a008_5fc036e6158e.xml
+		tp72d9f180_1038_4de7_af8a_29049c7b35d3WarningDetectorLog.xml
+		tp75cc19ef_a701_4cd4_b961_172039e542c2
+		tp76b91827_23ad_49ce_b20a_2ba01b6dcf65
+		tp90b6ee05_7c20_489c_880c_0824dc5a55c0WarningDetectorLog.xml
+		tp93ffe9e7_a4b0_4686_b3a7_4569e0bcdd91.xml
+		tp9c7458d0_189a_44d3_ae33_b5e5bdbb2529
+		tpa1a02447_6b38_489e_a523_29c00db6197c
+		tpa5057e2f_6e2b_4913_bceb_dbbcbed32e4e.xml
+		tpa94cbf31_976a_4b7a_ab1a_a54de7bdcfb2WarningDetectorLog.xml
+		tpac57c46a_4666_487e_94c6_8b20168bd545WarningDetectorLog.xml
+		tpb211e406_hungdang-deb6-64
+		tpc5363a46_51f1_4323_b8f0_de83414b6a02
+		tpdb225d60_c4d1_4f9b_8e38_4a4fedeb6600
+		tpdc05b981_03dc_446e_886d_afdf1bcffd7c
+		tpdc904fc6_14cf_4986_a391_c4fe89eee224.xml
+		tpdd6633a9_abfa_432a_aef8_00480e642b94.xml
+		tpdf59d14f_17bd_4ba3_9410_46abda3092ae
+		tpe5c4423a_0258_4047_8c24_240691e54504.xml
+		tpf64517ee_1a71_4d63_b0ec_00c542b4f3bb.xml
+		tpf68e75d7_06ac_4b7a_a22d_882a38a40a05
+		tpf795c426_a548_4a8e_a523_c7b17c2a35b9WarningDetectorLog.xml
+	Missing files:
+		.java_pid16345
+		.java_pid17165
+		.java_pid17168
+		.java_pid17172
+		.java_pid17174
+		.java_pid17178
+		.java_pid19303
+		.java_pid20181
+		mupkr6UtYHo
+		tp90127b01_494f_4f05_ac07_017939844993WarningDetectorLog.xml
+		tpa55d8bd5_d86d_4f10_9af9_8899eff9219eWarningDetectorLog.xml
+		tpc95f1311_d847_4487_ad12_afb3f7d5ab90WarningDetectorLog.xml
+21-May-2013 12:33:04 :: Done testing : test/toolbox/simulink/modelref/ss2mdlref/tExportedFunction('lvlAll') in 140s : PASSED
+21-May-2013 12:33:04 :: Running test : test/toolbox/simulink/modelref/ss2mdlref/t_dir_drool_check('lvlAll')
+TempDirDrool: we drooled the following files/directories in tempdir:
+	New files:
+		.java_pid20678
+		.java_pid22700
+		.java_pid22803
+		.java_pid23153
+		.java_pid23330
+		.java_pid25011
+		mupkr0IATf4
+		mwslx_Space_in_the_name_tpfbd10e27_f275_4fad_9ab9_bf9d75c7accf
+		mwslx_SubSystemTestCounter_tp57847105_09f1_47f6_ba79_7dd28f8c46db
+		mwslx_f12345678910111213141516171819202122232425262728293031323334_tp439e11b5_13e4_4672_b52f_d01e93af8cd4
+		mwslx_mInvalidSignalResolution_tpc7b2362e_308b_4068_9c46_6f663a850744
+		mwslx_mInvalidSubsys_tp19ec6a1f_ecc7_4105_8bff_e562a99f966d
+		mwslx_mStateflowDSMBasicNameMapping_tp07d25e7c_e428_4037_917b_373b3122be9d
+		mwslx_mblibv1_tp39f392c4_fa0d_4a36_b793_7fc0deb174f5
+		mwslx_menabport_noio_tp5c8050f3_f1af_4390_a80c_a59f256af2f7
+		mwslx_msiglabel_in_tp540197ef_ddc4_4564_ac18_a40f48dd155e
+		mwslx_msiglabel_out_tp16500308_c0f5_49a2_a468_d510728d4379
+		mwslx_msigspec_bus_tp8d3a071e_e026_4276_b277_166dd9ebddd9
+		mwslx_myNewModel_xyz_tp6ab4d7b5_b250_4128_948c_addcaef39043
+		mwslx_myNewModel_xyz_tpa2bb8134_98d7_4fcb_8d8c_b70d9190a101
+		mwslx_myNewModel_xyz_tpd3a85d3c_c692_4f7e_9c8f_9a1f345708f9
+		mwslx_myNewModel_xyz_tpf62e254f_fb25_4fdc_98b5_d242b2c1d4d1
+		mwslx_simulink_tp3c440922_ee0c_49fc_94b6_3f7417e612c1
+		tp000e56fb_f38f_4f97_900e_5b095527a517.xml
+		tp0572f990_755a_4639_b30d_ea746f6d8d73WarningDetectorLog.xml
+		tp21a31698_de0f_408e_8a15_b776421b1a88.xml
+		tp22a1a7ab_87c2_4e06_a7b6_565ef49f8e65WarningDetectorLog.xml
+		tp24d0251f_7ae3_4ff7_83cb_7297b681b187WarningDetectorLog.xml
+		tp2d35eb38_7d0c_4918_a384_ef9eaf897451.xml
+		tp2dffae09_be6e_4049_bfcc_383c359cb9f2WarningDetectorLog.xml
+		tp2eab0452_b870_45d9_82c9_23d021099409.xml
+		tp302ab41a_hungdang-deb6-64
+		tp35316a63_d8f3_4480_8bff_b45f991eef97
+		tp3955e830_e3f1_4898_8be3_f04ade97520f
+		tp57df6803_hungdang-deb6-64
+		tp57f0a80e_hungdang-deb6-64
+		tp62c13734_daad_4fb8_b351_e2d55f2134c0.xml
+		tp644a81dd_fa01_47d0_aca0_ac093611c32a.xml
+		tp6d9902b9_e3b9_4633_a008_5fc036e6158e.xml
+		tp72d9f180_1038_4de7_af8a_29049c7b35d3WarningDetectorLog.xml
+		tp75cc19ef_a701_4cd4_b961_172039e542c2
+		tp76b91827_23ad_49ce_b20a_2ba01b6dcf65
+		tp90b6ee05_7c20_489c_880c_0824dc5a55c0WarningDetectorLog.xml
+		tp93ffe9e7_a4b0_4686_b3a7_4569e0bcdd91.xml
+		tp9c7458d0_189a_44d3_ae33_b5e5bdbb2529
+		tpa1a02447_6b38_489e_a523_29c00db6197c
+		tpa5057e2f_6e2b_4913_bceb_dbbcbed32e4e.xml
+		tpa94c94a1_824f_4617_9e39_cb8a988d023eWarningDetectorLog.xml
+		tpa94cbf31_976a_4b7a_ab1a_a54de7bdcfb2WarningDetectorLog.xml
+		tpac57c46a_4666_487e_94c6_8b20168bd545WarningDetectorLog.xml
+		tpb16e03c8_bc7a_429d_8871_26bc2070129bWarningDetectorLog.xml
+		tpb211e406_hungdang-deb6-64
+		tpb66016b9_94ae_48b3_b9d0_6823a8d85779WarningDetectorLog.xml
+		tpc2625d27_c216_4add_a426_43149186ef92WarningDetectorLog.xml
+		tpc5363a46_51f1_4323_b8f0_de83414b6a02
+		tpcafbc070_7cd7_4300_86c7_3d18384cd49f
+		tpdb225d60_c4d1_4f9b_8e38_4a4fedeb6600
+		tpdc05b981_03dc_446e_886d_afdf1bcffd7c
+		tpdc904fc6_14cf_4986_a391_c4fe89eee224.xml
+		tpdd6633a9_abfa_432a_aef8_00480e642b94.xml
+		tpdf59d14f_17bd_4ba3_9410_46abda3092ae
+		tpe5c4423a_0258_4047_8c24_240691e54504.xml
+		tpf64517ee_1a71_4d63_b0ec_00c542b4f3bb.xml
+		tpf68e75d7_06ac_4b7a_a22d_882a38a40a05
+		tpf795c426_a548_4a8e_a523_c7b17c2a35b9WarningDetectorLog.xml
+	Missing files:
+		.java_pid16345
+		.java_pid17165
+		.java_pid17168
+		.java_pid17172
+		.java_pid17174
+		.java_pid17178
+		.java_pid19303
+		.java_pid20181
+		mupkr6UtYHo
+21-May-2013 12:33:06 :: Done testing : test/toolbox/simulink/modelref/ss2mdlref/t_dir_drool_check('lvlAll') in 3s : PASSED
+*** Exiting directory :: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/simulink/modelref/ss2mdlref at :: 21-May-2013 12:33:06 ***
+*** PASSED :: /local-ssd/sandbox/Aslrtw/matlab/test/toolbox/simulink/modelref/ss2mdlref in 161.24 seconds ***
+
+-------------------------------------------------------------------------
+*** Testing time for the directories :  161.24 seconds (2.69 minutes) ***
+*** Overall testing time :              166.87 seconds (2.78 minutes) ***
+-------------------------------------------------------------------------
+
+*****************************
+*** SUMMARY OF TEST FILES ***
+*****************************
+Total test files run: 1
+No failures.
+
+[?1l>
