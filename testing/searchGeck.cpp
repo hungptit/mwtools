@@ -6,7 +6,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "base/Basic.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Resources.hpp"
 
 template <typename T>
@@ -50,14 +50,14 @@ bool parseInputParameters(int ac, char* av[])
         std::string optionString;
         if (geckId.empty())
         {
-            optionString = Sbtools::Resources<std::string>::Gecko;
+            optionString = Tools::SandboxResources<std::string>::Gecko;
         }
         else 
         {
-            optionString = Sbtools::Resources<std::string>::Gecko + "view?Record=" + geckId;
+            optionString = Tools::SandboxResources<std::string>::Gecko + "view?Record=" + geckId;
         }
 
-        const std::string cmdStr = Sbtools::Resources<std::string>::WebViewer + " " + optionString;
+        const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " + optionString;
         Tools::run(cmdStr);
         std::cout << "Command: " << cmdStr << std::endl;
     }

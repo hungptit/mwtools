@@ -11,7 +11,7 @@
 #include "FindEditedFiles.hpp"
 #include "base/Basic.hpp"
 
-namespace Sbtools
+namespace Tools
 {
     class SyncSandbox
     {

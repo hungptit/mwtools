@@ -6,10 +6,10 @@
 bool runUnitTests(const std::string & folderPath, const bool verbose = false)
 {
     const std::string fullFolderPath = Tools::getAbslutePath(folderPath);
-    Sbtools::FindEditedFiles finder;
+    Tools::FindEditedFiles finder;
     const size_t fileNum = finder.searchWritableFiles(fullFolderPath);
     std::cout << "Number of writable files: " << fileNum << std::endl;   
-    Sbtools::Sandbox sandbox(fullFolderPath);
+    Tools::Sandbox sandbox(fullFolderPath);
     const std::string fileName = sandbox.getSandboxPath() + Tools::FileSeparator<std::string>::value+ + ".sbtools/database.txt";
     finder.createWritableFileDatabase(fileName);
     std::cout << "Database file: " << fileName << std::endl;

@@ -12,7 +12,7 @@
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace Sbtools
+namespace Tools
 {
     class RunTests
     {

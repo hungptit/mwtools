@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <iterator>
 #include <cstdlib>
-#include "base/FileSystemUtilities.hpp"
-#include "base/Basic.hpp"
+#include "utils/FileSystemUtilities.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Utilities.hpp"
 
 template <typename T>

@@ -6,7 +6,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "base/Basic.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Resources.hpp"
 
 template <typename T>
@@ -62,7 +62,7 @@ bool parseInputParameters(int ac, char* av[])
             optionString += " -description=\"" + vm["description"].as<std::string>() + "\" ";
         }
 
-        const std::string cmdStr = Sbtools::Resources<std::string>::ReviewBoardCommand + changeId + " " + optionString;
+        const std::string cmdStr = Tools::SandboxResources<std::string>::ReviewBoardCommand + changeId + " " + optionString;
         Tools::run(cmdStr);
         std::cout << "Command: " << cmdStr << std::endl;
     }

@@ -16,7 +16,7 @@
 #include "base/FileFinder.hpp"
 #include "sbtools/Resources.hpp"
 
-namespace Sbtools 
+namespace Tools 
 {
     class TestSuite
     {

@@ -6,7 +6,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "base/Basic.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Resources.hpp"
 
 template <typename T>
@@ -55,8 +55,8 @@ bool parseInputParameters(int ac, char* av[])
         
 
         // Launch code search
-        const std::string cmdStr = Sbtools::Resources<std::string>::WebViewer + " " + 
-            Sbtools::Resources<std::string>::CodeSearch + options;
+        const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " + 
+            Tools::SandboxResources<std::string>::CodeSearch + options;
         Tools::run(cmdStr);
         std::cout << "Command: " << cmdStr << std::endl;
     }

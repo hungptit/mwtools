@@ -16,7 +16,7 @@
 
 #include "base/Resources.hpp"
 
-namespace Sbtools
+namespace Tools
 {
     class TestDatabase
     {

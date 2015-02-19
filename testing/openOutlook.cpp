@@ -6,7 +6,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "base/Basic.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Resources.hpp"
 
 template <typename T>
@@ -46,8 +46,8 @@ bool parseInputParameters(int ac, char* av[])
             options = "mail";
         }
 
-        const std::string cmdStr = Sbtools::Resources<std::string>::WebViewer + " " + 
-            Sbtools::Resources<std::string>::Outlook + options;
+        const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " + 
+            Tools::SandboxResources<std::string>::Outlook + options;
         Tools::run(cmdStr);
         std::cout << "Command: " << cmdStr << std::endl;
     }

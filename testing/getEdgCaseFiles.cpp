@@ -86,6 +86,6 @@ int main(int ac, char* av[])
     std::string desFolder;
     std::string caseId;
     if (parserInputParameters<std::string>(ac, av, caseId, srcFolder, desFolder))
-        Sbtools::copyFiles(srcFolder, desFolder);
+        Tools::copyFiles(srcFolder, desFolder);
     return EXIT_SUCCESS;
 }

@@ -8,7 +8,7 @@
 #include "base/TimeUtilities.hpp"
 #include "base/Resources.hpp"
 
-namespace Sbtools 
+namespace Tools 
 {
     class LogFolder
     {

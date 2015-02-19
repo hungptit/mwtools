@@ -5,7 +5,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "base/Basic.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Utilities.hpp"
 #include "sbtools/Resources.hpp"
 
@@ -46,7 +46,7 @@ bool parseInputParameters(int ac, char* av[])
         return false;
     }
 
-    std::cout << "Backup folder: "<< Sbtools::backupSandbox(comment) << std::endl;    
+    std::cout << "Backup folder: "<< Tools::backupSandbox(comment) << std::endl;    
     return true;
 }
 

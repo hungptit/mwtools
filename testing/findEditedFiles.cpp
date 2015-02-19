@@ -5,16 +5,16 @@
 
 bool runUnitTests(const std::string & folderPath, const bool verbose = false)
 {
-    Sbtools::FindEditedFiles finder;
+    Tools::FindEditedFiles finder;
     
     const std::string fullFolderPath = Tools::getAbslutePath(folderPath);   
-    Sbtools::Sandbox sandbox(fullFolderPath);
+    Tools::Sandbox sandbox(fullFolderPath);
     const std::string fileName = 
         sandbox.getSandboxPath() + 
         Tools::FileSeparator<std::string>::value + 
-        Sbtools::Resources<std::string>::SbtoolsFolder + 
+        Tools::Resources<std::string>::SbtoolsFolder + 
         Tools::FileSeparator<std::string>::value +
-        Sbtools::Resources<std::string>::DatabaseFileName;
+        Tools::Resources<std::string>::DatabaseFileName;
 
 #ifdef DEBUG
     std::cout << "Database file: " << fileName << std::endl;

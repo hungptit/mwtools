@@ -50,7 +50,7 @@ std::string getFarmOption(const std::string & farm)
 const std::string getLogDir(const std::string & seed)
 {
     const std::string logDir = " $DEFAULT_SANDBOX" + Tools::FileSeparator<std::string>::value + 
-        "logs" + Tools::FileSeparator<std::string>::value + seed + Tools::FileSeparator<std::string>::value + getTimeStampString();
+        "logs" + Tools::FileSeparator<std::string>::value + seed + Tools::FileSeparator<std::string>::value + Tools::getTimeStampString();
     return logDir;
 }
 
@@ -68,7 +68,7 @@ std::string getSbruntestsCommand(const std::string & farm,
                                  const std::string & listFile,
                                  const std::string & runFolder)
 {
-    std::string command = "sbruntests " + Sbtools::getFarmOption(farm);
+    std::string command = "sbruntests " + Tools::getFarmOption(farm);
     std::string seed;
 
     if (!runFolder.empty())
@@ -97,7 +97,7 @@ std::string getSbruntestsCommand(const std::string & farm,
         throw("Invalid options");
     }
 
-    command += " -testlogarea " + Sbtools::getLogDir(seed);
+    command += " -testlogarea " + getLogDir(seed);
 
     return command;
 }
@@ -133,11 +133,11 @@ std::string readFile(const std::string & fileName)
 
 const std::string backupSandbox(const std::string & comment)
 {
-    const std::string str = Sbtools::getBackupDir(comment);
-    const std::string cmdStr = "sbbackup -l " + str + " -r " + Sbtools::Resources<std::string>::BackupDirectory;
+    const std::string str = getBackupDir(comment);
+    const std::string cmdStr = "sbbackup -l " + str + " -r " + SandboxResources<std::string>::BackupDirectory;
     Tools::run(cmdStr);
     // std::cout << "Command: " << cmdStr << std::endl;
-    std::string backupDir = Sbtools::Resources<std::string>::BackupDirectory + Tools::FileSeparator<std::string>::value + str;
+    std::string backupDir = SandboxResources<std::string>::BackupDirectory + Tools::FileSeparator<std::string>::value + str;
     return Tools::getAbslutePath(backupDir);
 }
 
@@ -158,7 +158,7 @@ const std::string generateGlobalDatabaseCommand(const std::string & sandboxPath)
 const std::string getDatabaseFileName(const std::string & sandboxPath)
 {
     const std::string fileName = sandboxPath + Tools::FileSeparator<std::string>::value +
-        Resources<std::string>::SbtoolsFolder + Tools::FileSeparator<std::string>::value + 
-        Resources<std::string>::DatabaseFileName;
+        SandboxResources<std::string>::SbtoolsFolder + Tools::FileSeparator<std::string>::value + 
+        SandboxResources<std::string>::DatabaseFileName;
     return fileName;
 }

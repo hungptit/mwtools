@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <iterator>
 #include "sbtools/Utilities.hpp"
-#include "base/FileSystemUtilities.hpp"
-#include "base/Basic.hpp"
+#include "utils/FileSystemUtilities.hpp"
+#include "utils/Basic.hpp"
 
 template <typename Int>
 bool parseInputParameters(int ac, char* av[], std::string & runCommand)
@@ -91,11 +91,11 @@ bool parseInputParameters(int ac, char* av[], std::string & runCommand)
         {
             farm = vm["farm"].as<std::string>();
         }       
-        Sbtools::getRunningFarm(farm, sandbox);
+        Tools::getRunningFarm(farm, sandbox);
         // std::cout << "Running farm: " << farm << std::endl;
 
         // Create the sbruntests command
-        runCommand = Sbtools::getSbruntestsCommand(farm, listFile, runFolder);
+        runCommand = Tools::getSbruntestsCommand(farm, listFile, runFolder);
         std::cout << "Run command: " << runCommand << std::endl;
     }
 

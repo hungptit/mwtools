@@ -14,7 +14,7 @@
 
 #include "Utilities.hpp"
 
-namespace Sbtools
+namespace Tools
 {
     enum TestStatus {TEST_PASSED = 0, 
                      TEST_PASSED_WITH_WARNING = 1, 

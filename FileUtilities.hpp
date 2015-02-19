@@ -1,6 +1,6 @@
 #ifndef FileUtilities_hpp_
 #define FileUtilities_hpp_
-namespace Sbtools
+namespace Tools
 {
     const bool createDirectory(const std::string & folderName);
     const bool isRegularFile(const std::string & str);    

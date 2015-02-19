@@ -5,7 +5,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "base/Basic.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Utilities.hpp"
 
 bool parseInputParameters(int ac, char* av[])
@@ -40,7 +40,7 @@ bool parseInputParameters(int ac, char* av[])
             sandboxPath = vm["sandbox"].as<std::string>();
         }
 
-        const std::string cmdStr = Sbtools::generateGlobalDatabaseCommand(sandboxPath);
+        const std::string cmdStr = Tools::generateGlobalDatabaseCommand(sandboxPath);
         Tools::run(cmdStr);
         std::cout << "Command: " << cmdStr << std::endl;
     }

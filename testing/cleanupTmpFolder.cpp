@@ -1,5 +1,5 @@
-#include "base/Basic.hpp"
-#include "base/FileSystemUtilities.hpp"
+#include "utils/Basic.hpp"
+#include "utils/FileSystemUtilities.hpp"
 #include "boost/program_options.hpp"
 #include "boost/lexical_cast.hpp"
 #include "sbtools/CleanupTmpFolder.hpp"
@@ -36,7 +36,7 @@ int main(int ac, char* av[])
         tmpFolder = "/tmp/";
     }
     
-    Sbtools::CleanupTmpFolder cleanObj(tmpFolder);
+    Tools::CleanupTmpFolder cleanObj(tmpFolder);
     cleanObj.clean();
     
     return EXIT_SUCCESS;

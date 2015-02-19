@@ -1,13 +1,10 @@
-#include "base/Basic.hpp"
-
 #include <string>
 #include <iostream>
-
 #include "boost/lexical_cast.hpp"
 #include "boost/program_options.hpp"
-#include "base/Resources.hpp"
-#include "base/Basic.hpp"
-#include "base/FileSystemUtilities.hpp"
+#include "utils/Resources.hpp"
+#include "utils/Basic.hpp"
+#include "utils/FileSystemUtilities.hpp"
 
 class CreatePdfFile
 {

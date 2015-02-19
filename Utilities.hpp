@@ -8,8 +8,8 @@
 #include <fstream>
 #include <cerrno>
 
-#include "base/TimeUtilities.hpp"
-#include "base/Resources.hpp"
+#include "utils/TimeUtilities.hpp"
+#include "utils/Resources.hpp"
 
 #include "boost/regex.hpp"
 #include "boost/lexical_cast.hpp"
@@ -17,11 +17,12 @@
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include <boost/date_time/gregorian/gregorian.hpp>
 
-#include "base/Basic.hpp"
-#include "base/FileSystemUtilities.hpp"
+#include "utils/Basic.hpp"
+#include "utils/FileSystemUtilities.hpp"
+#include "utils/TimeUtilities.hpp"
 #include "Resources.hpp"
 
-namespace Sbtools 
+namespace Tools 
 {
     void copyFiles(const std::string & srcFolder, const std::string & desFolder);   
     bool hasPrefixString(const std::string & str, const std::string & prefix);    

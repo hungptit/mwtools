@@ -6,7 +6,7 @@
 #include "sbtools/Utilities.hpp"
 #include "sbtools/FindEditedFiles.hpp"
 
-namespace Sbtools
+namespace Tools
 {
     class ZFSUtils
     {

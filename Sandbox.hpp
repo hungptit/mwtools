@@ -10,7 +10,7 @@
 #include "Utilities.hpp"
 #include "base/Basic.hpp"
 
-namespace Sbtools
+namespace Tools
 {
     class Sandbox
     {

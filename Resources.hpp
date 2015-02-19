@@ -1,13 +1,13 @@
 #ifndef sbtool_resources_hpp
 #define sbtool_resources_hpp
 
-#include "base/Resources.hpp"
-#include "base/Basic.hpp"
+#include "utils/Resources.hpp"
+#include "utils/Basic.hpp"
 
-namespace Sbtools
+namespace Tools
 {
     template <typename T>
-    struct Resources
+    struct SandboxResources
     {
         typedef T value_type;
         static const T SbtoolsFolder;

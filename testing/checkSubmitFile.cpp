@@ -6,7 +6,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "base/Basic.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Resources.hpp"
 
 template <typename T>
@@ -57,7 +57,7 @@ bool parseInputParameters(int ac, char* av[])
             optionString = " -check sbedits -opened ";
         }
 
-        const std::string cmdStr = Sbtools::Resources<std::string>::SbCheckCommand + optionString + "-F " + submitFile;
+        const std::string cmdStr = Tools::SandboxResources<std::string>::SbCheckCommand + optionString + "-F " + submitFile;
         std::cout << "Command: " << cmdStr << std::endl;
         Tools::run(cmdStr);
         std::cout << "Command: " << cmdStr << std::endl;

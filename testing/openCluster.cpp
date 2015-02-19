@@ -6,7 +6,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "base/Basic.hpp"
+#include "utils/Basic.hpp"
 #include "sbtools/Resources.hpp"
 
 template <typename T>
@@ -46,8 +46,8 @@ bool parseInputParameters(int ac, char* av[])
             cluster = "Bmdlref";
         }
 
-        const std::string cmdStr = Sbtools::Resources<std::string>::WebViewer + " " + 
-            Sbtools::Resources<std::string>::Batcave + cluster;
+        const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " + 
+            Tools::SandboxResources<std::string>::Batcave + cluster;
         Tools::run(cmdStr);
         std::cout << "Command: " << cmdStr << std::endl;
     }

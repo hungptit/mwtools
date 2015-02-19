@@ -9,19 +9,19 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11  -Wall -Wextra -pedantic -O3"
 ENABLE_TESTING()
 
 # Include folder
-INCLUDE_DIRECTORIES ("../")
-INCLUDE_DIRECTORIES ("../../3p/threadpool/")
+INCLUDE_DIRECTORIES ("../../")
 INCLUDE_DIRECTORIES ("../../3p/gtest/include")
 INCLUDE_DIRECTORIES ("../../3p/poco/include/")
 
 # Used libraries
-set(LIB_GTEST "${CMAKE_CURRENT_SOURCE_DIR}/../../3p/gtest/lib/libgtest.a")
-set(LIB_GTEST_MAIN "${CMAKE_CURRENT_SOURCE_DIR}/../../3p/gtest/lib/libgtest_main.a")
-set(LIB_POCO "${CMAKE_CURRENT_SOURCE_DIR}/../../3p/gtest/lib/libgtest_main.a")
-set(LIB_POCO_FOUNDATION  "${CMAKE_CURRENT_SOURCE_DIR}/../../3p/poco/lib/libPocoFoundation.a")
-set(LIB_POCO_UTIL "${CMAKE_CURRENT_SOURCE_DIR}/../../3p/poco/lib/libPocoUtil.a")
-set(LIB_POCO_XML  "${CMAKE_CURRENT_SOURCE_DIR}/../../3p/poco/lib/libPocoXML.a")
-set(LIB_POCO_SQLITE  "${CMAKE_CURRENT_SOURCE_DIR}/../../3p/poco/lib/libPocoDataSQLited.so")
+set(PROJECT_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../../")
+set(LIB_GTEST "${PROJECT_FOLDER}/3p/gtest/lib/libgtest.a")
+set(LIB_GTEST_MAIN "${PROJECT_FOLDER}/3p/gtest/lib/libgtest_main.a")
+set(LIB_POCO "${PROJECT_FOLDER}/3p/gtest/lib/libgtest_main.a")
+set(LIB_POCO_FOUNDATION  "${PROJECT_FOLDER}/3p/poco/lib/libPocoFoundation.a")
+set(LIB_POCO_UTIL "${PROJECT_FOLDER}/3p/poco/lib/libPocoUtil.a")
+set(LIB_POCO_XML  "${PROJECT_FOLDER}/3p/poco/lib/libPocoXML.a")
+set(LIB_POCO_SQLITE  "${PROJECT_FOLDER}/3p/poco/lib/libPocoDataSQLited.so")
 
 # Find Boost libraries
 set(Boost_USE_STATIC_LIBS ON)
@@ -31,7 +31,7 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 # This option make sure that we use the local boost version.
 set(Boost_NO_SYSTEM_PATHS TRUE) 
 if (Boost_NO_SYSTEM_PATHS)
-  set(BOOST_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../3p/boost")
+  set(BOOST_ROOT "${PROJECT_FOLDER}/3p/boost")
   set(BOOST_INCLUDE_DIRS "${BOOST_ROOT}/include")
   set(BOOST_LIBRARY_DIRS "${BOOST_ROOT}/lib")
 endif (Boost_NO_SYSTEM_PATHS)
@@ -45,9 +45,14 @@ message(STATUS "${Boost_INCLUDE_DIRS}")
 message(STATUS "${Boost_LIBRARY_DIRS}")
 
 set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
-  runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles
   regenerateGlobalDatabase cleanupTmpFolder runMatlab checkSubmitFile searchGeck
-  geckoSearch openCluster openOutlook codeSearch)
+  geckoSearch openCluster openOutlook codeSearch
+  runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles)
+
+# set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
+#   runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles
+#   regenerateGlobalDatabase cleanupTmpFolder runMatlab checkSubmitFile searchGeck
+#   geckoSearch openCluster openOutlook codeSearch)
 
 message(STATUS "${Boost_LIBRARIES}")
 

@@ -7,7 +7,7 @@
 #include "boost/lexical_cast.hpp"
 #include "boost/program_options.hpp"
 
-namespace Sbtools
+namespace Tools
 {
     class CleanupTmpFolder
     {
