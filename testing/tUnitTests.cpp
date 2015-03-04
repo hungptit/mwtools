@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <iterator>
 #include "sbtools/Utilities.hpp"
-#include "base/FileSystemUtilities.hpp"
-#include "base/Basic.hpp"
+#include "utils/FileSystemUtilities.hpp"
+#include "utils/Basic.hpp"
 
 bool runUnitTests()
 {

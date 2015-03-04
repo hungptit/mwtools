@@ -4,9 +4,9 @@
 #include <string>
 #include "boost/filesystem.hpp"
 #include "boost/date_time/posix_time/posix_time.hpp"
-#include "base/FileSystemUtilities.hpp"
-#include "base/TimeUtilities.hpp"
-#include "base/Resources.hpp"
+#include "utils/FileSystemUtilities.hpp"
+#include "utils/TimeUtilities.hpp"
+#include "utils/Resources.hpp"
 
 namespace Tools 
 {
@@ -15,9 +15,9 @@ namespace Tools
       public:
         LogFolder(const std::string & rootPath);
         ~LogFolder();        
-        const bool create();
+        bool create();
         const std::string & getFolderPath() const;
-        const bool unitTest();
+        bool unitTest();
         
       private:
         std::string RootFolderPath;

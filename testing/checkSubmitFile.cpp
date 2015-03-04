@@ -54,7 +54,7 @@ bool parseInputParameters(int ac, char* av[])
         }
         else
         {
-            optionString = " -check sbedits -opened ";
+            optionString = " -check sbedits ";
         }
 
         const std::string cmdStr = Tools::SandboxResources<std::string>::SbCheckCommand + optionString + "-F " + submitFile;

@@ -55,7 +55,7 @@ namespace Tools
         void run();
         void report(const std::string & fileName = "");
 
-        const bool unitTest();
+        bool unitTest();
         
       private:
         std::string FolderPath;

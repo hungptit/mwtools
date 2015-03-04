@@ -64,10 +64,10 @@ void Sandbox::getSandboxTimeStamp()
     if (boost::regex_search(begin, end, what, expression, flags))
     {
         timeString = what[0];
-        Sbtools::replaceSubstring(timeString, "_", "-");        
-        Sbtools::replaceSubstring(timeString, "-h", " ");
-        Sbtools::replaceSubstring(timeString, "m", ":");
-        Sbtools::replaceSubstring(timeString, "s", ":");
+        Tools::replaceSubstring(timeString, "_", "-");        
+        Tools::replaceSubstring(timeString, "-h", " ");
+        Tools::replaceSubstring(timeString, "m", ":");
+        Tools::replaceSubstring(timeString, "s", ":");
         TimeStamp = boost::posix_time::time_from_string(timeString);
     }
 }

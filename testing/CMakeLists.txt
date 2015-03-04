@@ -4,7 +4,8 @@ CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
 # set (CMAKE_BUILD_TYPE Debug)
 set (CMAKE_BUILD_TYPE Release)
 # set(CMAKE_CXX_COMPILER clang++)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11  -Wall -Wextra -pedantic -O3")
+set(CMAKE_CXX_COMPILER ../../3p/llvm/bin/clang++)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11  -Wall -Wextra -pedantic -O3 -Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef")
 
 ENABLE_TESTING()
 
@@ -65,15 +66,16 @@ if (Boost_FOUND)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
   # Compile all unittests
+  set(UNITTEST_SRC_FILES tUnitTests tTestSuite tTestDatabase tLogFolder tLogParser tRemoveWhiteSpace tBasic tFindEditedFiles 
+    tSandbox tFileDatabase main)
+
   # set(UNITTEST_SRC_FILES tUnitTests tTestSuite tTestDatabase tLogFolder tLogParser tRemoveWhiteSpace tBasic tFindEditedFiles 
   #   tSandbox tFileFinder tFileDatabase main)
 
-  # set(UNITTEST_SRC_FILES tUnitTests tTestDatabase tLogFolder tLogParser tRemoveWhiteSpace tSandbox tFileFinder)
-  # foreach (src_file ${UNITTEST_SRC_FILES})
-  #   ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
-  #   TARGET_LINK_LIBRARIES(${src_file} 
-  #     ${LIB_BOOST_PROGRAM_OPTIONS} ${LIB_BOOST_REGEX} ${LIB_BOOST_SYSTEM} ${LIB_BOOST_FILESYSTEM} ${LIB_BOOST_DATETIME} 
-  #     ${LIB_GTEST} ${LIB_GTEST_MAIN} ${LIB_POCO_FOUNDATION} ${LIB_POCO_UTIL} ${LIB_POCO_SQLITE} ${LIB_POCO_XML} -lpthread)
-  #   ADD_TEST(${src_file} ./${src_file})
-  # endforeach (src_file)
+  set(UNITTEST_SRC_FILES tUnitTests tRemoveWhiteSpace tSandbox)
+  foreach (src_file ${UNITTEST_SRC_FILES})
+    ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
+    TARGET_LINK_LIBRARIES(${src_file} ${Boost_LIBRARIES})
+    ADD_TEST(${src_file} ./${src_file})
+  endforeach (src_file)
 endif (Boost_FOUND)

@@ -1,6 +1,6 @@
 #include <vector>
 #include <map>
-#include "base/FileFinder.hpp"
+#include "utils/FileFinder.hpp"
 #include "base/Basic.hpp"
 #include "base/FileSystemUtilities.hpp"
 #include "gtest/gtest.h"
