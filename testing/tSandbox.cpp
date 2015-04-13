@@ -10,7 +10,7 @@ bool runUnitTests(const std::string & folderPath)
 }
 
 
-int main(int ac, char* av[])
+int main()
 {
     const bool flag = runUnitTests("/sandbox/hungdang/Aslrtw/matlab/toolbox");
     return flag ? EXIT_SUCCESS : EXIT_FAILURE;
