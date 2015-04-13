@@ -1,7 +1,12 @@
 #include "sbtools/Sandbox.hpp"
 #include "gtest/gtest.h"
 
-TEST(RemoveWhiteSpace, Positive) {
-    Tools::Sandbox sandbox("/local-ssd/sandbox/advisor");
+TEST(Sandbox, Positive) {
+    Tools::Sandbox sandbox(boost::filesystem::path("/local-ssd/sandbox/advisor"));
     sandbox.info();
+}
+
+
+TEST(Sandbox, Negative) {
+    ASSERT_ANY_THROW(Tools::Sandbox sandbox(boost::filesystem::path("/local/projects/")));
 }

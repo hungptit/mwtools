@@ -5,7 +5,7 @@ CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
 set (CMAKE_BUILD_TYPE Release)
 # set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_COMPILER ../../3p/llvm/bin/clang++)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11  -Wall -Wextra -pedantic -O3 -Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -pedantic -O3 -Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef")
 
 ENABLE_TESTING()
 

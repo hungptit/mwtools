@@ -1,4 +1,3 @@
-
 #ifndef Sandbox_hpp_
 #define Sandbox_hpp_
 
@@ -8,8 +7,9 @@
 #include <boost/filesystem.hpp>
 #include "boost/regex.hpp"
 #include "boost/date_time/posix_time/posix_time.hpp"
-#include "Utilities.hpp"
+// #include "Utilities.hpp"
 #include "utils/Basic.hpp"
+
 
 namespace {
     bool isLocalSandbox(const boost::filesystem::path &aPath) {
@@ -28,10 +28,21 @@ namespace {
 }
 
 namespace Tools {
+    void replaceSubstring(std::string &stringBuf, const std::string &subString,
+                          const std::string &replaceString) {
+        size_t pos = 0;
+        while (pos != std::string::npos) {
+            pos = stringBuf.find(subString, pos);
+            if (pos != std::string::npos)
+                stringBuf.replace(pos, subString.length(), replaceString);
+        }
+    }
+
+
     class Sandbox {
       public:
-        Sandbox(const std::string &folderPath)
-            : FolderPath(boost::filesystem::path(folderPath)) {
+        Sandbox(const boost::filesystem::path &folderPath)
+            : FolderPath(folderPath) {
             getSandboxRootFolder();
             getPerfectPath();
             getSandboxTimeStamp();
@@ -82,10 +93,10 @@ namespace Tools {
             std::string timeString;
             if (boost::regex_search(begin, end, what, expression, flags)) {
                 timeString = what[0];
-                Tools::replaceSubstring(timeString, "_", "-");
-                Tools::replaceSubstring(timeString, "-h", " ");
-                Tools::replaceSubstring(timeString, "m", ":");
-                Tools::replaceSubstring(timeString, "s", ":");
+                replaceSubstring(timeString, "_", "-");
+                replaceSubstring(timeString, "-h", " ");
+                replaceSubstring(timeString, "m", ":");
+                replaceSubstring(timeString, "s", ":");
                 TimeStamp = boost::posix_time::time_from_string(timeString);
             }
         }
@@ -107,6 +118,25 @@ namespace Tools {
             inputFile.close();
         }
     };
-}
 
+    std::string getFarmOption(const std::string &farm,
+                              const Sandbox &sandbox) {
+        std::string options;
+        const std::string farmStr = (sandbox.isLocal()) ? ("local") : (farm);
+
+        if (farmStr == "local") {
+            options = "";
+        }
+
+        else if (farm.empty()) {
+            options = "-autofarm devel ";
+        }
+
+        else {
+            options = "-autofarm devel ";
+        }
+
+        return options;
+    }
+}
 #endif

@@ -5,6 +5,7 @@
 #include <iterator>
 #include <cstdlib>
 #include "sbtools/Utilities.hpp"
+#include "sbtools/Sandbox.hpp"
 
 template <typename T>
 bool parserInputParameters(int ac, char* av[],

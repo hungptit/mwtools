@@ -51,7 +51,7 @@ std::string RunTests::createRunCommand(const std::string & testFile, const std::
         "-nodesktop -nosplash "
         "-r 'cd(matlabroot);runsuite('" + testFile + "');exit'"
         );
-#else  // Use this command for other OS including Linux and Mac
+#else  // Use this command for other OSs (Linux and Mac)
     std::string cmdStr;        
     cmdStr += "sb -nosetmwe -showenv -priority=low -mlprefroot $HOME -skip-job-archive-check -vmemorylimit=4g -memmgr fastdebug -timing -nodesktop -nosplash";
     cmdStr += " -s " + sandboxPath;
