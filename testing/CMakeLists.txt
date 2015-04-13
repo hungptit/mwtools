@@ -72,10 +72,10 @@ if (Boost_FOUND)
   # set(UNITTEST_SRC_FILES tUnitTests tTestSuite tTestDatabase tLogFolder tLogParser tRemoveWhiteSpace tBasic tFindEditedFiles 
   #   tSandbox tFileFinder tFileDatabase main)
 
-  set(UNITTEST_SRC_FILES tUnitTests tRemoveWhiteSpace tSandbox)
+  set(UNITTEST_SRC_FILES tUnitTests tSandbox)
   foreach (src_file ${UNITTEST_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
-    TARGET_LINK_LIBRARIES(${src_file} ${Boost_LIBRARIES})
+    TARGET_LINK_LIBRARIES(${src_file} ${Boost_LIBRARIES} ${LIB_GTEST} ${LIB_GTEST_MAIN} -lpthread)
     ADD_TEST(${src_file} ./${src_file})
   endforeach (src_file)
 endif (Boost_FOUND)

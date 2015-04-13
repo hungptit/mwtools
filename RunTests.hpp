@@ -12,25 +12,25 @@
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace Tools
-{
-    class RunTests
-    {
-      public:
-        RunTests(const std::string & sandboxPath, const std::string & fileName, const std::string & logFolder, const int numberOfThreads);
-        ~RunTests();
-        void run();
+namespace Tools {
+class RunTests {
+  public:
+    RunTests(const std::string &sandboxPath, const std::string &fileName,
+             const std::string &logFolder, const int numberOfThreads);
+    void run();
 
-      private:
-        Sandbox CurrentSandbox;
-        LogFolder CurrentLogFolder;
-        TestSuite TestFiles;
-        TestDatabase Database;
-        int NumberOfThreads;
+  private:
+    Sandbox CurrentSandbox;
+    LogFolder CurrentLogFolder;
+    TestSuite TestFiles;
+    TestDatabase Database;
+    int NumberOfThreads;
 
-        static void exec(const std::string & fileName, const std::string & logFile, const std::string & sandboxPath);
-        static std::string createRunCommand(const std::string & testFile, const std::string & sandboxPath);
-    };
+    static void exec(const std::string &fileName, const std::string &logFile,
+                     const std::string &sandboxPath);
+    static std::string createRunCommand(const std::string &testFile,
+                                        const std::string &sandboxPath);
+};
 #include "private/RunTests.cpp"
 }
 #endif

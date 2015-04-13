@@ -10,7 +10,7 @@
 namespace Tools {
 class CleanupTmpFolder {
   public:
-    CleanupTmpFolder()::TmpFolder(boost::filesystem::temp_directory_path()){};
+    CleanupTmpFolder() : TmpFolder(boost::filesystem::temp_directory_path()){};
 
     void clean() {
         boost::filesystem::recursive_directory_iterator endIter;

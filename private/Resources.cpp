@@ -1,13 +1,11 @@
 template <> const std::string SandboxResources<std::string>::DerivedFolder = Tools::FileSeparator<std::string>::value + "derived" + Tools::FileSeparator<std::string>::value;
 template <> const std::string SandboxResources<std::string>::SbtoolsFolder = ".sbtools";
 template <> const std::string SandboxResources<std::string>::DatabaseFileName = "database.db";
-template <> const std::string SandboxResources<std::string>::NetworkSandbox = Tools::getenv("DEFAULT_SANDBOX");
-template <> const std::string SandboxResources<std::string>::BackupDirectory = SandboxResources<std::string>::NetworkSandbox + Tools::FileSeparator<std::string>::value + "backup";
+
 template <> const std::string SandboxResources<std::string>::LatestSnapshotName = "@latest";
 template <> const std::string SandboxResources<std::string>::ReviewBoardCommand = "sbreviewboard -cn ";
 template <> const std::string SandboxResources<std::string>::SbCommand = "sb ";
 template <> const std::string SandboxResources<std::string>::SbCheckCommand = "sbcheck ";
-
 template <> const std::string SandboxResources<std::string>::WebViewer = "chromium";
 template <> const std::string SandboxResources<std::string>::Gecko = "http://komodo.mathworks.com/main/gecko/";
 template <> const std::string SandboxResources<std::string>::GeckoSearch = "http://inside-labs.mathworks.com/dev/gecko-search/?q=";

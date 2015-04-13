@@ -8,23 +8,26 @@
 #include "utils/TimeUtilities.hpp"
 #include "utils/Resources.hpp"
 
-namespace Tools 
-{
-    class LogFolder
-    {
-      public:
-        LogFolder(const std::string & rootPath);
-        ~LogFolder();        
-        bool create();
-        const std::string & getFolderPath() const;
-        bool unitTest();
-        
+namespace Tools {
+class LogFolder {
+  public:
+    LogFolder::LogFolder(const boost::filesystem::path &parentFolder)
+        : ParentFolder(parentFolder),
+          FolderPath(ParentFolder /
+                     boost::filesystem::path(Sbtools::getTimeStampString())) {
+        if (!boost::filesystem::exists(RootFolderPath)) {
+            boost::filesystem::create_directories(RootFolderPath);
+        }
+
+        boost::filesystem::create_directories(FolderPath);
+        assert(boost::filesystem::exists(FolderPath));
+
+        const auto &getPath() const { return CurrentFolder; }
+
       private:
-        std::string RootFolderPath;
-        std::string FolderPath;
-        void createFolderPathString();        
+        boost::filesystem::path ParentFolder;
+        boost::filesystem::path CurrentFolder;
     };
-#include "private/LogFolder.cpp"    
 }
 
 #endif

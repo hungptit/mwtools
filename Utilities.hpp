@@ -24,13 +24,32 @@
 
 namespace Tools 
 {
-    void copyFiles(const std::string & srcFolder, const std::string & desFolder);   
+    const boost::filesystem::path getNetworkSandboxPath() {
+        return boost::filesystem::path (std::getenv("DEFAULT_SANDBOX"));
+    }
+
+    const boost::filesystem::path getBackupPath() {
+        return getNetworkSandboxPath() / boost::filesystem::path("backup");
+    }      
+
+    
+    void copyFiles(const std::string & srcFolder, const std::string & desFolder) {
+        boost::filesystem::copy_directory(boost::filesystem::path(srcFolder), boost::filesystem::path(desFolder));
+    }
+
     bool hasPrefixString(const std::string & str, const std::string & prefix);    
     void getRunningFarm(std::string & farm, const std::string & sandbox);
     std::string getFarmOption(const std::string & farm);
     const std::string getLogDir(const std::string & seed);
     void replaceSubstring(std::string & stringBuf, const std::string & subString, const std::string & replaceString);
-    std::string getBackupDir(const std::string & seed);
+
+    boost::filesystem::path getBackupDir(const std::string & seed)
+    {
+        std::string strBuf = seed;
+        replaceSubstring(strBuf, " ", "_");
+        return boost::filesystem::path(strBuf) /  boost::filesystem::path(getTimeStampString());
+    }
+    
     std::string getSbruntestsCommand(const std::string & farm, 
                                      const std::string & listFile, 
                                      const std::string & runFolder);

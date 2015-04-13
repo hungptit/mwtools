@@ -20,12 +20,6 @@ RunTests::RunTests(const std::string & sandboxPath, const std::string & testFold
 }
 
 
-RunTests::~RunTests()
-{
-    // Do nothing
-}
-
-
 std::string RunTests::createRunCommand(const std::string & testFile, const std::string & sandboxPath)
 {
 #ifdef _WIN64

@@ -6,37 +6,13 @@
 #include "sbtools/Utilities.hpp"
 #include "utils/FileSystemUtilities.hpp"
 #include "utils/Basic.hpp"
+#include "gtest/gtest.h"
 
-bool runUnitTests()
-{
-    bool flag = true;
-   
-    {
-        std::string currentPath = Tools::getCurrentFolder();
-        flag &= currentPath == Tools::FileSeparator<std::string>::value + "local" + 
-            Tools::FileSeparator<std::string>::value + "sbtools" + 
-            Tools::FileSeparator<std::string>::value + "src" + 
-            Tools::FileSeparator<std::string>::value + "testing";
-        std::cout << currentPath << std::endl;
-    }
-
-    {
-        std::string folderName = 
-            Tools::TemporaryFolder<std::string>::value + 
-            Tools::FileSeparator<std::string>::value +
-            "a" + 
-            Tools::FileSeparator<std::string>::value + "b" + 
-            Tools::FileSeparator<std::string>::value + "c" + 
-            Tools::FileSeparator<std::string>::value + "d";
-        flag &= Tools::createDirectory(folderName);
-    }
-
-    return flag;
-}
-
-
-int main(int ac, char* av[])
-{
-    const bool flag = runUnitTests();
-    return flag ? EXIT_SUCCESS : EXIT_FAILURE;
+TEST(RemoveWhiteSpace, Positive) {
+    std::string strBuf = "fdsfsd  fdsg dsgdsgd sgds";
+    std::string strBuf_results = "fdsfsd..fdsg.dsgdsgd.sgds";
+    std::cout << strBuf << std::endl;
+    Tools::replaceSubstring(strBuf, " ", ".");
+    std::cout << strBuf << std::endl;
+    EXPECT_TRUE(strBuf == strBuf_results);
 }

@@ -1,15 +1,4 @@
 
-// TODO: Make this better using boost filesystem
-void copyFiles(const std::string & srcFolder, const std::string & desFolder)
-{
-    std::string cmdStr;
-    cmdStr = "mkdir -p " + desFolder;
-    (void) system(cmdStr.c_str());
-    cmdStr = "cp -rv " + srcFolder + Tools::FileSeparator<std::string>::value + "* " + desFolder;
-    (void) system(cmdStr.c_str());
-}
-
-
 bool hasPrefixString(const std::string & str, const std::string & prefix)
 {
     return str.find(prefix) == 0;
@@ -54,14 +43,6 @@ const std::string getLogDir(const std::string & seed)
     return logDir;
 }
 
-
-std::string getBackupDir(const std::string & seed)
-{
-    std::string strBuf = seed;
-    replaceSubstring(strBuf, " ", "_");
-    std::string dirStr = strBuf + Tools::FileSeparator<std::string>::value + getTimeStampString();
-    return dirStr;
-}
 
 
 std::string getSbruntestsCommand(const std::string & farm,
@@ -133,12 +114,11 @@ std::string readFile(const std::string & fileName)
 
 const std::string backupSandbox(const std::string & comment)
 {
-    const std::string str = getBackupDir(comment);
-    const std::string cmdStr = "sbbackup -l " + str + " -r " + SandboxResources<std::string>::BackupDirectory;
+    const boost::filesystem::path backupDir = getBackupDir(comment);
+    const boost::filesystem::path backupPath = getBackupPath();
+    const std::string cmdStr = "sbbackup -l " + backupDir.string() + " -r " + backupPath.string();
     Tools::run(cmdStr);
-    // std::cout << "Command: " << cmdStr << std::endl;
-    std::string backupDir = SandboxResources<std::string>::BackupDirectory + Tools::FileSeparator<std::string>::value + str;
-    return Tools::getAbslutePath(backupDir);
+    return (backupPath / backupDir).string();
 }
 
 
