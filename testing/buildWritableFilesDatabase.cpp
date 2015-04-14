@@ -10,7 +10,11 @@ bool runUnitTests(const std::string & folderPath, const bool verbose = false)
     const size_t fileNum = finder.searchWritableFiles(fullFolderPath);
     std::cout << "Number of writable files: " << fileNum << std::endl;   
     Tools::Sandbox sandbox(fullFolderPath);
-    const std::string fileName = sandbox.getSandboxPath() + Tools::FileSeparator<std::string>::value+ + ".sbtools/database.txt";
+    boost::filesystem::path aFile =
+      boost::filesystem::path(sandbox.getSandboxPath()) /
+      sandbox.getSandboxPath(".sbtools") /
+      sandbox.getSandboxPath("database.txt"); 
+    const std::string fileName = aFile.string();
     finder.createWritableFileDatabase(fileName);
     std::cout << "Database file: " << fileName << std::endl;
     return true;
