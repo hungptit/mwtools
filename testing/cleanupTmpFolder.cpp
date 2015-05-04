@@ -35,6 +35,7 @@ int main(int ac, char* av[])
         tmpFolder = "/tmp/";
     }
     
-    Tools::CleanupTmpFolder cleanObj( boost::filesystem::path(tmpFolder) );   
+    // const boost::filesystem::path aPath(tmpFolder);
+    // Tools::CleanupTmpFolder cleanObj(aPath);   
     return EXIT_SUCCESS;
 }

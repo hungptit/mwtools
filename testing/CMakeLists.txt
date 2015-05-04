@@ -22,7 +22,7 @@ set(LIB_POCO "${PROJECT_FOLDER}/3p/gtest/lib/libgtest_main.a")
 set(LIB_POCO_FOUNDATION  "${PROJECT_FOLDER}/3p/poco/lib/libPocoFoundation.a")
 set(LIB_POCO_UTIL "${PROJECT_FOLDER}/3p/poco/lib/libPocoUtil.a")
 set(LIB_POCO_XML  "${PROJECT_FOLDER}/3p/poco/lib/libPocoXML.a")
-set(LIB_POCO_SQLITE  "${PROJECT_FOLDER}/3p/poco/lib/libPocoDataSQLited.so")
+set(LIB_POCO_SQLITE  "${PROJECT_FOLDER}/3p/poco/lib/libPocoDataSQLite.a")
 
 # Find Boost libraries
 set(Boost_USE_STATIC_LIBS ON)
@@ -61,7 +61,7 @@ if (Boost_FOUND)
   # Compile all binaries
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
-    TARGET_LINK_LIBRARIES(${src_file} ${Boost_LIBRARIES})
+    TARGET_LINK_LIBRARIES(${src_file} ${Boost_LIBRARIES} ${LIB_POCO_FOUNDATION}) 
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
