@@ -12,7 +12,7 @@ std::string getSbruntestsCommand(const std::string &farmOpts,
 
     else if (!listFile.empty()) {
         if (listFile.find("submit") == 0) {
-            command += "-F " + listFile;
+            command += "-testsuites dacore -F " + listFile;
         } else {
             command += "-testsuites " + listFile;
             seed += "runtests";
@@ -58,11 +58,11 @@ generateGlobalDatabaseCommand(const std::string &sandboxPath) {
     return cmdStr;
 }
 
-const std::string getDatabaseFileName(const std::string &sandboxPath) {
-    const std::string fileName =
-        sandboxPath + Tools::FileSeparator<std::string>::value +
-        SandboxResources<std::string>::SbtoolsFolder +
-        Tools::FileSeparator<std::string>::value +
-        SandboxResources<std::string>::DatabaseFileName;
-    return fileName;
-}
+// const std::string getDatabaseFileName(const std::string &sandboxPath) {
+//     const std::string fileName =
+//         sandboxPath + Tools::FileSeparator<std::string>::value +
+//         SandboxResources<std::string>::SbtoolsFolder +
+//         Tools::FileSeparator<std::string>::value +
+//         SandboxResources<std::string>::DatabaseFileName;
+//     return fileName;
+// }

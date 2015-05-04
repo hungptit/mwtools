@@ -1,4 +1,4 @@
-template <> const std::string SandboxResources<std::string>::DerivedFolder = Tools::FileSeparator<std::string>::value + "derived" + Tools::FileSeparator<std::string>::value;
+template <> const std::string SandboxResources<std::string>::DerivedFolder = "/derived/";
 template <> const std::string SandboxResources<std::string>::SbtoolsFolder = ".sbtools";
 template <> const std::string SandboxResources<std::string>::DatabaseFileName = "database.db";
 

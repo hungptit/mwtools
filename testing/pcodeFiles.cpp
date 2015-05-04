@@ -4,8 +4,7 @@
 #include <algorithm>
 #include <iterator>
 #include <cstdlib>
-
-#include "utils/Basic.hpp"
+#include "utils/Utils.hpp"
 
 template <typename T>
 bool parseInputParameters(int ac, char* av[])
@@ -37,7 +36,10 @@ bool parseInputParameters(int ac, char* av[])
         std::string fileName;
         if (vm.count("submit_file"))
         {
-            fileName = vm["submit_file"].as<std::string>();
+            fileName = vm["submit_file"].as<std::string>();            
+        }
+        else {
+            fileName = "submit.txt";
         }
 
         std::string cmdStr = "sbpcode -F " + fileName;

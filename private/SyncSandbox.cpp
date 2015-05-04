@@ -74,9 +74,9 @@ void SyncSandbox::sync()
     Tools::run(runCommand);
     
     // Generate the editable file database
-    Sbtools::FindEditedFiles finder;
-    finder.searchWritableFiles(sandboxPath + Tools::FileSeparator<std::string>::value + "matlab");
-    finder.createWritableFileDatabase(getDatabaseFileName(sandboxPath));
+    // Sbtools::FindEditedFiles finder;
+    // finder.searchWritableFiles(sandboxPath + Tools::FileSeparator<std::string>::value + "matlab");
+    // finder.createWritableFileDatabase(getDatabaseFileName(sandboxPath));
 }
 
 

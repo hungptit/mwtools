@@ -9,18 +9,12 @@
 #include <fstream>
 #include <cerrno>
 
-#include "utils/TimeUtilities.hpp"
-#include "utils/Resources.hpp"
-
+#include "utils/Utils.hpp"
 #include "boost/regex.hpp"
 #include "boost/lexical_cast.hpp"
 #include "boost/program_options.hpp"
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include <boost/date_time/gregorian/gregorian.hpp>
-
-#include "utils/Basic.hpp"
-#include "utils/FileSystemUtilities.hpp"
-#include "utils/TimeUtilities.hpp"
 #include "Resources.hpp"
 #include "sbtools/Sandbox.hpp"
 #include "sbtools/LogFolder.hpp"

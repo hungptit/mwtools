@@ -5,7 +5,7 @@
 #include <iterator>
 #include <cstdlib>
 
-#include "utils/Basic.hpp"
+#include "utils/Utils.hpp"
 #include "sbtools/Utilities.hpp"
 
 bool parseInputParameters(int ac, char* av[])

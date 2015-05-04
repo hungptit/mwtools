@@ -5,7 +5,7 @@
 #include <iterator>
 #include "sbtools/Utilities.hpp"
 #include "utils/FileSystemUtilities.hpp"
-#include "utils/Basic.hpp"
+#include "utils/Utils.hpp"
 #include "gtest/gtest.h"
 
 TEST(RemoveWhiteSpace, Positive) {
