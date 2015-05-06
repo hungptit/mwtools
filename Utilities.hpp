@@ -28,9 +28,31 @@ namespace Tools {
         return getNetworkSandboxPath() / boost::filesystem::path("backup");
     }
 
-    void copyFiles(const std::string &srcFolder, const std::string &desFolder) {
-        boost::filesystem::copy_directory(boost::filesystem::path(srcFolder),
-                                          boost::filesystem::path(desFolder));
+    /**
+     * @note This function will throw.
+     */
+    void copyDir(const boost::filesystem::path &srcFolder,
+                 const boost::filesystem::path &desFolder) {
+        using namespace boost::filesystem;
+
+        // Create the destination folder if it does not exist.
+        if (!exists(desFolder)) {
+            create_directory(desFolder);
+        }
+
+        // Copy files and recurse to the sub-folders if neccessary.
+        recursive_directory_iterator endIter;
+        recursive_directory_iterator dirIter(srcFolder);
+        for (; dirIter != endIter; ++dirIter) {
+            auto aFile = dirIter->path();
+            if (is_directory(aFile)) {
+                auto aPath = desFolder / aFile.filename();
+                copyDir(aFile, aPath);
+            } else {
+                auto desFile = desFolder / aFile.filename();
+                copy(aFile, desFile);
+            }
+        }
     }
 
     boost::filesystem::path getBackupDir(const std::string &seed) {

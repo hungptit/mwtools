@@ -50,11 +50,6 @@ set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
   geckoSearch openCluster openOutlook codeSearch
   runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles)
 
-# set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
-#   runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles
-#   regenerateGlobalDatabase cleanupTmpFolder runMatlab checkSubmitFile searchGeck
-#   geckoSearch openCluster openOutlook codeSearch)
-
 message(STATUS "${Boost_LIBRARIES}")
 
 if (Boost_FOUND)

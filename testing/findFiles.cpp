@@ -1,5 +1,4 @@
 #include <vector>
-
 #include "base/FileFinder.hpp"
 #include "base/Basic.hpp"
 #include "base/FileSystemUtilities.hpp"

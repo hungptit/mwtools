@@ -29,6 +29,8 @@ std::string getSbruntestsCommand(const std::string &farmOpts,
     return command;
 }
 
+
+// TODO: Improve this using the memory mapped file.
 std::string readFile(const std::string &fileName) {
     std::ifstream in(fileName.c_str(), std::ios::in | std::ios::binary);
     if (!in)
@@ -46,6 +48,8 @@ std::string readFile(const std::string &fileName) {
     return (contents);
 }
 
+
+// TODO: Rewite this function to take advantage of new run command.
 const std::string
 generateGlobalDatabaseCommand(const std::string &sandboxPath) {
     std::string cmdStr;
