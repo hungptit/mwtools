@@ -35,6 +35,7 @@ namespace Tools {
     }
 
     struct BackupInfo {
+        std::string CurrentDir;
         std::string Path;
         std::string Comment;
         std::string Time;
@@ -51,11 +52,11 @@ namespace Tools {
         using namespace Poco::Data::Keywords;
         Poco::Data::SQLite::Connector::registerConnector();
         Poco::Data::Session session("SQLite", database.string());
-        session << "CREATE TABLE IF NOT EXISTS BackupInfo (Path VARCHAR(1024), Comment VARCHAR(1024), Time Date);", now;
+        session << "CREATE TABLE IF NOT EXISTS BackupInfo (Sandbox VARCHAR(1024), Path VARCHAR(1024), Comment VARCHAR(1024), Time Date);", now;
 
-        BackupInfo info = {backupFolder.string(), comment, getTimeStampString()};
+        BackupInfo info = {boost::filesystem::current_path().string(), backupFolder.string(), comment, getTimeStampString()};
         Poco::Data::Statement insert(session);
-        insert << "INSERT INTO BackupInfo VALUES(?, ?, ?)", use(info.Path), use(info.Comment), use(info.Time);
+        insert << "INSERT INTO BackupInfo VALUES(?, ?, ?, ?)", use(info.CurrentDir), use(info.Path), use(info.Comment), use(info.Time);
         insert.execute();
 
         // Display the verbose information
@@ -65,6 +66,7 @@ namespace Tools {
     }
 
     struct TestInfo {
+        std::string RunFolder;
         std::string LogDir;
         std::string Command;
         std::string Time;
@@ -99,11 +101,11 @@ namespace Tools {
             using namespace Poco::Data::Keywords;
             Poco::Data::SQLite::Connector::registerConnector();
             Poco::Data::Session session("SQLite", database.string());
-            session << "CREATE TABLE IF NOT EXISTS TestInfo (LogFolder VARCHAR(1024), Command VARCHAR(1024), Time Date);", now;
+            session << "CREATE TABLE IF NOT EXISTS TestInfo (RunFolder VARCHAR(1024), LogFolder VARCHAR(1024), Command VARCHAR(1024), Time Date);", now;
 
-            TestInfo info = {logDir.getPath().string(), command, getTimeStampString()};
+            TestInfo info = {boost::filesystem::current_path().string(), logDir.getPath().string(), command, getTimeStampString()};
             Poco::Data::Statement insert(session);
-            insert << "INSERT INTO TestInfo VALUES(?, ?, ?)", use(info.LogDir), use(info.Command), use(info.Time);
+            insert << "INSERT INTO TestInfo VALUES(?, ?, ?, ?)", use(info.RunFolder), use(info.LogDir), use(info.Command), use(info.Time);
             insert.execute();
         }
 
