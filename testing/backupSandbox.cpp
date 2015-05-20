@@ -49,9 +49,7 @@ template <typename T> void parseInputParameters(int ac, char *av[]) {
         if (sandboxPath.empty()) {
             std::cerr << "DEFAULT_SANDBOX environment variable is not set or invalid.\n";
         }
-        else {
-            database = boost::filesystem::path(sandboxPath) / boost::filesystem::path("backup/.database.db");
-        }        
+        database = boost::filesystem::path(sandboxPath) / boost::filesystem::path("backup/.database.db");
     }
     Tools::backupSandbox(comment, database);
     return;
