@@ -10,50 +10,54 @@
 #include "sbtools/Resources.hpp"
 #include "sbtools/Sandbox.hpp"
 
-template <typename T>
-bool parseInputParameters(int ac, char* av[])
-{
+template <typename T> void parseInputParameters(int ac, char *av[]) {
     using namespace boost;
     namespace po = boost::program_options;
     po::options_description desc("Allowed options");
-    desc.add_options()
-        ("help,h", "backupSandbox - Run sbbackup to backup all changes for a curent sandbox.")
-        ("comment,c", po::value<std::string>(), "Comment for back up. No special character except the white space.")
-        ;
+    desc.add_options()("help,h", "backupSandbox - Run sbbackup to backup all changes for a curent sandbox.")(
+        "comment,c", po::value<std::string>(), "Comment for back up. No special character except the white space.")(
+        "database,d", po::value<std::string>(), "Database used to log all information.");
 
     po::positional_options_description p;
     p.add("comment", -1);
 
     po::variables_map vm;
-    po::store(po::command_line_parser(ac, av).
-              options(desc).positional(p).run(), vm);
+    po::store(po::command_line_parser(ac, av).options(desc).positional(p).run(), vm);
     po::notify(vm);
 
     if (vm.count("help")) {
         std::cout << "Usage: backupSandbox [options]\n";
         std::cout << desc;
-        return false;
+        return;
     }
 
     std::string comment;
-    if (vm.count("comment"))
-    {
+    if (vm.count("comment")) {
         comment = vm["comment"].as<std::string>();
-    }
-    else 
-    {
+    } else {
         std::cout << "Usage: backupSandbox [options]\n";
         std::cout << desc;
-        return false;
+        return;
     }
 
-    std::cout << "Backup folder: "<< Tools::backupSandbox(comment) << std::endl;    
-    return true;
+    boost::filesystem::path database;
+    if (vm.count("database")) {
+        database = boost::filesystem::path(vm["database"].as<std::string>());
+    } else {
+        std::string sandboxPath = std::string(std::getenv("DEFAULT_SANDBOX"));
+        std::cout << sandboxPath << "\n";
+        if (sandboxPath.empty()) {
+            std::cerr << "DEFAULT_SANDBOX environment variable is not set or invalid.\n";
+        }
+        else {
+            database = boost::filesystem::path(sandboxPath) / boost::filesystem::path("backup/.database.db");
+        }        
+    }
+    Tools::backupSandbox(comment, database);
+    return;
 }
 
-
-int main(int ac, char* av[])
-{
+int main(int ac, char *av[]) {
     parseInputParameters<std::string>(ac, av);
     return EXIT_SUCCESS;
 }
