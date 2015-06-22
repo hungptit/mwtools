@@ -9,6 +9,14 @@
 #include "utils/Utils.hpp"
 #include "sbtools/Resources.hpp"
 
+
+void usage() {
+    std::cout << "\nUsage:\n";
+    std::cout << "Create a review board from a change ID: reviewBoard  -c change_id [options]\n";
+    std::cout << "Create a review board and open a web browser to view it: reviewBoard  change_id -o\n";
+}
+
+
 template <typename T>
 bool parseInputParameters(int ac, char* av[])
 {
@@ -34,8 +42,8 @@ bool parseInputParameters(int ac, char* av[])
 
         // Parse input arguments
         if (vm.count("help")) {
-            std::cout << "Usage: reviewBoard  -c change_id [options]\n";
             std::cout << desc;
+            usage();
             return false;
         }
 
@@ -48,6 +56,7 @@ bool parseInputParameters(int ac, char* av[])
         {
             std::cout << "Usage: reviewBoard -c change_id [options]\n";
             std::cout << desc;
+            usage();
             return false;
         }
 
