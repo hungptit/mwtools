@@ -19,6 +19,7 @@ bool parseInputParameters(int ac, char* av[])
         po::options_description desc("Allowed options");
         desc.add_options()
             ("help,h", "reviewBoard - This binary is built on top of sbreviewboard.")
+            ("open-browser,o", "Open the web browser.")
             ("change_id,c", po::value<std::string>(), "Perforce change ID")
             ("reviewboard_id,i", po::value<std::string>(), "The current reviewboard ID")
             ("description,d", po::value<std::string>(), "Description about changes")
@@ -62,6 +63,14 @@ bool parseInputParameters(int ac, char* av[])
             optionString += " -description=\"" + vm["description"].as<std::string>() + "\" ";
         }
 
+        if (vm.count("open-browser")) {
+            optionString += " -open-browser";
+        }
+        else {
+            optionString += " -no-open-browser";
+        }
+        
+        // Construct the executed command.
         const std::string cmdStr = Tools::SandboxResources<std::string>::ReviewBoardCommand + changeId + " " + optionString;
         Tools::run(cmdStr);
         std::cout << "Command: " << cmdStr << std::endl;

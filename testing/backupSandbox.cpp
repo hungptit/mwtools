@@ -15,7 +15,7 @@ template <typename T> void parseInputParameters(int ac, char *av[]) {
     namespace po = boost::program_options;
     po::options_description desc("Allowed options");
     desc.add_options()("help,h", "backupSandbox - Run sbbackup to backup all changes for a curent sandbox.")(
-        "comment,c", po::value<std::string>(), "Comment for back up. No special character except the white space.")(
+        "comment,c", po::value<std::string>(), "Comment for back up changes. No special character except the white space.")(
         "database,d", po::value<std::string>(), "Database used to log all information.");
 
     po::positional_options_description p;
@@ -45,7 +45,6 @@ template <typename T> void parseInputParameters(int ac, char *av[]) {
         database = boost::filesystem::path(vm["database"].as<std::string>());
     } else {
         std::string sandboxPath = std::string(std::getenv("DEFAULT_SANDBOX"));
-        std::cout << sandboxPath << "\n";
         if (sandboxPath.empty()) {
             std::cerr << "DEFAULT_SANDBOX environment variable is not set or invalid.\n";
         }
