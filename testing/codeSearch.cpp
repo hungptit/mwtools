@@ -7,6 +7,7 @@
 #include <cstdlib>
 
 #include "utils/Utils.hpp"
+#include "utils/Process.hpp"
 #include "sbtools/Resources.hpp"
 
 template <typename T>
@@ -52,17 +53,16 @@ bool parseInputParameters(int ac, char* av[])
         }
 
         // Modify the options for special cases
-        
 
         // Launch code search
-        const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " + 
-            Tools::SandboxResources<std::string>::CodeSearch + options;
-        Tools::run(cmdStr);
+        Tools::run(Tools::SandboxResources<std::string>::WebViewer,
+                   {Tools::SandboxResources<std::string>::CodeSearch + options});
+        const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " +
+                                   Tools::SandboxResources<std::string>::CodeSearch + options;
         std::cout << "Command: " << cmdStr << std::endl;
     }
 
-    catch(std::exception & e)
-    {
+    catch (std::exception &e) {
         std::cout << e.what() << "\n";
         return false;
     }

@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include "utils/FileSystemUtilities.hpp"
 #include "utils/Utils.hpp"
+#include "utils/Process.hpp"
 #include "sbtools/Utilities.hpp"
 
 template <typename T>
@@ -42,9 +43,8 @@ void parseInputParameters(int ac, char* av[])
 
     if (Tools::isDirectory(folderName))
     {
-        std::string cmdStr = "sbrestore -restore-from " + folderName + ";sbgentbxcache";
-        Tools::run(cmdStr);
-        std::cout << "Command: " << cmdStr << std::endl;            
+        Tools::run("sbrestore", {"-restore-from", folderName});
+        Tools::run("sbgentbxcache", {});
     }
     else
     {

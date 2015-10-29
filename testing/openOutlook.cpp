@@ -7,6 +7,7 @@
 #include <cstdlib>
 
 #include "utils/Utils.hpp"
+#include "utils/Process.hpp"
 #include "sbtools/Resources.hpp"
 
 template <typename T>
@@ -48,7 +49,7 @@ bool parseInputParameters(int ac, char* av[])
 
         const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " + 
             Tools::SandboxResources<std::string>::Outlook + options;
-        Tools::run(cmdStr);
+        Tools::run(cmdStr, {});
         std::cout << "Command: " << cmdStr << std::endl;
     }
 

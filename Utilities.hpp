@@ -23,6 +23,8 @@
 #include "sbtools/Sandbox.hpp"
 #include "sbtools/LogFolder.hpp"
 
+#include "utils/Process.hpp"
+
 namespace Tools {
     const boost::filesystem::path getNetworkSandboxPath() { return boost::filesystem::path(std::getenv("DEFAULT_SANDBOX")); }
 
@@ -39,30 +41,30 @@ namespace Tools {
         std::string Path;
         std::string Comment;
         std::string Time;
+        std::string Info;
     };
 
     void backupSandbox(const std::string &comment, const boost::filesystem::path &database) {
         const boost::filesystem::path backupDir = getBackupDir(comment);
         const boost::filesystem::path backupPath = getBackupPath();
-        const std::string cmdStr = "sbbackup -l " + backupDir.string() + " -r " + backupPath.string();
-        Tools::run(cmdStr);
+        std::string results = Tools::run("sbbackup", {"-l", backupDir.string(), "-r", backupPath.string()});
 
         // Record all information to SQLite database
         const auto backupFolder = backupPath / backupDir;
         using namespace Poco::Data::Keywords;
         Poco::Data::SQLite::Connector::registerConnector();
         Poco::Data::Session session("SQLite", database.string());
-        session << "CREATE TABLE IF NOT EXISTS BackupInfo (Sandbox VARCHAR(1024), Path VARCHAR(1024), Comment VARCHAR(1024), Time Date);", now;
+        session << "CREATE TABLE IF NOT EXISTS BackupInfo (Sandbox VARCHAR(1024), Path VARCHAR(1024), Comment VARCHAR(1024), Time Date, Text Info);", now;
 
-        BackupInfo info = {boost::filesystem::current_path().string(), backupFolder.string(), comment, getTimeStampString()};
+        BackupInfo info = {boost::filesystem::current_path().string(), backupFolder.string(), comment, getTimeStampString(), results};
         Poco::Data::Statement insert(session);
-        insert << "INSERT INTO BackupInfo VALUES(?, ?, ?, ?)", use(info.CurrentDir), use(info.Path), use(info.Comment), use(info.Time);
+        insert << "INSERT INTO BackupInfo VALUES(?, ?, ?, ?, ?)", use(info.CurrentDir), use(info.Path), use(info.Comment), use(info.Time), use(info.Info);
         insert.execute();
 
         // Display the verbose information
-        std::cout << "Backup command: " << cmdStr << "\n";
         std::cout << "Database: " << database << "\n";
         std::cout << "Backup folder: " << backupFolder << "\n";
+        std::cout << "Output of sbbackup command: \n" << results << "\n";
     }
 
     struct TestInfo {
@@ -111,7 +113,7 @@ namespace Tools {
 
         // Execute the sbruntest command
         std::cout << "Run command: " << command << std::endl;
-        Tools::run(command);
+        Tools::run(command, {});
     }
 #include "private/Utilities.cpp"
 }

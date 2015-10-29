@@ -4,6 +4,7 @@
 #include "boost/lexical_cast.hpp"
 #include "boost/program_options.hpp"
 #include "utils/Utils.hpp"
+#include "utils/Process.hpp"
 
 class ServerAcesss 
 {
@@ -13,7 +14,7 @@ class ServerAcesss
 
     void access(const std::string & serverName, const std::string & userName = "hungptit")
     {
-        Tools::run(getSshCommand(serverName, userName));
+        Tools::run(getSshCommand(serverName, userName), {});
     }
     
   private:

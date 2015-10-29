@@ -6,6 +6,7 @@
 #include <cstdlib>
 
 #include "utils/Utils.hpp"
+#include "utils/Process.hpp"
 #include "sbtools/Utilities.hpp"
 
 bool parseInputParameters(int ac, char* av[])
@@ -41,7 +42,7 @@ bool parseInputParameters(int ac, char* av[])
         }
 
         const std::string cmdStr = Tools::generateGlobalDatabaseCommand(sandboxPath);
-        Tools::run(cmdStr);
+        Tools::run(cmdStr, {});
         std::cout << "Command: " << cmdStr << std::endl;
     }
 

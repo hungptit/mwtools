@@ -5,6 +5,7 @@
 #include <iterator>
 #include <cstdlib>
 #include "utils/Utils.hpp"
+#include "utils/Process.hpp"
 
 bool parserInputParameters(int ac, char* av[])
 {
@@ -48,7 +49,7 @@ bool parserInputParameters(int ac, char* av[])
         if (!logDir.empty())
         {
             cmdStr = "sbscanlog -testlogarea " + logDir;
-            Tools::run(cmdStr);
+            Tools::run(cmdStr, {});
         }
         
         std::cout << "Command: " << cmdStr << std::endl;

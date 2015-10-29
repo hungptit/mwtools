@@ -5,7 +5,7 @@ CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
 set (CMAKE_BUILD_TYPE Release)
 # set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_COMPILER ../../3p/llvm/bin/clang++)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -pedantic -O3 -Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -pedantic -O4 -Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef")
 
 ENABLE_TESTING()
 
@@ -41,7 +41,7 @@ if (Boost_NO_SYSTEM_PATHS)
   set(BOOST_LIBRARY_DIRS "${BOOST_ROOT}/lib")
 endif (Boost_NO_SYSTEM_PATHS)
 
-find_package(Boost REQUIRED regex date_time system filesystem thread graph program_options)
+find_package(Boost REQUIRED regex date_time system filesystem thread graph program_options iostreams)
 include_directories(${BOOST_INCLUDE_DIRS})
 
 # Display debug info
@@ -49,17 +49,10 @@ message(STATUS "${Boost_ROOT}")
 message(STATUS "${Boost_INCLUDE_DIRS}")
 message(STATUS "${Boost_LIBRARY_DIRS}")
 
-set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
-  regenerateGlobalDatabase cleanupTmpFolder runMatlab checkSubmitFile searchGeck
-  geckoSearch openCluster openOutlook codeSearch
-  runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles)
-
-message(STATUS "${Boost_LIBRARIES}")
-
 if (Boost_FOUND)
   # Compile all binaries
   set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
-    regenerateGlobalDatabase cleanupTmpFolder runMatlab checkSubmitFile searchGeck
+    regenerateGlobalDatabase runMatlab searchGeck
     geckoSearch openCluster openOutlook codeSearch
     runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles)
   foreach (src_file ${COMMAND_SRC_FILES})

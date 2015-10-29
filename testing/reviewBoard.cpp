@@ -7,6 +7,7 @@
 #include <cstdlib>
 
 #include "utils/Utils.hpp"
+#include "utils/Process.hpp"
 #include "sbtools/Resources.hpp"
 
 void usage() {
@@ -68,7 +69,7 @@ void parseInputParameters(int ac, char *av[]) {
 
     // Construct the executed command.
     const std::string cmdStr = Tools::SandboxResources<std::string>::ReviewBoardCommand + changeId + " " + optionString;
-    Tools::run(cmdStr);
+    Tools::run(cmdStr, {});
     std::cout << "Command: " << cmdStr << std::endl;
 }
 
