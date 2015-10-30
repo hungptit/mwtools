@@ -74,46 +74,76 @@ namespace Tools {
         std::string Time;
     };
 
-    void runTests(const std::string &farmOpts, const std::string &listFile, const std::string &runFolder,
-                  boost::filesystem::path &database) {
+    
+    bool isLocalSandbox(const boost::filesystem::path &p) {
         using boost::filesystem::path;
-        std::string command = "sbruntests " + farmOpts;
-        std::string seed;
-
-        // Prepare sbruntets command
-        if (!runFolder.empty()) {
-            seed += "runtests";
-            command += "-runallunder_mp " + runFolder;
-        } else if (!listFile.empty()) {
-            if (listFile.find("submit") == 0) {
-                command += "-testsuites dacore -F " + listFile;
-            } else {
-                command += "-testsuites " + listFile;
-                seed += "runtests";
+        path local("/local"), localssd("/local-ssd");
+        auto aPath = boost::filesystem::canonical(p).parent_path();
+        while (!aPath.empty()) {
+            if ((aPath == local) || (aPath == localssd)) {
+                return true;
             }
+            aPath = aPath.parent_path();
+        } 
+        return false;
+    }    
+
+    void runTests(const std::string &runFolder) {
+        using boost::filesystem::path;
+        std::vector<std::string> args;
+        path aPath(runFolder);
+        
+        if (isLocalSandbox(runFolder)) {
+            std::cout << "Local sandbox\n"; 
+            args.emplace_back("-local");
+            args.emplace_back("all");
         } else {
-            throw("Invalid options");
+            std::cout << "Network sandbox\n";
+            args.emplace_back("-autofarm");
+            args.emplace_back("devel");
         }
 
-        Tools::LogFolder logDir(path(std::getenv("DEFAULT_SANDBOX")) / path("logs") / path(seed));
-        command += " -testlogarea " + logDir.getPath().string();
+        if (boost::filesystem::is_directory(aPath)) {
+            args.emplace_back("-runallunder_mp");
+            args.emplace_back(runFolder);
+        } else {
+            if (runFolder.find("submit") == 0) { // Assume submit*.txt is a submit file
+                args.emplace_back("-F");
+                args.emplace_back(runFolder);
+            } else {            // This is a list of tests users want to run
+                args.emplace_back("-testsuites");
+                args.emplace_back(runFolder);
+            } 
+        }
+        
+        // Construct the log folder.
+        auto defaultSandbox = std::getenv("DEFAULT_SANDBOX");
+        auto logDir = path(defaultSandbox) / path("logs") / path(Tools::getTimeStampString());
+        
+        // Update sbruntets arguments
+        args.emplace_back("-testlogarea");
+        args.emplace_back(logDir.string());
 
-        // Log required information to SQLite database
+        // Execute the sbruntest command
+        // Tools::print(args);
+        auto results = Tools::run("sbruntests", args);
+        std::cout << results;
+
+        // Log required information to a SQLite database
         { 
             using namespace Poco::Data::Keywords;
+            path database = path(defaultSandbox) / path("backup" / path(".database.db"));
             Poco::Data::SQLite::Connector::registerConnector();
             Poco::Data::Session session("SQLite", database.string());
-            session << "CREATE TABLE IF NOT EXISTS TestInfo (RunFolder VARCHAR(1024), LogFolder VARCHAR(1024), Command VARCHAR(1024), Time Date);", now;
+            
+            std::string command;
+            TestInfo info = {boost::filesystem::current_path().string(), logDir.string(), command, getTimeStampString()};
 
-            TestInfo info = {boost::filesystem::current_path().string(), logDir.getPath().string(), command, getTimeStampString()};
+            session << "CREATE TABLE IF NOT EXISTS TestInfo (RunFolder VARCHAR(1024), LogFolder VARCHAR(1024), Command VARCHAR(1024), Time Date);", now;
             Poco::Data::Statement insert(session);
             insert << "INSERT INTO TestInfo VALUES(?, ?, ?, ?)", use(info.RunFolder), use(info.LogDir), use(info.Command), use(info.Time);
             insert.execute();
         }
-
-        // Execute the sbruntest command
-        std::cout << "Run command: " << command << std::endl;
-        Tools::run(command, {});
     }
 #include "private/Utilities.cpp"
 }
