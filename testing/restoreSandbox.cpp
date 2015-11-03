@@ -43,7 +43,8 @@ void parseInputParameters(int ac, char* av[])
 
     if (Tools::isDirectory(folderName))
     {
-        Tools::run("sbrestore", {"-restore-from", folderName});
+        std::string cmd = "sbrestore -restore-from " + folderName;
+        (void)std::system(cmd.c_str());
         Tools::run("sbgentbxcache", {});
     }
     else
