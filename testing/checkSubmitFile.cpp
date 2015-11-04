@@ -1,80 +1,161 @@
-#include "boost/program_options.hpp"
-#include "boost/lexical_cast.hpp"
-
+#include <fstream>
 #include <iostream>
-#include <algorithm>
-#include <iterator>
-#include <cstdlib>
+#include <string>
+#include <vector>
 
+#define BOOST_THREAD_VERSION 4
+#include "boost/config.hpp"
+#include "boost/thread.hpp"
+#include "boost/thread/future.hpp"
+
+#include "boost/filesystem.hpp"
+#include "boost/program_options.hpp"
+
+#include "utils/Finder.hpp"
+#include "utils/FindUtils.hpp"
+#include "utils/LevelDBIO.hpp"
+#include "utils/Timer.hpp"
 #include "utils/Utils.hpp"
-#include "sbtools/Resources.hpp"
 
-template <typename T>
-bool parseInputParameters(int ac, char* av[])
-{
+int main(int argc, char *argv[]) {
+    typedef std::unordered_map<std::string, Tools::EditedFileInfo> Map;
+    typedef Tools::FindEditedFiles<Tools::Finder> SearchAlg;
+
     using namespace boost;
     namespace po = boost::program_options;
-    
-    try {
-        po::options_description desc("Allowed options");
-        desc.add_options()
-            ("help,h", "This binary is built on top of sbcheck.")
-            ("submit_file,f", po::value<std::string>(), "A given submit file. Default values is submit.txt.")
-            ("options,i", po::value<std::string>(), "Check options. Default value is \"-check sbedits\"")
-            ;
+    po::options_description desc("Allowed options");
 
-        po::positional_options_description p;
-        p.add("submit_file", -1);
+    // clang-format off
+    desc.add_options()
+        ("help,h", "Print this help")
+        ("verbose,v", "Display searched data.")
+        ("submit-file,s", po::value<std::string>(), "A text file which has a list of files need to remove.")
+        ("folders,f", po::value<std::vector<std::string>>(), "Folders want to search.")
+        ("extensions,e", po::value<std::vector<std::string>>(), "File extensions.")
+        ("database,d", po::value<std::string>(), "Edited file database.");
+    // clang-format on
 
-        po::variables_map vm;
-        po::store(po::command_line_parser(ac, av).options(desc).positional(p).run(), vm);
-        po::notify(vm);
+    po::positional_options_description p;
+    p.add("submit-file", -1);
+    po::variables_map vm;
+    po::store(
+        po::command_line_parser(argc, argv).options(desc).positional(p).run(),
+        vm);
+    po::notify(vm);
 
-        // Parse input arguments
-        if (vm.count("help")) {
-            std::cout << "Usage: checkSubmitFile -c change_id [options]\n";
-            std::cout << desc;
-            return false;
-        }
-
-        std::string submitFile;
-        if (vm.count("submit_file"))
-        {
-            submitFile = vm["submit_file"].as<std::string>();
-        }
-        else 
-        {
-            submitFile = "submit.txt";
-        }
-
-        std::string optionString;
-        if (vm.count("options"))
-        {
-            optionString = vm["options"].as<std::string>();
-        }
-        else
-        {
-            optionString = " -check sbedits ";
-        }
-
-        const std::string cmdStr = Tools::SandboxResources<std::string>::SbCheckCommand + optionString + "-F " + submitFile;
-        std::cout << "Command: " << cmdStr << std::endl;
-        Tools::run(cmdStr);
-        std::cout << "Command: " << cmdStr << std::endl;
+    if (vm.count("help")) {
+        std::cout << "Usage: deleteFiles [options]\n";
+        std::cout << desc;
+        std::cout << "Examples:" << std::endl;
+        std::cout << "\t deleteFiles foo.txt test.txt" << std::endl;
+        return 0;
     }
 
-    catch(std::exception & e)
+    bool verbose = false;
+    if (vm.count("verbose")) {
+        verbose = true;
+    }
+
+    std::string submitFile;
+    if (vm.count("submit-file")) {
+        submitFile = vm["submit-file"].as<std::string>();
+    } else {
+        std::cerr << "Need to provide a submit file name\n";
+        return -1;
+    }
+
+    std::string dataFile;
+    if (vm.count("database")) {
+        dataFile = vm["database"].as<std::string>();
+    } else {
+        dataFile =
+            boost::filesystem::path(Tools::FileDatabaseInfo::Database).string();
+    }
+
+    // Get a list of folders users want to check again files listed in the
+    // submit file.
+    boost::system::error_code errcode;
+    std::vector<std::string> folders;
+    if (vm.count("folders")) {
+        for (auto item : vm["folders"].as<std::vector<std::string>>()) {
+            folders.emplace_back(item);
+        }
+    } else {
+        // folders.emplace_back(boost::filesystem::current_path(errcode).string());
+        folders.emplace_back(
+            "matlab/"); // Use matlab/ as a default search path.
+    }
+
+    std::vector<std::string> stems, extensions, searchStrings;
+    if (vm.count("extensions")) {
+        extensions = vm["extensions"].as<std::vector<std::string>>();
+    }
+
+    using boost::filesystem::path;
+    path aFile(submitFile);
+    if (!boost::filesystem::is_regular_file(aFile)) {
+        std::cerr << aFile << " isn't a regular file!\n";
+        return -1;
+    }
+
+    std::vector<std::string> fileList;
+    auto files = Tools::getFilesFromTxtFile(aFile.string());
+    for (auto aFile : files) {
+        fileList.push_back(aFile.string());
+    }
+
+    if (verbose) {
+        std::cout << "Files listed in the\"" << submitFile << "\" file:\n";
+        for (auto item : fileList) {
+            std::cout << item << "\n";
+        }
+    }
+
+    // Find all valid edited files.
+    Timer timer;
+    auto const params = std::make_tuple(verbose, dataFile, folders, stems,
+                                        extensions, searchStrings);
+    Tools::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params, 700000);
+
+    boost::future<void> readThread =
+        boost::async(std::bind(&decltype(searchAlg)::read, &searchAlg));
+    boost::future<void> findThread =
+        boost::async(std::bind(&decltype(searchAlg)::find, &searchAlg));
+
+    readThread.wait();
+    findThread.wait();
+    readThread.get();
+    findThread.get();
+
+    // Filter unrelated artifacts
+    Tools::print(searchAlg.getEditedFiles());
+    std::cout << "Number of edited files: " << searchAlg.getEditedFiles().size() << std::endl;
+    searchAlg.filter();
+
+    // Get a list of edited files.
+    std::vector<std::string> editedFiles;
+    for (auto item : searchAlg.getEditedFiles()) {
+        editedFiles.emplace_back(std::get<0>(item));
+    }
+
+    // Find edited files which are not belong to the submit file list.
     {
-        std::cout << e.what() << "\n";
-        return false;
+        std::cout << "Edited files which are not listed in the \"" << submitFile
+                  << "\" file:\n";
+        std::set<std::string> lookupTable;
+        for (auto &item : fileList) {
+            lookupTable.insert(item);
+        }
+
+        for (auto aFile : editedFiles) {
+            if (lookupTable.find(aFile) == lookupTable.end()) {
+                std::cout << aFile << "\n";
+            }
+        }
     }
-    
-    return true;
-}
 
+    std::cout << "Elapsed time: " << timer.toc() / timer.ticksPerSecond()
+              << " seconds" << std::endl;
 
-int main(int ac, char* av[])
-{
-    parseInputParameters<std::string>(ac, av);
     return EXIT_SUCCESS;
 }

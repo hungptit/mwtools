@@ -10,23 +10,28 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -pedantic -O4 -
 ENABLE_TESTING()
 
 set(PROJECTS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../../")
+
 # Include folder
 INCLUDE_DIRECTORIES ("../../")
-include_directories ("${PROJECTS_FOLDER}/3p/gtest/include")
 include_directories ("${PROJECTS_FOLDER}/3p/poco/include")
 include_directories ("${PROJECTS_FOLDER}/3p/leveldb/include")
 include_directories ("${PROJECTS_FOLDER}/3p/rapidjson/include")
+include_directories ("${PROJECTS_FOLDER}/3p/gtest/include")
+include_directories ("${PROJECTS_FOLDER}/3p/cppformat/include")
+include_directories ("${PROJECTS_FOLDER}/3p/cereal/include")
+include_directories ("${PROJECTS_FOLDER}/3p/sparsehash/include/")
 
 # Used libraries
 set(LIB_GTEST "${PROJECTS_FOLDER}/3p/gtest/lib/libgtest.a")
 set(LIB_GTEST_MAIN "${PROJECTS_FOLDER}/3p/gtest/lib/libgtest_main.a")
-
+set(LIB_LEVELDB "${PROJECTS_FOLDER}/3p/leveldb/libleveldb.a")
 set(LIB_POCO_FOUNDATION "${PROJECTS_FOLDER}/3p/poco/lib/libPocoFoundation.a")
 set(LIB_POCO_UTIL "${PROJECTS_FOLDER}/3p/poco/lib/libPocoUtil.a")
 set(LIB_POCO_DATA "${PROJECTS_FOLDER}/3p/poco/lib/libPocoData.a")
 set(LIB_POCO_SQLITE "${PROJECTS_FOLDER}/3p/poco/lib/libPocoDataSQLite.a")
 set(LIB_POCO_XML "${PROJECTS_FOLDER}/3p/poco/lib/libPocoXML.a")
 set(LIB_POCO_NET "${PROJECTS_FOLDER}/3p/poco/lib/libPocoNet.a")
+set(LIB_CPPFORMAT "${PROJECTS_FOLDER}/3p/cppformat/lib/libcppformat.a")
 
 # Find Boost libraries
 set(Boost_USE_STATIC_LIBS ON)
@@ -66,6 +71,15 @@ if (Boost_FOUND)
       ${LIB_POCO_FOUNDATION}
       ${LIB_POCO_DATA}
       ${LIB_POCO_SQLITE} -ldl -lpthread) 
+  endforeach (src_file)
+  INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
+
+  set(COMMAND_SRC_FILES findEditedFiles buildEditedFileDatabase deleteFiles checkSubmitFile copyFiles)
+  foreach (src_file ${COMMAND_SRC_FILES})
+    ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
+    TARGET_LINK_LIBRARIES(${src_file} 
+      ${Boost_LIBRARIES} ${LIB_LEVELDB} ${LIB_CPPFORMAT} -lpthread -lrt)
+    ADD_TEST(${src_file} ./${src_file})
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
