@@ -7,7 +7,7 @@
 #include "utils/FileSystemUtilities.hpp"
 #include "utils/Utils.hpp"
 #include "utils/Process.hpp"
-#include "sbtools/Utilities.hpp"
+#include "tools/Utilities.hpp"
 
 template <typename T>
 void parseInputParameters(int ac, char* av[])

@@ -1,7 +1,7 @@
 #include "utils/Utils.hpp"
 #include "boost/program_options.hpp"
 #include "boost/lexical_cast.hpp"
-#include "sbtools/CleanupTmpFolder.hpp"
+#include "tools/CleanupTmpFolder.hpp"
 
 int main(int ac, char* av[])
 {

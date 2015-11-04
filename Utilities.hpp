@@ -20,8 +20,8 @@
 #include "Poco/Data/SQLite/Connector.h"
 
 #include "Resources.hpp"
-#include "sbtools/Sandbox.hpp"
-#include "sbtools/LogFolder.hpp"
+#include "tools/Sandbox.hpp"
+#include "tools/LogFolder.hpp"
 
 #include "utils/Process.hpp"
 

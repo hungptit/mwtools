@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iterator>
 #include <cstdlib>
-#include "sbtools/Utilities.hpp"
+#include "tools/Utilities.hpp"
 #include "base/Basic.hpp"
 
 template <typename T>

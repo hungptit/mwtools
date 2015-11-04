@@ -1,6 +1,6 @@
-#include "sbtools/FindEditedFiles.hpp"
-#include "sbtools/Sandbox.hpp"
-#include "sbtools/Utilities.hpp"
+#include "tools/FindEditedFiles.hpp"
+#include "tools/Sandbox.hpp"
+#include "tools/Utilities.hpp"
 #include "base/Resources.hpp"
 
 bool runUnitTests(const std::string & folderPath, const bool verbose = false)

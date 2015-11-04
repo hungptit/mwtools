@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <iterator>
 #include <cstdlib>
-#include "sbtools/Utilities.hpp"
-#include "sbtools/ZFSUtils.hpp"
+#include "tools/Utilities.hpp"
+#include "tools/ZFSUtils.hpp"
 
 template <typename T>
 bool parseInputParameters(int ac, char* av[])

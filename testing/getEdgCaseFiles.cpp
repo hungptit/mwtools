@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <iterator>
 #include <cstdlib>
-#include "sbtools/Utilities.hpp"
-#include "sbtools/Sandbox.hpp"
+#include "tools/Utilities.hpp"
+#include "tools/Sandbox.hpp"
 
 template <typename T>
 bool parserInputParameters(int ac, char* av[],

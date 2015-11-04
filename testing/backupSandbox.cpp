@@ -4,9 +4,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <iterator>
-#include "sbtools/Resources.hpp"
-#include "sbtools/Sandbox.hpp"
-#include "sbtools/Utilities.hpp"
+#include "tools/Resources.hpp"
+#include "tools/Sandbox.hpp"
+#include "tools/Utilities.hpp"
 #include "utils/Utils.hpp"
 
 namespace {

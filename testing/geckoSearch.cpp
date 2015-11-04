@@ -8,7 +8,7 @@
 
 #include "utils/Utils.hpp"
 #include "utils/Process.hpp"
-#include "sbtools/Resources.hpp"
+#include "tools/Resources.hpp"
 
 template <typename T>
 bool parseInputParameters(int ac, char* av[])

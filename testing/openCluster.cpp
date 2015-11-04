@@ -6,7 +6,7 @@
 #include <iostream>
 #include <iterator>
 
-#include "sbtools/Resources.hpp"
+#include "tools/Resources.hpp"
 #include "utils/Process.hpp"
 #include "utils/Utils.hpp"
 
