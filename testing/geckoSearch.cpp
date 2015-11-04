@@ -32,7 +32,7 @@ bool parseInputParameters(int ac, char* av[])
 
         // Parse input arguments
         if (vm.count("help")) {
-            std::cout << "Usage: geckoSearch  -s keyword\n";
+            std::cout << "Usage: geckoSearch keyword\n";
             std::cout << desc;
             return false;
         }
@@ -59,8 +59,8 @@ bool parseInputParameters(int ac, char* av[])
         }
 
         const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " + optionString;
-        Tools::run(cmdStr, {});
-        std::cout << "Command: " << cmdStr << std::endl;
+        Tools::run(Tools::SandboxResources<std::string>::WebViewer, {optionString});
+        std::cout << "Argument: " << optionString << std::endl;
     }
 
     catch(std::exception & e)
