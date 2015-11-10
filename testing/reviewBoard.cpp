@@ -1,33 +1,24 @@
-#include "boost/program_options.hpp"
 #include "boost/lexical_cast.hpp"
-
-#include <iostream>
-#include <algorithm>
-#include <iterator>
-#include <cstdlib>
-
-#include "utils/Utils.hpp"
-#include "utils/Process.hpp"
+#include "boost/program_options.hpp"
 #include "tools/Resources.hpp"
-
-void usage() {
-    std::cout << "\nUsage:\n";
-    std::cout << "Create a review board from a change ID: reviewBoard  -c change_id [options]\n";
-    std::cout << "Create a review board and open a web browser to view it : reviewBoard change_id -o\n ";
-}
+#include <algorithm>
+#include <cstdlib>
+#include <iostream>
+#include <iterator>
 
 void parseInputParameters(int ac, char *av[]) {
     using namespace boost;
     namespace po = boost::program_options;
 
     po::options_description desc("Allowed options");
+    // clang-format off
     desc.add_options()
         ("help,h", "reviewBoard - This binary is built on top of sbreviewboard.")
         ("open-browser,o", "Open the web browser.")
-        ("change_id,c", po::value<std::string>(), "Perforce change ID")
+        ("change_id,c", po::value<std::string>(), "Perforce change ID. Users must provide the change set ID.")
         ("reviewboard_id,i", po::value<std::string>(), "The current reviewboard ID")
         ("description,d", po::value<std::string>(), "Description about changes");
-
+    // clang-format on
     po::positional_options_description p;
     p.add("change_id", -1);
 
@@ -38,7 +29,6 @@ void parseInputParameters(int ac, char *av[]) {
     // Parse input arguments
     if (vm.count("help")) {
         std::cout << desc;
-        usage();
         return;
     }
 
@@ -48,7 +38,6 @@ void parseInputParameters(int ac, char *av[]) {
     } else {
         std::cout << "Usage: reviewBoard -c change_id [options]\n";
         std::cout << desc;
-        usage();
         return;
     }
 
@@ -68,7 +57,10 @@ void parseInputParameters(int ac, char *av[]) {
     }
 
     // Construct the executed command.
-    Tools::run(Tools::SandboxResources<std::string>::ReviewBoardCommand, {changeId, optionString});
+    auto command = Tools::SandboxResources<std::string>::ReviewBoardCommand + " " + changeId +
+                   " " + optionString;
+    std::system(command.c_str());
+    std::cout << "Executed command: " << command << std::endl;
 }
 
 int main(int ac, char *av[]) {
