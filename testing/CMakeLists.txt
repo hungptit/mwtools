@@ -85,7 +85,7 @@ if (Boost_FOUND)
 
   # Compile all unittests
   # set(UNITTEST_SRC_FILES tUnitTests tTestSuite tTestDatabase tLogFolder tLogParser tRemoveWhiteSpace tBasic tFindEditedFiles 
-  #   tSandbox tFileDatabase main)
+  #   tSandbox tFileDatabase mai)
 
   # set(UNITTEST_SRC_FILES tUnitTests tTestSuite tTestDatabase tLogFolder tLogParser tRemoveWhiteSpace tBasic tFindEditedFiles 
   #   tSandbox tFileFinder tFileDatabase main)

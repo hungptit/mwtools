@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
     readThread.get();
     findThread.get();
 
-    // Get the list of edited files then print out the results.
+    // Get the list of edited files then print out the results.    
     std::cout << "Number of new or modified files: " << searchAlg.filter()
               << "\n";
 
