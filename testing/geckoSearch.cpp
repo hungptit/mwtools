@@ -59,7 +59,7 @@ bool parseInputParameters(int ac, char* av[])
         }
 
         const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " + optionString;
-        Tools::run(Tools::SandboxResources<std::string>::WebViewer, {optionString});
+        Utils::run(Tools::SandboxResources<std::string>::WebViewer, {optionString});
         std::cout << "Argument: " << optionString << std::endl;
     }
 

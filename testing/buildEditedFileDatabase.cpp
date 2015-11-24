@@ -4,27 +4,29 @@
 #include <vector>
 #include <array>
 #include <tuple>
-#include "boost/filesystem.hpp"
+#include "utils/BFSFileSearch.hpp"
+#include "utils/DFSFileSearch.hpp"
+#include "utils/FileSearch.hpp"
+#include "utils/Timer.hpp"
 #include "utils/Utils.hpp"
-#include "utils/FindUtils.hpp"
 #include "utils/LevelDBIO.hpp"
 #include "boost/program_options.hpp"
 #include "InputArgumentParser.hpp"
 
-typedef Tools::DefaultOArchive OArchive;
-typedef Tools::DefaultIArchive IArchive;
+typedef Utils::OArchive OArchive;
+typedef Utils::IArchive IArchive;
 
 template <typename OArchive, typename Container>
-void serialize(Tools::Writer &writer, const std::string &key, Container &data) {
+void serialize(Utils::Writer &writer, const std::string &key, Container &data) {
     std::ostringstream os;
-    Tools::save<OArchive, decltype(data)>(data, os);
+    Utils::save<OArchive, decltype(data)>(data, os);
     const auto value = os.str();
     writer.write(key, value);
 }
 
-std::vector<Tools::EditedFileInfo>
+std::vector<Utils::FileInfo>
 createFileInfo(std::vector<boost::filesystem::path> &files) {
-    std::vector<Tools::EditedFileInfo> data;
+    std::vector<Utils::FileInfo> data;
     for (auto const &aPath : files) {
         boost::system::error_code ec;
         auto const fs = boost::filesystem::status(aPath, ec);
@@ -38,7 +40,7 @@ createFileInfo(std::vector<boost::filesystem::path> &files) {
     return data;
 }
 
-void createFolderDatabase(Tools::Writer &writer,
+void createFolderDatabase(Utils::Writer &writer,
                           std::vector<boost::filesystem::path> &folders, 
                           bool useRelativePath,
                           bool verbose) {
@@ -47,7 +49,7 @@ void createFolderDatabase(Tools::Writer &writer,
         std::cout << "Build file database for " << aFolder << "\n";
 
         // Search for files
-        Tools::BuildFileDatabase<Tools::Finder, Tools::EditedFileInfo> fSearch;
+        Utils::FileSearchBase<Utils::DFSFileSearchBase> fSearch;
         fSearch.search(aPath);
         auto data = fSearch.getData();
 
@@ -70,9 +72,9 @@ void createFolderDatabase(Tools::Writer &writer,
 void createDatabase(const std::string &dataFile,
                     const std::vector<std::string> &folders,
                     const int exploreLevel, bool useRelativePath, bool verbose = false) {
-    Tools::Writer writer(dataFile);
+    Utils::Writer writer(dataFile);
     if (folders.empty()) {
-        auto results = Tools::exploreFolders(
+        auto results = Utils::exploreFolders(
             exploreLevel,
             boost::filesystem::canonical(boost::filesystem::current_path()), useRelativePath);
         createFolderDatabase(writer, std::get<0>(results), useRelativePath, verbose);
@@ -139,7 +141,7 @@ int main(int argc, char *argv[]) {
     if (vm.count("database")) {
         dataFile = vm["database"].as<std::string>();
     } else {
-        dataFile = (boost::filesystem::path(Tools::FileDatabaseInfo::Database))
+        dataFile = (boost::filesystem::path(Utils::FileDatabaseInfo::Database))
                        .string();
     }
 

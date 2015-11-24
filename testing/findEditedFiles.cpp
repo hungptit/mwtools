@@ -16,15 +16,17 @@
 #include "boost/filesystem.hpp"
 #include "boost/program_options.hpp"
 
-#include "utils/Finder.hpp"
-#include "utils/FindUtils.hpp"
+#include "utils/BFSFileSearch.hpp"
+#include "utils/DFSFileSearch.hpp"
+#include "utils/FileSearch.hpp"
 #include "utils/LevelDBIO.hpp"
 #include "utils/Timer.hpp"
 #include "utils/Utils.hpp"
+#include "utils/Finder.hpp"
 
 int main(int argc, char *argv[]) {
-    typedef std::unordered_map<std::string, Tools::EditedFileInfo> Map;
-    typedef Tools::FindEditedFiles<Tools::Finder> SearchAlg;
+    typedef std::unordered_map<std::string, Utils::FileInfo> Map;
+    typedef Utils::FileSearchBase<Utils::DFSFileSearchBase> SearchAlg;
 
     using namespace boost;
     namespace po = boost::program_options;
@@ -46,9 +48,7 @@ int main(int argc, char *argv[]) {
     po::positional_options_description p;
     p.add("folders", -1);
     po::variables_map vm;
-    po::store(
-        po::command_line_parser(argc, argv).options(desc).positional(p).run(),
-        vm);
+    po::store(po::command_line_parser(argc, argv).options(desc).positional(p).run(), vm);
     po::notify(vm);
 
     if (vm.count("help")) {
@@ -76,8 +76,7 @@ int main(int argc, char *argv[]) {
             if (useRelativePath) {
                 folders.emplace_back(item);
             } else {
-                folders.emplace_back(
-                    boost::filesystem::canonical(item, errcode).string());
+                folders.emplace_back(boost::filesystem::canonical(item, errcode).string());
             }
         }
     }
@@ -101,16 +100,15 @@ int main(int argc, char *argv[]) {
     if (vm.count("database")) {
         dataFile = vm["database"].as<std::string>();
     } else {
-        dataFile =
-            boost::filesystem::path(Tools::FileDatabaseInfo::Database).string();
+        dataFile = boost::filesystem::path(Utils::FileDatabaseInfo::Database).string();
     }
 
     Timer timer;
 
     // Launch read and find tasks using two async threads.
-    auto const params = std::make_tuple(verbose, dataFile, folders, stems,
-                                        extensions, searchStrings);
-    Tools::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params, 700000);
+    auto const params =
+        std::make_tuple(verbose, dataFile, folders, stems, extensions, searchStrings);
+    Utils::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params, 700000);
 
     boost::future<void> readThread =
         boost::async(std::bind(&decltype(searchAlg)::read, &searchAlg));
@@ -120,19 +118,18 @@ int main(int argc, char *argv[]) {
     readThread.wait();
     findThread.wait();
 
-    std::cout << "Search time: " << timer.toc() / timer.ticksPerSecond()
-              << " seconds" << std::endl;
+    std::cout << "Search time: " << timer.toc() / timer.ticksPerSecond() << " seconds"
+              << std::endl;
 
     readThread.get();
     findThread.get();
 
-    // Get the list of edited files then print out the results.    
-    std::cout << "Number of new or modified files: " << searchAlg.filter()
-              << "\n";
+    // Get the list of edited files then print out the results.
+    std::cout << "Number of new or modified files: " << searchAlg.filter() << "\n";
 
     searchAlg.disp();
-    std::cout << "Total time: " << timer.toc() / timer.ticksPerSecond()
-              << " seconds" << std::endl;
+    std::cout << "Total time: " << timer.toc() / timer.ticksPerSecond() << " seconds"
+              << std::endl;
 
     return 0;
 }

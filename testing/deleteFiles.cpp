@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     } 
 
     if (vm.count("list-file")) {
-        for (auto item : Tools::getFilesFromTxtFile(vm["list-file"].as<std::string>())) {
+        for (auto item : Utils::getFilesFromTxtFile(vm["list-file"].as<std::string>())) {
             fileNames.emplace_back(item.string());
         }
     }

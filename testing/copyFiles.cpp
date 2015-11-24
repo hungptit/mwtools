@@ -17,13 +17,12 @@
 #include "boost/program_options.hpp"
 
 #include "utils/Utils.hpp"
-#include "utils/FindUtils.hpp"
 #include "utils/LevelDBIO.hpp"
 #include "utils/Finder.hpp"
 
 int main(int argc, char *argv[]) {
-    typedef std::unordered_map<std::string, Tools::EditedFileInfo> Map;
-    typedef Tools::FindEditedFiles<Tools::Finder> SearchAlg;
+    typedef std::unordered_map<std::string, Utils::FileInfo> Map;
+    typedef Utils::FileSearchBase<Utils::DFSFileSearchBase> SearchAlg;
 
     using namespace boost;
     namespace po = boost::program_options;
@@ -90,12 +89,12 @@ int main(int argc, char *argv[]) {
         dataFile = vm["database"].as<std::string>();
     } else {
         dataFile =
-            boost::filesystem::path(Tools::FileDatabaseInfo::Database).string();
+            boost::filesystem::path(Utils::FileDatabaseInfo::Database).string();
     }
 
     // Launch read and find tasks using two async threads.
     auto const params = std::make_tuple(verbose, dataFile, folders, stems, extensions, searchStrings);
-    Tools::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params);
+    Utils::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params);
     
     // searchAlg.read();
     // searchAlg.find();

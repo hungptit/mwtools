@@ -40,7 +40,7 @@ template <typename T> bool parseInputParameters(int ac, char *av[]) {
 
     const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " +
                                Tools::SandboxResources<std::string>::Outlook + options;
-    Tools::run(Tools::SandboxResources<std::string>::WebViewer,
+    Utils::run(Tools::SandboxResources<std::string>::WebViewer,
                {Tools::SandboxResources<std::string>::Outlook + options});
     // std::cout << "Command: " << cmdStr << std::endl;
 

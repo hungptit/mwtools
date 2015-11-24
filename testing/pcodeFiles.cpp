@@ -39,7 +39,7 @@ void parseInputParameters(int ac, char *av[]) {
 
     std::string command = "sbpcode";
     std::vector<std::string> args = {"-F", fileName};
-    std::cout << Tools::run(command, args) << std::endl;
+    std::cout << Utils::run(command, args) << std::endl;
 }
 
 int main(int ac, char *av[]) {

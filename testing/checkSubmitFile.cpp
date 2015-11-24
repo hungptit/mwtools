@@ -11,15 +11,17 @@
 #include "boost/filesystem.hpp"
 #include "boost/program_options.hpp"
 
-#include "utils/Finder.hpp"
-#include "utils/FindUtils.hpp"
+#include "utils/BFSFileSearch.hpp"
+#include "utils/DFSFileSearch.hpp"
+#include "utils/FileSearch.hpp"
 #include "utils/LevelDBIO.hpp"
 #include "utils/Timer.hpp"
 #include "utils/Utils.hpp"
+#include "utils/Finder.hpp"
 
 int main(int argc, char *argv[]) {
-    typedef std::unordered_map<std::string, Tools::EditedFileInfo> Map;
-    typedef Tools::FindEditedFiles<Tools::Finder> SearchAlg;
+    typedef std::unordered_map<std::string, Utils::FileInfo> Map;
+    typedef Utils::FileSearchBase<Utils::DFSFileSearchBase> SearchAlg;
 
     using namespace boost;
     namespace po = boost::program_options;
@@ -69,7 +71,7 @@ int main(int argc, char *argv[]) {
         dataFile = vm["database"].as<std::string>();
     } else {
         dataFile =
-            boost::filesystem::path(Tools::FileDatabaseInfo::Database).string();
+            boost::filesystem::path(Utils::FileDatabaseInfo::Database).string();
     }
 
     // Get a list of folders users want to check again files listed in the
@@ -99,7 +101,7 @@ int main(int argc, char *argv[]) {
     }
 
     std::vector<std::string> fileList;
-    auto files = Tools::getFilesFromTxtFile(aFile.string());
+    auto files = Utils::getFilesFromTxtFile(aFile.string());
     for (auto aFile : files) {
         fileList.push_back(aFile.string());
     }
@@ -115,7 +117,8 @@ int main(int argc, char *argv[]) {
     Timer timer;
     auto const params = std::make_tuple(verbose, dataFile, folders, stems,
                                         extensions, searchStrings);
-    Tools::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params, 700000);
+
+    Utils::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params);
 
     boost::future<void> readThread =
         boost::async(std::bind(&decltype(searchAlg)::read, &searchAlg));
@@ -128,7 +131,7 @@ int main(int argc, char *argv[]) {
     findThread.get();
 
     // Filter unrelated artifacts
-    Tools::print(searchAlg.getEditedFiles());
+    Utils::print(searchAlg.getEditedFiles());
     std::cout << "Number of edited files: " << searchAlg.getEditedFiles().size() << std::endl;
     searchAlg.filter();
 

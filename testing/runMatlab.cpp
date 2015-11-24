@@ -56,7 +56,7 @@ bool parseInputParameters(int ac, char* av[])
         optionString += " -nosplash";
 
         const std::string cmdStr = Tools::SandboxResources<std::string>::SbCommand + optionString;
-        Tools::run(cmdStr, {});
+        Utils::run(cmdStr, {});
         std::cout << "Command: " << cmdStr << std::endl;
     }
 

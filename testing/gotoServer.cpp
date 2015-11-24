@@ -14,7 +14,7 @@ class ServerAcesss
 
     void access(const std::string & serverName, const std::string & userName = "hungptit")
     {
-        Tools::run(getSshCommand(serverName, userName), {});
+        Utils::run(getSshCommand(serverName, userName), {});
     }
     
   private:

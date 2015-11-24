@@ -29,7 +29,7 @@ void parserInputParameters(int ac, char *av[]) {
     }
 
     if (vm.count("testlogarea")) {
-        Tools::run("sbscanlog", {"-testlogarea", vm["testlogarea"].as<std::string>()});
+        Utils::run("sbscanlog", {"-testlogarea", vm["testlogarea"].as<std::string>()});
     } else {
         std::cout << desc;
         std::cout << "Usage: scanTestLog a_log_folder\n";

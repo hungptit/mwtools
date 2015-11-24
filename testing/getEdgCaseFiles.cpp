@@ -87,6 +87,6 @@ int main(int ac, char* av[])
     std::string desFolder;
     std::string caseId;
     if (parserInputParameters<std::string>(ac, av, caseId, srcFolder, desFolder))
-        Tools::copyDir(srcFolder, desFolder);
+        Utils::copyDir(srcFolder, desFolder);
     return EXIT_SUCCESS;
 }

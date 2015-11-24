@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <iterator>
 #include <cstdlib>
-#include "utils/FileSystemUtilities.hpp"
 #include "utils/Utils.hpp"
 #include "utils/Process.hpp"
 #include "tools/Utilities.hpp"
@@ -41,11 +40,11 @@ void parseInputParameters(int ac, char* av[])
         folderName = vm["backup_folder"].as<std::string>();
     }
 
-    if (Tools::isDirectory(folderName))
+    if (Utils::isDirectory(folderName))
     {
         std::string cmd = "sbrestore -restore-from " + folderName;
         (void)std::system(cmd.c_str());
-        Tools::run("sbgentbxcache", {});
+        Utils::run("sbgentbxcache", {});
     }
     else
     {

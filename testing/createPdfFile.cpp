@@ -44,7 +44,7 @@ namespace {
                                                  inputFile,
                                                  "-o",
                                                  outputFile};
-                Tools::run("sbcode2pdf", args);
+                Utils::run("sbcode2pdf", args);
             }
 
             // View generated files using given pdf viewer.
@@ -52,7 +52,7 @@ namespace {
             for (auto val : info) {
                 args.emplace_back(std::get<1>(val).string());
             }
-            Tools::run(PdfViewer, args);
+            Utils::run(PdfViewer, args);
         }
 
       private:

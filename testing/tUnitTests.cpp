@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <iterator>
 #include "tools/Utilities.hpp"
-#include "utils/FileSystemUtilities.hpp"
 #include "utils/Utils.hpp"
 #include "gtest/gtest.h"
 
