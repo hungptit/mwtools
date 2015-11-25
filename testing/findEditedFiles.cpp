@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
     // Launch read and find tasks using two async threads.
     auto const params =
         std::make_tuple(verbose, dataFile, folders, stems, extensions, searchStrings);
-    Utils::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params, 700000);
+    Utils::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params, 1400000);
 
     boost::future<void> readThread =
         boost::async(std::bind(&decltype(searchAlg)::read, &searchAlg));
