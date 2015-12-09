@@ -20,6 +20,7 @@ include_directories ("${PROJECTS_FOLDER}/3p/gtest/include")
 include_directories ("${PROJECTS_FOLDER}/3p/cppformat/include")
 include_directories ("${PROJECTS_FOLDER}/3p/cereal/include")
 include_directories ("${PROJECTS_FOLDER}/3p/sparsehash/include/")
+include_directories ("${PROJECTS_FOLDER}/3p/snappy/include/")
 
 # Used libraries
 set(LIB_GTEST "${PROJECTS_FOLDER}/3p/gtest/lib/libgtest.a")
@@ -32,6 +33,7 @@ set(LIB_POCO_SQLITE "${PROJECTS_FOLDER}/3p/poco/lib/libPocoDataSQLite.a")
 set(LIB_POCO_XML "${PROJECTS_FOLDER}/3p/poco/lib/libPocoXML.a")
 set(LIB_POCO_NET "${PROJECTS_FOLDER}/3p/poco/lib/libPocoNet.a")
 set(LIB_CPPFORMAT "${PROJECTS_FOLDER}/3p/cppformat/lib/libcppformat.a")
+set(LIB_SNAPPY "${PROJECTS_FOLDER}/3p/snappy/lib/libsnappy.a")
 
 # Find Boost libraries
 set(Boost_USE_STATIC_LIBS ON)
@@ -56,7 +58,7 @@ message(STATUS "${Boost_LIBRARY_DIRS}")
 
 if (Boost_FOUND)
   # Compile all binaries
-  set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
+  set(COMMAND_SRC_FILES vncViewer gotoServer createPdfFile getGeckFiles getEdgCaseFiles
     regenerateGlobalDatabase runMatlab searchGeck
     geckoSearch openCluster openOutlook codeSearch
     runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles)
@@ -78,7 +80,7 @@ if (Boost_FOUND)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
-      ${Boost_LIBRARIES} ${LIB_LEVELDB} ${LIB_CPPFORMAT} -lpthread -lrt)
+      ${Boost_LIBRARIES} ${LIB_LEVELDB} ${LIB_CPPFORMAT} ${LIB_SNAPPY} -lpthread -lrt)
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
