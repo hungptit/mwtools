@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
         dataFile = boost::filesystem::path(Utils::FileDatabaseInfo::Database).string();
     }
 
-    Timer timer;
+    Utils::ElapsedTime<Utils::MILLISECOND> timer;
 
     // Launch read and find tasks using two async threads.
     auto const params =
@@ -107,19 +107,11 @@ int main(int argc, char *argv[]) {
 
     readThread.wait();
     findThread.wait();
-
-    std::cout << "Search time: " << timer.toc() / timer.ticksPerSecond() << " seconds"
-              << std::endl;
-
     readThread.get();
     findThread.get();
 
     // Get the list of edited files then print out the results.
     std::cout << "Number of new or modified files: " << searchAlg.filter() << "\n";
-
     searchAlg.disp();
-    std::cout << "Total time: " << timer.toc() / timer.ticksPerSecond() << " seconds"
-              << std::endl;
-
     return 0;
 }
