@@ -36,7 +36,6 @@ int main(int argc, char *argv[]) {
     desc.add_options()              
         ("help,h", "Print this help")
         ("verbose,v", "Display searched data.")
-        ("use_absolute_path,a", "Use absolute path.")
         ("folders,f", po::value<std::vector<std::string>>(), "Search folders.")
         ("file-stems,s", po::value<std::vector<std::string>>(), "File stems.")
         ("extensions,e", po::value<std::vector<std::string>>(), "File extensions.")
@@ -63,21 +62,12 @@ int main(int argc, char *argv[]) {
         verbose = true;
     }
 
-    bool useRelativePath = true;
-    if (vm.count("use_absolute_path")) {
-        useRelativePath = false;
-    }
-
     // Notes: All folder paths must be full paths.
     boost::system::error_code errcode;
     std::vector<std::string> folders;
     if (vm.count("folders")) {
         for (auto item : vm["folders"].as<std::vector<std::string>>()) {
-            if (useRelativePath) {
-                folders.emplace_back(item);
-            } else {
-                folders.emplace_back(boost::filesystem::canonical(item, errcode).string());
-            }
+            folders.emplace_back((Utils::normalize_path(item)));
         }
     }
 
@@ -103,7 +93,7 @@ int main(int argc, char *argv[]) {
         dataFile = boost::filesystem::path(Utils::FileDatabaseInfo::Database).string();
     }
 
-    Timer timer;
+    Utils::ElapsedTime<Utils::MILLISECOND> timer;
 
     // Launch read and find tasks using two async threads.
     auto const params =
@@ -117,19 +107,11 @@ int main(int argc, char *argv[]) {
 
     readThread.wait();
     findThread.wait();
-
-    std::cout << "Search time: " << timer.toc() / timer.ticksPerSecond() << " seconds"
-              << std::endl;
-
     readThread.get();
     findThread.get();
 
     // Get the list of edited files then print out the results.
     std::cout << "Number of new or modified files: " << searchAlg.filter() << "\n";
-
     searchAlg.disp();
-    std::cout << "Total time: " << timer.toc() / timer.ticksPerSecond() << " seconds"
-              << std::endl;
-
     return 0;
 }

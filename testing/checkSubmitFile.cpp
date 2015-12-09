@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Find all valid edited files.
-    Timer timer;
+    Utils::ElapsedTime<Utils::MILLISECOND> timer;
     auto const params = std::make_tuple(verbose, dataFile, folders, stems,
                                         extensions, searchStrings);
 
@@ -156,9 +156,6 @@ int main(int argc, char *argv[]) {
             }
         }
     }
-
-    std::cout << "Elapsed time: " << timer.toc() / timer.ticksPerSecond()
-              << " seconds" << std::endl;
 
     return EXIT_SUCCESS;
 }
