@@ -41,7 +41,7 @@ namespace Tools {
 
     std::string args2string(std::vector<std::string> &args) {
         std::string results;
-        for (auto arg : args) {
+        for (const auto & arg : args) {
             results += arg + " ";
         }
         return results;
