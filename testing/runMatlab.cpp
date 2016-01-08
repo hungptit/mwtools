@@ -53,7 +53,7 @@ bool parseInputParameters(int ac, char* av[])
             optionString += "-s " + vm["cluster"].as<std::string>();
         }
 
-        optionString += " -nosplash";
+        optionString += " -nosplash -memmgr release";
 
         const std::string cmdStr = Tools::SandboxResources<std::string>::SbCommand + optionString;
         Utils::run(cmdStr, {});
