@@ -14,7 +14,7 @@ namespace {
         for (auto aFile : inputFiles) {
             path aPath(aFile);
             info.emplace_back(std::make_tuple(aPath, rootPath / path("print") /
-                                              path(aPath.stem().string() + ".pdf")));
+                                              path(aPath.stem().string() + aPath.extension().string() + ".pdf")));
         }
         return info;
     }
