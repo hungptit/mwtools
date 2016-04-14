@@ -51,6 +51,13 @@ namespace {
         }
     }
 
+    void print(std::vector<std::string> &results, const std::string &title) {
+        fmt::print("{}:\n", title);
+        for (auto const &item : results) {
+            fmt::print("{}\n", item);
+        }
+    }
+
     auto parse_submit_file(const std::string &fileName) {
         std::vector<std::string> modifiedFiles;
         std::vector<std::string> deletedFiles;
@@ -132,52 +139,57 @@ int main(int argc, char *argv[]) {
         fmt::print("Submit file: {}\n", submitFile);
     }
 
-    // // Get file extensions
-    // std::vector<std::string> extensions;
-    // if (vm.count("extensions")) {
-    //     extensions = vm["extensions"].as<std::vector<std::string>>();
-    // }
+    // Get file database
+    std::string dataFile;
+    if (vm.count("database")) {
+        dataFile = vm["database"].as<std::string>();
+    } else {
+        dataFile = (boost::filesystem::path(utils::Resources::Database)).string();
+    }
 
-    // // Get file extensions
-    // std::vector<std::string> searchStrings;
-    // if (vm.count("strings")) {
-    //     searchStrings = vm["strings"].as<std::vector<std::string>>();
-    // }
-
-    // // Get file database
-    // std::string dataFile;
-    // if (vm.count("database")) {
-    //     dataFile = vm["database"].as<std::string>();
-    // } else {
-    //     dataFile = (boost::filesystem::path(utils::Resources::Database)).string();
-    // }
-
-    // if (verbose) {
-    //     std::cout << "Database: " << dataFile << std::endl;
-    // }
+    if (verbose) {
+        std::cout << "Database: " << dataFile << std::endl;
+    }
 
     // Read file information from a submit file
     auto results = parse_submit_file(submitFile);
 
-    // {
-    //     utils::ElapsedTime<utils::SECOND> e;
-    //     std::vector<utils::FileInfo> allEditedFiles, allNewFiles, allDeletedFiles;
-    //     std::tie(allEditedFiles, allDeletedFiles, allNewFiles) =
-    //         utils::diffFolders(dataFile, folders, verbose);
+    {
+        utils::ElapsedTime<utils::SECOND> e;
+        std::vector<utils::FileInfo> allEditedFiles, allNewFiles, allDeletedFiles;
+        std::tie(allEditedFiles, allDeletedFiles, allNewFiles) =
+            utils::diffFolders(dataFile, folders, verbose);
 
-    //     // Now we will display the results
-    //     std::cout << "---- Modified files: " << allEditedFiles.size() << " ----\n";
-    //     NormalFilter f;
-    //     print(allEditedFiles, f);
+        // Now we will display the results
+        std::cout << "---- Modified files: " << allEditedFiles.size() << " ----\n";
+        NormalFilter f;
+        print(allEditedFiles, f);
 
-    //     std::cout << "---- New files: " << allNewFiles.size() << " ----\n";
-    //     print(allNewFiles, f);
+        std::cout << "---- New files: " << allNewFiles.size() << " ----\n";
+        print(allNewFiles, f);
 
-    //     std::cout << "---- Deleted files: " << allDeletedFiles.size() << " ----\n";
-    //     print(allDeletedFiles, f);
+        std::cout << "---- Deleted files: " << allDeletedFiles.size() << " ----\n";
+        print(allDeletedFiles, f);
 
-    //     // Find  the different between actual data and data from the submit file.
+        // Find  the different between actual data and data from the submit file.
+        std::vector<std::string> modifiedFiles;
+        std::vector<std::string> deletedFiles;
+        
+        for (auto const &item : allEditedFiles) {
+            modifiedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));            
+        }
 
-    //     // Display results.
-    // }
+        for (auto const &item : allNewFiles) {
+            modifiedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));            
+        }
+
+        for (auto const & item : allDeletedFiles) {
+            deletedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));
+        }
+        
+        print(modifiedFiles, "Modified files: ");
+        print(modifiedFiles, "Deleted files: ");
+
+        // Display results.
+    }
 }
