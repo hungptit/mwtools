@@ -2,9 +2,9 @@
 #include "utils/Process.hpp"
 
 int main() {
-    Utils::run("sbglobal", {"-gentags"});
-    Utils::run("sblocate", {"-gendb"});
-    Utils::run("sbid", {"-gendb"});
-    Utils::run("sbgentbxcache", {});
+    utils::run("sbglobal", {"-gentags"});
+    utils::run("sblocate", {"-gendb"});
+    utils::run("sbid", {"-gendb"});
+    utils::run("sbgentbxcache", {});
     return EXIT_SUCCESS;
 }

@@ -49,7 +49,7 @@ template <typename T> bool parseInputParameters(int ac, char *av[]) {
                 Tools::SandboxResources<std::string>::Gecko + "view?Record=" + geckId;
         }
 
-        Utils::run(Tools::SandboxResources<std::string>::WebViewer, {optionString});
+        utils::run(Tools::SandboxResources<std::string>::WebViewer, {optionString});
         // std::cout << "Command: " << cmdStr << std::endl;
     }
 

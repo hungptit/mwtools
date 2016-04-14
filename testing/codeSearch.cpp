@@ -55,7 +55,7 @@ bool parseInputParameters(int ac, char* av[])
         // Modify the options for special cases
 
         // Launch code search
-        Utils::run(Tools::SandboxResources<std::string>::WebViewer,
+        utils::run(Tools::SandboxResources<std::string>::WebViewer,
                    {Tools::SandboxResources<std::string>::CodeSearch + options});
         const std::string cmdStr = Tools::SandboxResources<std::string>::WebViewer + " " +
                                    Tools::SandboxResources<std::string>::CodeSearch + options;

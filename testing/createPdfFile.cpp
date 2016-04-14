@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "boost/lexical_cast.hpp"
+#include "boost/filesystem.hpp"
 #include "boost/program_options.hpp"
 #include "utils/Utils.hpp"
 #include "utils/Process.hpp"
@@ -44,7 +45,7 @@ namespace {
                                                  inputFile,
                                                  "-o",
                                                  outputFile};
-                Utils::run("sbcode2pdf", args);
+                utils::run("sbcode2pdf", args);
             }
 
             // View generated files using given pdf viewer.
@@ -52,7 +53,7 @@ namespace {
             for (auto val : info) {
                 args.emplace_back(std::get<1>(val).string());
             }
-            Utils::run(PdfViewer, args);
+            utils::run(PdfViewer, args);
         }
 
       private:

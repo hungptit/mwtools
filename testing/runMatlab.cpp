@@ -53,10 +53,10 @@ bool parseInputParameters(int ac, char* av[])
             optionString += "-s " + vm["cluster"].as<std::string>();
         }
 
-        optionString += " -nosplash -memmgr release";
+        optionString += "-nodesktop -nosplash -memmgr release";
 
         const std::string cmdStr = Tools::SandboxResources<std::string>::SbCommand + optionString;
-        Utils::run(cmdStr, {});
+        std::system(cmdStr.c_str());
         std::cout << "Command: " << cmdStr << std::endl;
     }
 

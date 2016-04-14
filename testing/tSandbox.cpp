@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 
 TEST(Sandbox, Positive) {
-    Tools::Sandbox sandbox(boost::filesystem::path("/local-ssd/sandbox/advisor"));
+    Tools::Sandbox sandbox(boost::filesystem::path("/local-ssd/sandbox/exportfcns"));
     sandbox.info();
 }
 

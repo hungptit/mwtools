@@ -22,7 +22,7 @@ namespace {
         std::string strBuf = seed;
         Tools::replaceSubstring(strBuf, " ", "_");
         return boost::filesystem::path(strBuf) /
-               boost::filesystem::path(Utils::getTimeStampString());
+               boost::filesystem::path(utils::getTimeStampString());
     }
 
     struct BackupInfo {
@@ -37,7 +37,7 @@ namespace {
         const boost::filesystem::path backupDir = getBackupDir(comment);
         const boost::filesystem::path backupPath = getBackupPath();
         std::string results =
-            Utils::run("sbbackup", {"-l", backupDir.string(), "-r", backupPath.string()});
+            utils::run("sbbackup", {"-l", backupDir.string(), "-r", backupPath.string()});
 
         // Record all information to SQLite database
         const auto backupFolder = backupPath / backupDir;
@@ -49,7 +49,7 @@ namespace {
             now;
 
         BackupInfo info = {boost::filesystem::current_path().string(), backupFolder.string(),
-                           comment, Utils::getTimeStampString(), results};
+                           comment, utils::getTimeStampString(), results};
         Poco::Data::Statement insert(session);
         insert << "INSERT INTO BackupInfo VALUES(?, ?, ?, ?, ?)", use(info.CurrentDir),
             use(info.Path), use(info.Comment), use(info.Time), use(info.Info);

@@ -67,7 +67,7 @@ int main(int ac, char *av[]) {
     std::string desFolder;
     size_t geckId;
     if (parserInputParameters<size_t>(ac, av, geckId, srcFolder, desFolder))
-        Utils::copyDir(boost::filesystem::path(srcFolder),
+        utils::copyDir(boost::filesystem::path(srcFolder),
                        boost::filesystem::path(desFolder));
     return EXIT_SUCCESS;
 }

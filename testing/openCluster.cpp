@@ -37,7 +37,7 @@ template <typename T> void parseInputParameters(int ac, char *av[]) {
         cluster = "Bmdlref";
     }
 
-    Utils::run(Tools::SandboxResources<std::string>::WebViewer,
+    utils::run(Tools::SandboxResources<std::string>::WebViewer,
                {Tools::SandboxResources<std::string>::Batcave + cluster});
 }
 

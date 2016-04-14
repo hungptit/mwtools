@@ -55,7 +55,9 @@ void parseInputParameters(int ac, char *av[]) {
     } else {
         optionString += " -no-open-browser";
     }
-
+    
+    optionString += " -create-images";
+    
     // Construct the executed command.
     auto command = Tools::SandboxResources<std::string>::ReviewBoardCommand + " " + changeId +
                    " " + optionString;

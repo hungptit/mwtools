@@ -11,10 +11,16 @@ class ServerAcesss {
     ServerAcesss() : UserMap() { init(); }
     ~ServerAcesss() {}
 
+<<<<<<< HEAD
     void access(const std::string &serverName, const std::string &userName = "hungptit") {
       auto command = getSshCommand(serverName, userName);
       std::cout << command << "\n";
       std::system(command.c_str());
+=======
+    void access(const std::string & serverName, const std::string & userName = "hungptit")
+    {
+        utils::run(getSshCommand(serverName, userName), {});
+>>>>>>> 8becae5b3737682d8f4d6f931f5aff885301ef6c
     }
 
   private:
