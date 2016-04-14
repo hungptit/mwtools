@@ -51,6 +51,15 @@ namespace {
         }
     }
 
+    void print_results(std::vector<std::string> &results, const std::string &title) {
+        fmt::MemoryWriter writer;
+        fmt::print("---- {} ----\n", title);
+        for (auto const &item : results) {
+            writer << item << "\n";
+        }
+        fmt::print("{}", writer.str());
+    }
+
     auto parse_submit_file(const std::string &fileName) {
         std::vector<std::string> modifiedFiles;
         std::vector<std::string> deletedFiles;
@@ -64,22 +73,63 @@ namespace {
                 auto aLine = buffer.substr(begin, pos - begin);
                 if (!aLine.empty()) {
                     auto it = aLine.find(deleteSign);
-                    if (it != std::string::npos) {                  
-                        path aFile(aLine.substr(it+3));
+                    if (it != std::string::npos) {
+                        path aFile(aLine.substr(it + 3));
                         if (boost::filesystem::is_regular_file(aFile)) {
-                            fmt::print("Deleted file: {0}\n", aLine.substr(it+3));
+                            // fmt::print("Deleted file: {0}\n", aLine.substr(it + 3));
+                            deletedFiles.emplace_back(aLine.substr(it + 3));
                         }
                     } else {
                         path aFile(aLine);
                         if (boost::filesystem::is_regular_file(aFile)) {
-                            fmt::print("Modified file: {0}\n", aLine);
+                            modifiedFiles.emplace_back(aLine);
+                            // fmt::print("Modified file: {0}\n", aLine);
                         }
                     }
-                }                    
+                }
                 begin = pos + 1;
             };
             ++pos;
         }
+        return std::make_tuple(modifiedFiles, deletedFiles);
+    }
+
+    template <typename T> auto diff_vector(std::vector<T> &x, std::vector<T> &y) {
+        std::unordered_set<T> dict_of_x(x.begin(), x.end());
+        std::vector<T> dy;
+        for (auto const &item : y) {
+            if (dict_of_x.find(item) == dict_of_x.end()) {
+                dy.emplace_back(item);
+            } else {
+                dict_of_x.erase(item);
+            }
+        }
+        return std::make_tuple(std::vector<T>(dict_of_x.begin(), dict_of_x.end()), dy);
+    }
+
+    auto get_sandbox_diff(const std::string &dataFile, std::vector<std::string> &folders,
+                          bool verbose) {
+        utils::ElapsedTime<utils::SECOND> e;
+        std::vector<utils::FileInfo> allEditedFiles, allNewFiles, allDeletedFiles;
+        std::tie(allEditedFiles, allDeletedFiles, allNewFiles) =
+            utils::diffFolders(dataFile, folders, verbose);
+
+        // Find  the different between actual data and data from the submit file.
+        std::vector<std::string> modifiedFiles;
+        std::vector<std::string> deletedFiles;
+
+        for (auto const &item : allEditedFiles) {
+            modifiedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));
+        }
+
+        for (auto const &item : allNewFiles) {
+            modifiedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));
+        }
+
+        for (auto const &item : allDeletedFiles) {
+            deletedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));
+        }
+
         return std::make_tuple(modifiedFiles, deletedFiles);
     }
 }
@@ -132,52 +182,37 @@ int main(int argc, char *argv[]) {
         fmt::print("Submit file: {}\n", submitFile);
     }
 
-    // // Get file extensions
-    // std::vector<std::string> extensions;
-    // if (vm.count("extensions")) {
-    //     extensions = vm["extensions"].as<std::vector<std::string>>();
-    // }
+    // Get file database
+    std::string dataFile;
+    if (vm.count("database")) {
+        dataFile = vm["database"].as<std::string>();
+    } else {
+        dataFile = (boost::filesystem::path(utils::Resources::Database)).string();
+    }
 
-    // // Get file extensions
-    // std::vector<std::string> searchStrings;
-    // if (vm.count("strings")) {
-    //     searchStrings = vm["strings"].as<std::vector<std::string>>();
-    // }
-
-    // // Get file database
-    // std::string dataFile;
-    // if (vm.count("database")) {
-    //     dataFile = vm["database"].as<std::string>();
-    // } else {
-    //     dataFile = (boost::filesystem::path(utils::Resources::Database)).string();
-    // }
-
-    // if (verbose) {
-    //     std::cout << "Database: " << dataFile << std::endl;
-    // }
+    if (verbose) {
+        std::cout << "Database: " << dataFile << std::endl;
+    }
 
     // Read file information from a submit file
-    auto results = parse_submit_file(submitFile);
+    auto submitResults = parse_submit_file(submitFile);
+    auto sandboxDiff = get_sandbox_diff(dataFile, folders, verbose);
 
-    // {
-    //     utils::ElapsedTime<utils::SECOND> e;
-    //     std::vector<utils::FileInfo> allEditedFiles, allNewFiles, allDeletedFiles;
-    //     std::tie(allEditedFiles, allDeletedFiles, allNewFiles) =
-    //         utils::diffFolders(dataFile, folders, verbose);
+    // Display results.
+    fmt::print("==== Summary ====\n");
 
-    //     // Now we will display the results
-    //     std::cout << "---- Modified files: " << allEditedFiles.size() << " ----\n";
-    //     NormalFilter f;
-    //     print(allEditedFiles, f);
+    {
+        auto modifiedResults =
+            diff_vector(std::get<0>(sandboxDiff), std::get<0>(submitResults));
+        print_results(std::get<0>(modifiedResults), "Missing modified or new files: ");
+        print_results(std::get<1>(modifiedResults),
+                      "Files have not been changed but they are listed in a submit file: ");
+    }
 
-    //     std::cout << "---- New files: " << allNewFiles.size() << " ----\n";
-    //     print(allNewFiles, f);
-
-    //     std::cout << "---- Deleted files: " << allDeletedFiles.size() << " ----\n";
-    //     print(allDeletedFiles, f);
-
-    //     // Find  the different between actual data and data from the submit file.
-
-    //     // Display results.
-    // }
+    {
+        auto deletedResults = diff_vector(std::get<1>(sandboxDiff), std::get<1>(submitResults));
+        print_results(std::get<0>(deletedResults), "Missing deleted files: ");
+        print_results(std::get<1>(deletedResults),
+                      "Files have been marked as deleted, however, they are still exist: ");
+    }
 }
