@@ -40,11 +40,11 @@ void parseInputParameters(int ac, char* av[])
         folderName = vm["backup_folder"].as<std::string>();
     }
 
-    if (Utils::isDirectory(folderName))
+    if (utils::isDirectory(folderName))
     {
         std::string cmd = "sbrestore -restore-from " + folderName;
         (void)std::system(cmd.c_str());
-        Utils::run("sbgentbxcache", {});
+        utils::run("sbgentbxcache", {});
     }
     else
     {

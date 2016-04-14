@@ -40,7 +40,7 @@ template <typename T> bool parseInputParameters(int ac, char *av[]) {
         dataDir = "/local-ssd/hungdang/cache/";
     }
 
-    Utils::run(Tools::SandboxResources<std::string>::WebViewer, {"--user-data-dir=" + dataDir});
+    utils::run(Tools::SandboxResources<std::string>::WebViewer, {"--user-data-dir=" + dataDir});
 
     return true;
 }

@@ -55,7 +55,7 @@ namespace {
 
         // Construct the log folder.
         auto defaultSandbox = std::getenv("DEFAULT_SANDBOX");
-        auto logDir = path(defaultSandbox) / path("logs") / path(Utils::getTimeStampString());
+        auto logDir = path(defaultSandbox) / path("logs") / path(utils::getTimeStampString());
 
         // Update sbruntets arguments
         args.emplace_back("-testlogarea");
@@ -77,7 +77,7 @@ namespace {
         Poco::Data::SQLite::Connector::registerConnector();
         Poco::Data::Session session("SQLite", database.string());
         TestInfo info = {boost::filesystem::current_path().string(), logDir.string(), command,
-                         Utils::getTimeStampString()};
+                         utils::getTimeStampString()};
         session << "CREATE TABLE IF NOT EXISTS TestInfo (RunFolder VARCHAR(1024), LogFolder "
                    "VARCHAR(1024), Command VARCHAR(1024), Time Date);",
             now;

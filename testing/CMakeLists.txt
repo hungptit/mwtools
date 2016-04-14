@@ -11,6 +11,8 @@ ENABLE_TESTING()
 
 set(PROJECTS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../../")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Include folder
 INCLUDE_DIRECTORIES ("../../")
 include_directories ("${PROJECTS_FOLDER}/3p/poco/include")
@@ -24,7 +26,7 @@ include_directories ("${PROJECTS_FOLDER}/3p/sparsehash/include/")
 # Used libraries
 set(LIB_GTEST "${PROJECTS_FOLDER}/3p/gtest/lib/libgtest.a")
 set(LIB_GTEST_MAIN "${PROJECTS_FOLDER}/3p/gtest/lib/libgtest_main.a")
-set(LIB_LEVELDB "${PROJECTS_FOLDER}/3p/leveldb/libleveldb.a")
+set(LIB_LEVELDB "${PROJECTS_FOLDER}/3p/leveldb/out-static/libleveldb.a")
 set(LIB_POCO_FOUNDATION "${PROJECTS_FOLDER}/3p/poco/lib/libPocoFoundation.a")
 set(LIB_POCO_UTIL "${PROJECTS_FOLDER}/3p/poco/lib/libPocoUtil.a")
 set(LIB_POCO_DATA "${PROJECTS_FOLDER}/3p/poco/lib/libPocoData.a")
@@ -64,6 +66,7 @@ if (Boost_FOUND)
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
       ${Boost_LIBRARIES}       
+      ${LIB_CPPFORMAT}
       ${LIB_POCO_UTIL}
       ${LIB_POCO_NET}
       ${LIB_POCO_XML}
@@ -74,7 +77,7 @@ if (Boost_FOUND)
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
-  set(COMMAND_SRC_FILES findEditedFiles buildEditedFileDatabase deleteFiles checkSubmitFile copyFiles)
+  set(COMMAND_SRC_FILES checkSubmitFile)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
@@ -94,6 +97,7 @@ if (Boost_FOUND)
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
       ${Boost_LIBRARIES} 
+      ${LIB_CPPFORMAT}
       ${LIB_GTEST} 
       ${LIB_GTEST_MAIN}       
       ${LIB_POCO_UTIL}

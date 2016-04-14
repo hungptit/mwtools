@@ -1,55 +1,112 @@
+#include <array>
+#include <chrono>
 #include <fstream>
 #include <iostream>
+#include <map>
+#include <set>
 #include <string>
+#include <tuple>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #define BOOST_THREAD_VERSION 4
 #include "boost/config.hpp"
-#include "boost/thread.hpp"
-#include "boost/thread/future.hpp"
-
 #include "boost/filesystem.hpp"
 #include "boost/program_options.hpp"
+#include "boost/thread.hpp"
+#include "boost/thread.hpp"
+#include "boost/thread/future.hpp"
+#include "boost/unordered_set.hpp"
 
-#include "utils/BFSFileSearch.hpp"
-#include "utils/DFSFileSearch.hpp"
 #include "utils/FileSearch.hpp"
+#include "utils/FolderDiff.hpp"
 #include "utils/LevelDBIO.hpp"
 #include "utils/Timer.hpp"
-#include "utils/Utils.hpp"
-#include "utils/Finder.hpp"
+
+#include "cppformat/format.h"
+
+#include <sstream>
+#include <string>
+#include <vector>
+
+namespace {
+    struct NormalFilter {
+      public:
+        bool isValid(utils::FileInfo &item) {
+            return (std::find(ExcludedExtensions.begin(), ExcludedExtensions.end(),
+                              std::get<utils::filesystem::EXTENSION>(item)) ==
+                    ExcludedExtensions.end());
+        }
+
+      private:
+        std::vector<std::string> ExcludedExtensions = {".p", ".d", ".o", ".ts"};
+    };
+
+    template <typename Container, typename Filter> void print(Container &data, Filter &f) {
+        for (auto item : data) {
+            if (f.isValid(item)) {
+                fmt::print("{}\n", std::get<utils::filesystem::PATH>(item));
+            }
+        }
+    }
+
+    auto parse_submit_file(const std::string &fileName) {
+        std::vector<std::string> modifiedFiles;
+        std::vector<std::string> deletedFiles;
+        using path = boost::filesystem::path;
+        auto buffer = utils::read(fileName);
+        size_t begin = 0, pos = 0;
+        auto buflen = buffer.size();
+        std::string deleteSign("-d ");
+        while (pos < buflen) {
+            if (buffer[pos] == '\n') {
+                auto aLine = buffer.substr(begin, pos - begin);
+                if (!aLine.empty()) {
+                    auto it = aLine.find(deleteSign);
+                    if (it != std::string::npos) {                  
+                        path aFile(aLine.substr(it+3));
+                        if (boost::filesystem::is_regular_file(aFile)) {
+                            fmt::print("Deleted file: {0}\n", aLine.substr(it+3));
+                        }
+                    } else {
+                        path aFile(aLine);
+                        if (boost::filesystem::is_regular_file(aFile)) {
+                            fmt::print("Modified file: {0}\n", aLine);
+                        }
+                    }
+                }                    
+                begin = pos + 1;
+            };
+            ++pos;
+        }
+        return std::make_tuple(modifiedFiles, deletedFiles);
+    }
+}
 
 int main(int argc, char *argv[]) {
-    typedef std::unordered_map<std::string, Utils::FileInfo> Map;
-    typedef Utils::FileSearchBase<Utils::DFSFileSearchBase> SearchAlg;
-
     using namespace boost;
     namespace po = boost::program_options;
     po::options_description desc("Allowed options");
 
     // clang-format off
     desc.add_options()
-        ("help,h", "Print this help")
-        ("verbose,v", "Display searched data.")
-        ("submit-file,s", po::value<std::string>(), "A text file which has a list of files need to remove.")
-        ("folders,f", po::value<std::vector<std::string>>(), "Folders want to search.")
-        ("extensions,e", po::value<std::vector<std::string>>(), "File extensions.")
-        ("database,d", po::value<std::string>(), "Edited file database.");
+    ("help,h", "Print this help")
+    ("verbose,v", "Display searched data.")
+    ("folders,f", po::value<std::vector<std::string>>(), "Search folders.")
+    ("submit-file,s", po::value<std::string>(), "A submit file.")
+    ("database,d", po::value<std::string>(), "File database.");
     // clang-format on
 
     po::positional_options_description p;
     p.add("submit-file", -1);
     po::variables_map vm;
-    po::store(
-        po::command_line_parser(argc, argv).options(desc).positional(p).run(),
-        vm);
+    po::store(po::command_line_parser(argc, argv).options(desc).positional(p).run(), vm);
     po::notify(vm);
 
     if (vm.count("help")) {
-        std::cout << "Usage: deleteFiles [options]\n";
         std::cout << desc;
-        std::cout << "Examples:" << std::endl;
-        std::cout << "\t deleteFiles foo.txt test.txt" << std::endl;
+        fmt::print("Example:\n\tcheckSubmitFile matlab/toolbox\n");
         return 0;
     }
 
@@ -58,104 +115,69 @@ int main(int argc, char *argv[]) {
         verbose = true;
     }
 
+    // Search folders
+    std::vector<std::string> folders;
+    if (vm.count("folders")) {
+        folders = vm["folders"].as<std::vector<std::string>>();
+    }
+
     std::string submitFile;
     if (vm.count("submit-file")) {
         submitFile = vm["submit-file"].as<std::string>();
     } else {
-        std::cerr << "Need to provide a submit file name\n";
-        return -1;
-    }
-
-    std::string dataFile;
-    if (vm.count("database")) {
-        dataFile = vm["database"].as<std::string>();
-    } else {
-        dataFile =
-            boost::filesystem::path(Utils::FileDatabaseInfo::Database).string();
-    }
-
-    // Get a list of folders users want to check again files listed in the
-    // submit file.
-    boost::system::error_code errcode;
-    std::vector<std::string> folders;
-    if (vm.count("folders")) {
-        for (auto item : vm["folders"].as<std::vector<std::string>>()) {
-            folders.emplace_back(item);
-        }
-    } else {
-        // folders.emplace_back(boost::filesystem::current_path(errcode).string());
-        folders.emplace_back(
-            "matlab/"); // Use matlab/ as a default search path.
-    }
-
-    std::vector<std::string> stems, extensions, searchStrings;
-    if (vm.count("extensions")) {
-        extensions = vm["extensions"].as<std::vector<std::string>>();
-    }
-
-    using boost::filesystem::path;
-    path aFile(submitFile);
-    if (!boost::filesystem::is_regular_file(aFile)) {
-        std::cerr << aFile << " isn't a regular file!\n";
-        return -1;
-    }
-
-    std::vector<std::string> fileList;
-    auto files = Utils::getFilesFromTxtFile(aFile.string());
-    for (auto aFile : files) {
-        fileList.push_back(aFile.string());
+        submitFile = "submit.txt";
     }
 
     if (verbose) {
-        std::cout << "Files listed in the\"" << submitFile << "\" file:\n";
-        for (auto item : fileList) {
-            std::cout << item << "\n";
-        }
+        fmt::print("Submit file: {}\n", submitFile);
     }
 
-    // Find all valid edited files.
-    Utils::ElapsedTime<Utils::MILLISECOND> timer;
-    auto const params = std::make_tuple(verbose, dataFile, folders, stems,
-                                        extensions, searchStrings);
+    // // Get file extensions
+    // std::vector<std::string> extensions;
+    // if (vm.count("extensions")) {
+    //     extensions = vm["extensions"].as<std::vector<std::string>>();
+    // }
 
-    Utils::SandboxFinder<SearchAlg, Map, decltype(params)> searchAlg(params);
+    // // Get file extensions
+    // std::vector<std::string> searchStrings;
+    // if (vm.count("strings")) {
+    //     searchStrings = vm["strings"].as<std::vector<std::string>>();
+    // }
 
-    boost::future<void> readThread =
-        boost::async(std::bind(&decltype(searchAlg)::read, &searchAlg));
-    boost::future<void> findThread =
-        boost::async(std::bind(&decltype(searchAlg)::find, &searchAlg));
+    // // Get file database
+    // std::string dataFile;
+    // if (vm.count("database")) {
+    //     dataFile = vm["database"].as<std::string>();
+    // } else {
+    //     dataFile = (boost::filesystem::path(utils::Resources::Database)).string();
+    // }
 
-    readThread.wait();
-    findThread.wait();
-    readThread.get();
-    findThread.get();
+    // if (verbose) {
+    //     std::cout << "Database: " << dataFile << std::endl;
+    // }
 
-    // Filter unrelated artifacts
-    Utils::print(searchAlg.getEditedFiles());
-    std::cout << "Number of edited files: " << searchAlg.getEditedFiles().size() << std::endl;
-    searchAlg.filter();
+    // Read file information from a submit file
+    auto results = parse_submit_file(submitFile);
 
-    // Get a list of edited files.
-    std::vector<std::string> editedFiles;
-    for (auto item : searchAlg.getEditedFiles()) {
-        editedFiles.emplace_back(std::get<0>(item));
-    }
+    // {
+    //     utils::ElapsedTime<utils::SECOND> e;
+    //     std::vector<utils::FileInfo> allEditedFiles, allNewFiles, allDeletedFiles;
+    //     std::tie(allEditedFiles, allDeletedFiles, allNewFiles) =
+    //         utils::diffFolders(dataFile, folders, verbose);
 
-    // Find edited files which are not belong to the submit file list.
-    {
-        std::cout << "Edited files which are not listed in the \"" << submitFile
-                  << "\" file:\n";
-        std::set<std::string> lookupTable;
-        for (auto &item : fileList) {
-            lookupTable.insert(item);
-        }
+    //     // Now we will display the results
+    //     std::cout << "---- Modified files: " << allEditedFiles.size() << " ----\n";
+    //     NormalFilter f;
+    //     print(allEditedFiles, f);
 
-        for (auto aFile : editedFiles) {
-            if (lookupTable.find(aFile) == lookupTable.end()) {
-                std::cout << aFile << "\n";
-            }
-        }
-    }
+    //     std::cout << "---- New files: " << allNewFiles.size() << " ----\n";
+    //     print(allNewFiles, f);
 
-    return EXIT_SUCCESS;
+    //     std::cout << "---- Deleted files: " << allDeletedFiles.size() << " ----\n";
+    //     print(allDeletedFiles, f);
+
+    //     // Find  the different between actual data and data from the submit file.
+
+    //     // Display results.
+    // }
 }
