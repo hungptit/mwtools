@@ -51,7 +51,7 @@ namespace {
         }
     }
 
-    void print(std::vector<std::string> &results, const std::string &title) {
+    void print_results(std::vector<std::string> &results, const std::string &title) {
         fmt::print("{}:\n", title);
         for (auto const &item : results) {
             fmt::print("{}\n", item);
@@ -89,6 +89,13 @@ namespace {
         }
         return std::make_tuple(modifiedFiles, deletedFiles);
     }
+
+    
+    template<typename T> auto diff_vector(std::vector<T> &x, std::vector<T> &y) {
+        std::unordered_set<T> dict_of_x(x.begin(), x.end());
+        decltype(x) dx, dy;
+    }
+    
 }
 
 int main(int argc, char *argv[]) {
@@ -187,8 +194,8 @@ int main(int argc, char *argv[]) {
             deletedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));
         }
         
-        print(modifiedFiles, "Modified files: ");
-        print(modifiedFiles, "Deleted files: ");
+        print_results(modifiedFiles, "Modified files: ");
+        print_results(deletedFiles, "Deleted files: ");
 
         // Display results.
     }
