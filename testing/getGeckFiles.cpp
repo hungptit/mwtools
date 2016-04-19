@@ -1,73 +1,67 @@
-#include "boost/program_options.hpp"
-#include "boost/lexical_cast.hpp"
-#include <iostream>
 #include <algorithm>
-#include <iterator>
-#include <cstdlib>
-#include "tools/Utilities.hpp"
-#include "tools/Sandbox.hpp"
+#include <iostream>
 
-template <typename Int>
-bool parserInputParameters(int ac, char *av[], size_t &geckId,
-                           std::string &srcFolder, std::string &desFolder) {
-    using namespace boost;
+#include "boost/filesystem.hpp"
+#include "boost/program_options.hpp"
+#include "utils/FileUtils.hpp"
+
+int copy_directory(int ac, char *av[]) {
+    using path = boost::filesystem::path;
     namespace po = boost::program_options;
 
     po::options_description desc("Allowed options");
-    desc.add_options()("help,h", "getGeckFiles - Download all files associated "
-                                 "with given geck to a given folder.")(
-        "geck-id,g", po::value<Int>(),
-        "Geck ID")("source,s", po::value<std::string>(), "Source folder")(
-        "destination,d", po::value<std::string>(), "Destination folder");
+    
+    // clang-format off
+    desc.add_options()
+        ("help,h", "getGeckFiles - Download all files associated with given geck.")
+        ("geck-id,g", po::value<size_t>(), "Geck ID")
+        ("source,s", po::value<std::string>(), "Source folder")
+        ("destination,d", po::value<std::string>(), "Destination folder");
+    // clang-format on
 
     po::positional_options_description p;
     p.add("geck-id", -1);
 
     po::variables_map vm;
-    po::store(po::command_line_parser(ac, av).options(desc).positional(p).run(),
-              vm);
+    po::store(po::command_line_parser(ac, av).options(desc).positional(p).run(), vm);
     po::notify(vm);
 
     if (vm.count("help")) {
         std::cout << "Usage: getGeckFiles [options]\n";
         std::cout << desc;
-        return false;
+        return EXIT_SUCCESS;
     }
 
+    size_t geckId;
     if (vm.count("geck-id")) {
-        geckId = vm["geck-id"].as<Int>();
+        geckId = vm["geck-id"].as<size_t>();
     } else {
-        std::cout << "Usage: getGeckFiles [options]\n";
         std::cout << desc;
-        return false;
+        return EXIT_FAILURE;
     }
 
     // Default source and destination folders
-    srcFolder =
-        "/mathworks/home/tester/bugs/g" + lexical_cast<std::string>(geckId);
-    desFolder += "/local/sandbox/gecks/g" + lexical_cast<std::string>(geckId);
-
-    if (vm.count("source")) {
-        srcFolder = vm["source"].as<std::string>();
-    }
-
+    auto srcFolder = path("/mathworks/home/tester/bugs/g" + std::to_string(geckId));
+    path desFolder;
     if (vm.count("destination")) {
-        desFolder = vm["destination"].as<std::string>();
+        desFolder = path(vm["destination"].as<std::string>());
+    } else {
+        desFolder = path("/local/sandbox/gecks/g" + std::to_string(geckId));
     }
 
     // Display input parameters
     std::cout << "Geck ID is: " << geckId << "\n";
-    std::cout << "Source folder: " << srcFolder << std::endl;
-    std::cout << "Destination folder: " << desFolder << std::endl;
-    return true;
-}
+    std::cout << "Source folder: " << srcFolder << "\n";
+    std::cout << "Destination folder: " << desFolder << "\n";
 
-int main(int ac, char *av[]) {
-    std::string srcFolder;
-    std::string desFolder;
-    size_t geckId;
-    if (parserInputParameters<size_t>(ac, av, geckId, srcFolder, desFolder))
-        utils::copyDir(boost::filesystem::path(srcFolder),
-                       boost::filesystem::path(desFolder));
+    // Copy geck files to a folder.
+    auto parentFolder = desFolder.parent_path();
+    if (!boost::filesystem::exists(parentFolder)) {
+        boost::filesystem::create_directories(parentFolder);
+    }
+
+    utils::copyDir(path(srcFolder), path(desFolder));
     return EXIT_SUCCESS;
 }
+
+int main(int ac, char *av[]) { return copy_directory(ac, av); }
