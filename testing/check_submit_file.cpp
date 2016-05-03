@@ -24,7 +24,7 @@
 #include "utils/LevelDBIO.hpp"
 #include "utils/Timer.hpp"
 
-#include "cppformat/format.h"
+#include "fmt/format.h"
 
 #include <sstream>
 #include <string>
@@ -51,11 +51,30 @@ namespace {
         }
     }
 
+    struct BasicFilter {
+      public:
+        bool isValid(const std::string &item) {
+            using path = boost::filesystem::path;
+            path aPath(item);
+            return (std::find(ExcludedExtensions.begin(), ExcludedExtensions.end(),
+                              aPath.extension()) ==
+                    ExcludedExtensions.end());
+        }
+
+      private:
+        std::vector<std::string> ExcludedExtensions = {".p", ".d", ".o", ".ts", ".m~", ".m#";}
+    };
+
+    template<typename Filter>
     void print_results(std::vector<std::string> &results, const std::string &title) {
+        BasicFilter filter;
+        using path = boost::filesystem::path;
         fmt::MemoryWriter writer;
         fmt::print("---- {} ----\n", title);
         for (auto const &item : results) {
-            writer << item << "\n";
+            if (filter.isValid(item)) {
+                writer << item << "\n";
+            }             
         }
         fmt::print("{}", writer.str());
     }
@@ -204,15 +223,15 @@ int main(int argc, char *argv[]) {
     {
         auto modifiedResults =
             diff_vector(std::get<0>(sandboxDiff), std::get<0>(submitResults));
-        print_results(std::get<0>(modifiedResults), "Missing modified or new files: ");
-        print_results(std::get<1>(modifiedResults),
+        print_results<BasicFilter>(std::get<0>(modifiedResults), "Missing modified or new files: ");
+        print_results<BasicFilter>(std::get<1>(modifiedResults),
                       "Files have not been changed but they are listed in a submit file: ");
     }
 
     {
         auto deletedResults = diff_vector(std::get<1>(sandboxDiff), std::get<1>(submitResults));
-        print_results(std::get<0>(deletedResults), "Missing deleted files: ");
-        print_results(std::get<1>(deletedResults),
+        print_results<BasicFilter>(std::get<0>(deletedResults), "Missing deleted files: ");
+        print_results<BasicFilter>(std::get<1>(deletedResults),
                       "Files have been marked as deleted, however, they are still exist: ");
     }
 }

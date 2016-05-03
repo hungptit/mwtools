@@ -33,7 +33,7 @@ set(LIB_POCO_DATA "${PROJECTS_FOLDER}/3p/poco/lib/libPocoData.a")
 set(LIB_POCO_SQLITE "${PROJECTS_FOLDER}/3p/poco/lib/libPocoDataSQLite.a")
 set(LIB_POCO_XML "${PROJECTS_FOLDER}/3p/poco/lib/libPocoXML.a")
 set(LIB_POCO_NET "${PROJECTS_FOLDER}/3p/poco/lib/libPocoNet.a")
-set(LIB_CPPFORMAT "${PROJECTS_FOLDER}/3p/cppformat/lib/libcppformat.a")
+set(LIB_CPPFORMAT "${PROJECTS_FOLDER}/3p/cppformat/lib/libfmt.a")
 
 # Find Boost libraries
 set(Boost_USE_STATIC_LIBS ON)
@@ -77,7 +77,7 @@ if (Boost_FOUND)
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
-  set(COMMAND_SRC_FILES checkSubmitFile)
+  set(COMMAND_SRC_FILES check_submit_file)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
