@@ -57,15 +57,15 @@ namespace {
             using path = boost::filesystem::path;
             path aPath(item);
             return (std::find(ExcludedExtensions.begin(), ExcludedExtensions.end(),
-                              aPath.extension()) ==
-                    ExcludedExtensions.end());
+                              aPath.extension()) == ExcludedExtensions.end());
         }
 
       private:
-        std::vector<std::string> ExcludedExtensions = {".p", ".d", ".o", ".ts", ".m~", ".m#";}
+        std::vector<std::string> ExcludedExtensions = {".p",  ".d",    ".o",    ".ts",  ".m~",
+                                                       ".m#", ".xml~", ".cpp~", ".hpp~"};
     };
 
-    template<typename Filter>
+    template <typename Filter>
     void print_results(std::vector<std::string> &results, const std::string &title) {
         BasicFilter filter;
         using path = boost::filesystem::path;
@@ -74,7 +74,7 @@ namespace {
         for (auto const &item : results) {
             if (filter.isValid(item)) {
                 writer << item << "\n";
-            }             
+            }
         }
         fmt::print("{}", writer.str());
     }
@@ -188,6 +188,8 @@ int main(int argc, char *argv[]) {
     std::vector<std::string> folders;
     if (vm.count("folders")) {
         folders = vm["folders"].as<std::vector<std::string>>();
+    } else {
+        folders.emplace_back("matlab/");
     }
 
     std::string submitFile;
@@ -223,15 +225,18 @@ int main(int argc, char *argv[]) {
     {
         auto modifiedResults =
             diff_vector(std::get<0>(sandboxDiff), std::get<0>(submitResults));
-        print_results<BasicFilter>(std::get<0>(modifiedResults), "Missing modified or new files: ");
-        print_results<BasicFilter>(std::get<1>(modifiedResults),
-                      "Files have not been changed but they are listed in a submit file: ");
+        print_results<BasicFilter>(std::get<0>(modifiedResults),
+                                   "Missing modified or new files: ");
+        print_results<BasicFilter>(
+            std::get<1>(modifiedResults),
+            "Files have not been changed but they are listed in a submit file: ");
     }
 
     {
         auto deletedResults = diff_vector(std::get<1>(sandboxDiff), std::get<1>(submitResults));
         print_results<BasicFilter>(std::get<0>(deletedResults), "Missing deleted files: ");
-        print_results<BasicFilter>(std::get<1>(deletedResults),
-                      "Files have been marked as deleted, however, they are still exist: ");
+        print_results<BasicFilter>(
+            std::get<1>(deletedResults),
+            "Files have been marked as deleted, however, they are still exist: ");
     }
 }
