@@ -31,18 +31,6 @@
 #include <vector>
 
 namespace {
-    struct NormalFilter {
-      public:
-        bool isValid(utils::FileInfo &item) {
-            return (std::find(ExcludedExtensions.begin(), ExcludedExtensions.end(),
-                              std::get<utils::filesystem::EXTENSION>(item)) ==
-                    ExcludedExtensions.end());
-        }
-
-      private:
-        std::vector<std::string> ExcludedExtensions = {".p", ".d", ".o", ".ts"};
-    };
-
     template <typename Container, typename Filter> void print(Container &data, Filter &f) {
         for (auto item : data) {
             if (f.isValid(item)) {
@@ -62,7 +50,8 @@ namespace {
 
       private:
         std::vector<std::string> ExcludedExtensions = {".p",  ".d",    ".o",    ".ts",  ".m~",
-                                                       ".m#", ".xml~", ".cpp~", ".hpp~"};
+                                                       ".m#", ".xml~", ".cpp~", ".hpp~", ".so",
+                                                       ".dbg", ".log", ".tmp"};
     };
 
     template <typename Filter>
@@ -77,6 +66,13 @@ namespace {
             }
         }
         fmt::print("{}", writer.str());
+    }
+
+    template<typename Container> 
+    Container remove_duplicate_items(Container &data) {
+        using T = typename Container::value_type;
+        std::unordered_set<T> dict(data.begin(), data.end());
+        return Container(dict.begin(), dict.end());
     }
 
     auto parse_submit_file(const std::string &fileName) {
@@ -110,7 +106,7 @@ namespace {
             };
             ++pos;
         }
-        return std::make_tuple(modifiedFiles, deletedFiles);
+        return std::make_tuple(remove_duplicate_items(modifiedFiles), remove_duplicate_items(deletedFiles));
     }
 
     template <typename T> auto diff_vector(std::vector<T> &x, std::vector<T> &y) {
@@ -229,7 +225,7 @@ int main(int argc, char *argv[]) {
                                    "Missing modified or new files: ");
         print_results<BasicFilter>(
             std::get<1>(modifiedResults),
-            "Files have not been changed but they are listed in a submit file: ");
+            "Files might not be changed, however, they are listed in a submit file: ");
     }
 
     {

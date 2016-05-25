@@ -21,7 +21,6 @@ bool parseInputParameters(int ac, char* av[])
         desc.add_options()
             ("help,h", "This command will launch Matlab based on the given input arguments.")
             ("cluster,c", po::value<std::string>(), "Used cluster.")
-            ("options,o", po::value<std::string>(), "Other options.")
             ;
 
         po::positional_options_description p;
@@ -33,29 +32,20 @@ bool parseInputParameters(int ac, char* av[])
 
         // Parse input arguments
         if (vm.count("help")) {
-            std::cout << "Usage: runMatlab  -c Bmdlref [options]\n";
+            std::cout << "Usage: createSBSSandbox -c Bmdlref\n";
             std::cout << desc;
             return false;
         }
 
-        std::string optionString;
-        if (vm.count("options"))
-        {
-            optionString = vm["options"].as<std::string>();
-        }
-        else 
-        {
-            optionString = " ";
-        }
-
+        std::string cluster;
         if (vm.count("cluster"))
         {
-            optionString += "-s " + vm["cluster"].as<std::string>();
+            cluster+= vm["cluster"].as<std::string>();
+        } else {
+            cluster = "Bmdlref";
         }
 
-        optionString += " -nodesktop -nosplash -memmgr release";
-
-        const std::string cmdStr = Tools::SandboxResources<std::string>::SbCommand + optionString;
+        const std::string cmdStr = "mw -using " + cluster + " sbs -c " + cluster;
         std::system(cmdStr.c_str());
         std::cout << "Command: " << cmdStr << std::endl;
     }
