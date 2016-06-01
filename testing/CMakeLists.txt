@@ -61,7 +61,8 @@ if (Boost_FOUND)
   set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
     regenerateGlobalDatabase runMatlab searchGeck
     geckoSearch openCluster openOutlook codeSearch
-    runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles web_browser createSBSSandbox cloneSandbox)
+    runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles 
+    web_browser createSBSSandbox deleteSBSSandbox cloneSandbox syncMasterSandbox)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 

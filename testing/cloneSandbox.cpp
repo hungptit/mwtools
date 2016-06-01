@@ -17,7 +17,7 @@ namespace {
         // Create a sandbox using sbclone
         std::string cmdStr = "sbclone " + aMasterSandbox + " " + aNewSandbox;
         std::system(cmdStr.c_str());
-        
+
         fmt::print("Clone sandbox command: {0}\n", cmdStr);
 
         // Update the database using mupdatedb
@@ -59,9 +59,9 @@ namespace {
             master = "Bmdlref.latest_pass";
         }
 
-        
         if (vm.count("sandbox")) {
-            std::vector<std::string> newSandboxes = vm["sandbox"].as<std::vector<std::string>>();
+            std::vector<std::string> newSandboxes =
+                vm["sandbox"].as<std::vector<std::string>>();
             for (auto const &aNewSandbox : newSandboxes) {
                 createSandbox(master, aNewSandbox);
             }
