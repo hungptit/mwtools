@@ -1,27 +1,24 @@
-#include "boost/program_options.hpp"
 #include "boost/lexical_cast.hpp"
+#include "boost/program_options.hpp"
 
-#include <iostream>
 #include <algorithm>
-#include <iterator>
 #include <cstdlib>
+#include <iostream>
+#include <iterator>
 
-#include "utils/Utils.hpp"
-#include "utils/Process.hpp"
 #include "tools/Resources.hpp"
+#include "utils/Process.hpp"
+#include "utils/Utils.hpp"
 
-template <typename T>
-bool parseInputParameters(int ac, char* av[])
-{
+bool parseInputParameters(int ac, char *av[]) {
     using namespace boost;
     namespace po = boost::program_options;
-    
+
     try {
         po::options_description desc("Allowed options");
-        desc.add_options()
-            ("help,h", "This command will launch Matlab based on the given input arguments.")
-            ("cluster,c", po::value<std::string>(), "Used cluster.")
-            ;
+        desc.add_options()(
+            "help,h", "This command will launch Matlab based on the given input arguments.")(
+            "cluster,c", po::value<std::string>(), "Used cluster.");
 
         po::positional_options_description p;
         p.add("cluster", -1);
@@ -38,9 +35,8 @@ bool parseInputParameters(int ac, char* av[])
         }
 
         std::string cluster;
-        if (vm.count("cluster"))
-        {
-            cluster+= vm["cluster"].as<std::string>();
+        if (vm.count("cluster")) {
+            cluster += vm["cluster"].as<std::string>();
         } else {
             cluster = "Bmdlref";
         }
@@ -50,18 +46,15 @@ bool parseInputParameters(int ac, char* av[])
         std::cout << "Command: " << cmdStr << std::endl;
     }
 
-    catch(std::exception & e)
-    {
+    catch (std::exception &e) {
         std::cout << e.what() << "\n";
         return false;
     }
-    
+
     return true;
 }
 
-
-int main(int ac, char* av[])
-{
+int main(int ac, char *av[]) {
     parseInputParameters<std::string>(ac, av);
     return EXIT_SUCCESS;
 }
