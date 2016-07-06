@@ -9,27 +9,15 @@
 class ServerAcesss {
   public:
     ServerAcesss() : UserMap() { init(); }
-    ~ServerAcesss() {}
 
-<<<<<<< HEAD
     void access(const std::string &serverName, const std::string &userName = "hungptit") {
-      auto command = getSshCommand(serverName, userName);
-      std::cout << command << "\n";
-      std::system(command.c_str());
-=======
-    void access(const std::string & serverName, const std::string & userName = "hungptit")
-    {
-        utils::run(getSshCommand(serverName, userName), {});
->>>>>>> 8becae5b3737682d8f4d6f931f5aff885301ef6c
+        auto command = getSshCommand(serverName, userName);
+        std::system(command.c_str());
     }
 
   private:
     std::map<std::string, std::string> UserMap;
-
-    void init() {
-        UserMap["hungdang-deb7-64.dhcp.mathworks.com"] = "hungdang";
-        UserMap["c-24-60-165-128.hsd1.ma.comcast.net"] = "hungptit";
-    }
+    void init() { UserMap["hungdang-deb7-64.dhcp.mathworks.com"] = "hungdang"; }
 
     const std::string getSshCommand(const std::string &serverName,
                                     const std::string &userName) {
