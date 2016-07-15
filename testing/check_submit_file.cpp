@@ -49,9 +49,9 @@ namespace {
         }
 
       private:
-        std::vector<std::string> ExcludedExtensions = {".p",  ".d",    ".o",    ".ts",  ".m~",
-                                                       ".m#", ".xml~", ".cpp~", ".hpp~", ".so",
-                                                       ".dbg", ".log", ".tmp"};
+        std::vector<std::string> ExcludedExtensions = {
+            ".p",    ".d",  ".o",   ".ts",  ".m~",  ".m#",  ".xml~",   ".cpp~",
+            ".hpp~", ".so", ".dbg", ".log", ".tmp", ".dot", ".mexa64", ""};
     };
 
     template <typename Filter>
@@ -68,8 +68,7 @@ namespace {
         fmt::print("{}", writer.str());
     }
 
-    template<typename Container> 
-    Container remove_duplicate_items(Container &data) {
+    template <typename Container> Container remove_duplicate_items(Container &data) {
         using T = typename Container::value_type;
         std::unordered_set<T> dict(data.begin(), data.end());
         return Container(dict.begin(), dict.end());
@@ -106,7 +105,8 @@ namespace {
             };
             ++pos;
         }
-        return std::make_tuple(remove_duplicate_items(modifiedFiles), remove_duplicate_items(deletedFiles));
+        return std::make_tuple(remove_duplicate_items(modifiedFiles),
+                               remove_duplicate_items(deletedFiles));
     }
 
     template <typename T> auto diff_vector(std::vector<T> &x, std::vector<T> &y) {

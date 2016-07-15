@@ -21,13 +21,12 @@ namespace {
         // clang-format off
         desc.add_options()(
             "help,h", "This command will sync a master sandbox on a local SSD drive.")
-            ("root-dir,r", po::value<std::string>(), "A master sandbox.")
-            ("sandbox,s", po::value<std::string>(), "A master sandbox name.")
+            ("root-dir,r", po::value<std::string>(), "A root directory.")
             ("cluster,c", po::value<std::string>(), "A source cluster.")
-            ("log-dir,l", po::value<std::string>(), "A new sandbox name.");
+            ("log-dir,l", po::value<std::string>(), "A log folder.");
         // clang-format on
         po::positional_options_description p;
-        p.add("sandbox", -1);
+        p.add("cluster", -1);
 
         po::variables_map vm;
         po::store(po::command_line_parser(ac, av).options(desc).positional(p).run(), vm);
@@ -42,7 +41,7 @@ namespace {
 
         std::string rootDir;
         if (vm.count("root-dir")) {
-            rootDir = vm["master"].as<std::string>();
+            rootDir = vm["root-dir"].as<std::string>();
         } else {
             auto currentPath = boost::filesystem::current_path();
             rootDir = currentPath.string();
@@ -53,13 +52,6 @@ namespace {
             cluster = vm["cluster"].as<std::string>();
         } else {
             cluster = "Bmdlref";
-        }
-
-        std::string sandbox;
-        if (vm.count("sandbox")) {
-            sandbox = vm["sandbox"].as<std::string>();
-        } else {
-            sandbox = "Bmdlref.latest_pass";
         }
 
         std::string logDir;
