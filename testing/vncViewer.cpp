@@ -8,7 +8,7 @@ int main(int ac, char *av[]) {
     namespace po = boost::program_options;
     po::options_description desc("Allowed options");
     desc.add_options()("help,h", "gotoServer: .")(
-        "server,s", po::value<std::string>(), "Server name")("user,u", po::value<std::string>(),
+                                                  "server,s", po::value<std::string>(), "Server name")("user,u", po::value<std::string>(),
                                                              "User name");
 
     po::positional_options_description p;
@@ -19,7 +19,6 @@ int main(int ac, char *av[]) {
     po::notify(vm);
 
     if (vm.count("help")) {
-        std::cout << "Usage: gotoServer [options]\n";
         std::cout << desc;
         return false;
     }
@@ -28,7 +27,7 @@ int main(int ac, char *av[]) {
     if (vm.count("server")) {
         serverName = vm["server"].as<std::string>();
     } else {
-        serverName = "hungdang-deb7-64.dhcp.mathworks.com";
+        serverName = "hungdang-deb8-64.dhcp.mathworks.com";
     }
 
     std::string userName;

@@ -17,7 +17,7 @@ class ServerAcesss {
 
   private:
     std::map<std::string, std::string> UserMap;
-    void init() { UserMap["hungdang-deb7-64.dhcp.mathworks.com"] = "hungdang"; }
+    void init() { UserMap["hungdang-deb8-64.dhcp.mathworks.com"] = "hungdang"; }
 
     const std::string getSshCommand(const std::string &serverName,
                                     const std::string &userName) {

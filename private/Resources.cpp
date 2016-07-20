@@ -8,7 +8,7 @@ template <> const std::string SandboxResources<std::string>::SbCommand = "sb ";
 template <> const std::string SandboxResources<std::string>::SbCheckCommand = "sbcheck ";
 template <> const std::string SandboxResources<std::string>::WebViewer = "chromium";
 template <> const std::string SandboxResources<std::string>::Gecko = "http://komodo.mathworks.com/main/gecko/";
-template <> const std::string SandboxResources<std::string>::GeckoSearch = "http://inside-labs.mathworks.com/dev/gecko-search/?q=";
+template <> const std::string SandboxResources<std::string>::GeckoSearch = "http://komodo.mathworks.com/main/gecko/search?q=";
 template <> const std::string SandboxResources<std::string>::Batcave = "http://bat3cave.mathworks.com/Cabbage/cluster/";
 template <> const std::string SandboxResources<std::string>::CodeSearch = "http://codesearch.mathworks.com:8080/srcsearch/";
 template <> const std::string SandboxResources<std::string>::Outlook = "https://outlook.mathworks.com/owa/#path=/";

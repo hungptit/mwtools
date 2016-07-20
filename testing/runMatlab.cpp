@@ -25,7 +25,7 @@ bool parseInputParameters(int ac, char* av[])
             ;
 
         po::positional_options_description p;
-        p.add("options", -1);
+        p.add("cluster", -1);
 
         po::variables_map vm;
         po::store(po::command_line_parser(ac, av).options(desc).positional(p).run(), vm);
@@ -53,7 +53,7 @@ bool parseInputParameters(int ac, char* av[])
             optionString += "-s " + vm["cluster"].as<std::string>();
         }
 
-        optionString += "-nodesktop -nosplash -memmgr release";
+        optionString += " -nodesktop -nosplash -memmgr release";
 
         const std::string cmdStr = Tools::SandboxResources<std::string>::SbCommand + optionString;
         std::system(cmdStr.c_str());

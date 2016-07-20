@@ -13,7 +13,7 @@
 #include <boost/filesystem.hpp>
 #include <locale>
 
-#include "cppformat/format.h"
+#include "fmt/format.h"
 
 namespace {
     bool isLocalSandbox(const boost::filesystem::path &aPath) {

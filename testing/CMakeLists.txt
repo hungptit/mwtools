@@ -19,7 +19,7 @@ include_directories ("${PROJECTS_FOLDER}/3p/poco/include")
 include_directories ("${PROJECTS_FOLDER}/3p/leveldb/include")
 include_directories ("${PROJECTS_FOLDER}/3p/rapidjson/include")
 include_directories ("${PROJECTS_FOLDER}/3p/gtest/include")
-include_directories ("${PROJECTS_FOLDER}/3p/cppformat/include")
+include_directories ("${PROJECTS_FOLDER}/3p/fmt/include")
 include_directories ("${PROJECTS_FOLDER}/3p/cereal/include")
 include_directories ("${PROJECTS_FOLDER}/3p/sparsehash/include/")
 include_directories ("${PROJECTS_FOLDER}/3p/snappy/include/")
@@ -34,8 +34,8 @@ set(LIB_POCO_DATA "${PROJECTS_FOLDER}/3p/poco/lib/libPocoData.a")
 set(LIB_POCO_SQLITE "${PROJECTS_FOLDER}/3p/poco/lib/libPocoDataSQLite.a")
 set(LIB_POCO_XML "${PROJECTS_FOLDER}/3p/poco/lib/libPocoXML.a")
 set(LIB_POCO_NET "${PROJECTS_FOLDER}/3p/poco/lib/libPocoNet.a")
-set(LIB_CPPFORMAT "${PROJECTS_FOLDER}/3p/cppformat/lib/libcppformat.a")
 set(LIB_SNAPPY "${PROJECTS_FOLDER}/3p/snappy/lib/libsnappy.a")
+set(LIB_FMT "${PROJECTS_FOLDER}/3p/fmt/lib/libfmt.a")
 
 # Find Boost libraries
 set(Boost_USE_STATIC_LIBS ON)
@@ -63,12 +63,13 @@ if (Boost_FOUND)
   set(COMMAND_SRC_FILES vncViewer gotoServer createPdfFile getGeckFiles getEdgCaseFiles
     regenerateGlobalDatabase runMatlab searchGeck
     geckoSearch openCluster openOutlook codeSearch
-    runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles web_browser)
+    runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles 
+    web_browser createSBSSandbox deleteSBSSandbox cloneSandbox syncMasterSandbox)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
       ${Boost_LIBRARIES}       
-      ${LIB_CPPFORMAT}
+      ${LIB_FMT}
       ${LIB_POCO_UTIL}
       ${LIB_POCO_NET}
       ${LIB_POCO_XML}
@@ -83,7 +84,7 @@ if (Boost_FOUND)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
-      ${Boost_LIBRARIES} ${LIB_LEVELDB} ${LIB_CPPFORMAT} ${LIB_SNAPPY} -lpthread -lrt)
+      ${Boost_LIBRARIES} ${LIB_LEVELDB} ${LIB_FMT} -lpthread -lrt)
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
@@ -99,7 +100,7 @@ if (Boost_FOUND)
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
       ${Boost_LIBRARIES} 
-      ${LIB_CPPFORMAT}
+      ${LIB_FMT}
       ${LIB_GTEST} 
       ${LIB_GTEST_MAIN}       
       ${LIB_POCO_UTIL}
