@@ -55,6 +55,6 @@ bool parseInputParameters(int ac, char *av[]) {
 }
 
 int main(int ac, char *av[]) {
-    parseInputParameters<std::string>(ac, av);
+    parseInputParameters(ac, av);
     return EXIT_SUCCESS;
 }
