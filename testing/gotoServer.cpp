@@ -66,7 +66,7 @@ int main(int ac, char *av[]) {
     if (vm.count("server")) {
         serverName = vm["server"].as<std::string>();
     } else {
-        serverName = "hungdang-deb7-64.dhcp.mathworks.com";
+        serverName = "hungdang-deb8-64.dhcp.mathworks.com";
     }
 
     std::string userName;
