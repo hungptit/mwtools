@@ -1,11 +1,13 @@
 PROJECT (TOOLS)
 CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
 
+set(EXTRA_COMPILE_OPTIONS "-Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef -DCEREAL_RAPIDJSON_HAS_CXX11_RVALUE_REFS -DFMT_HEADER_ONLY ")
+
 # set (CMAKE_BUILD_TYPE Debug)
 set (CMAKE_BUILD_TYPE Release)
 # set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_COMPILER ../../3p/llvm/bin/clang++)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -pedantic -O4 -Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -pedantic -O4 ${EXTRA_COMPILE_OPTIONS}")
 
 ENABLE_TESTING()
 
@@ -34,6 +36,20 @@ set(LIB_POCO_SQLITE "${PROJECTS_FOLDER}/3p/poco/lib/libPocoDataSQLite.a")
 set(LIB_POCO_XML "${PROJECTS_FOLDER}/3p/poco/lib/libPocoXML.a")
 set(LIB_POCO_NET "${PROJECTS_FOLDER}/3p/poco/lib/libPocoNet.a")
 set(LIB_FMT "${PROJECTS_FOLDER}/3p/fmt/lib/libfmt.a")
+
+# Libraries used by rocksdb
+set(LIB_ROCKSDB "${PROJECTS_FOLDER}/3p/rocksdb/librocksdb.a")
+set(LIB_ZLIB "${PROJECTS_FOLDER}/3p/zlib/lib/libz.a")
+set(LIB_LZ4 "${PROJECTS_FOLDER}/3p/lz4/lib/liblz4.a")
+set(LIB_BZ2 "${PROJECTS_FOLDER}/3p/bzip2/lib/libbz2.a")
+set(LIB_SNAPPY "${PROJECTS_FOLDER}/3p/snappy/lib/libsnappy.a")
+set(LIB_JEMALLOC "${PROJECTS_FOLDER}/3p/jemalloc/lib/libjemalloc.a")
+
+include_directories ("${PROJECTS_FOLDER}/3p/rocksdb/include")
+include_directories ("${PROJECTS_FOLDER}/3p/zlib/include")
+include_directories ("${PROJECTS_FOLDER}/3p/lz4/include")
+include_directories ("${PROJECTS_FOLDER}/3p/bzip2/include")
+include_directories ("${PROJECTS_FOLDER}/3p/jemalloc/include")
 
 # Find Boost libraries
 set(Boost_USE_STATIC_LIBS ON)
@@ -82,7 +98,8 @@ if (Boost_FOUND)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
-      ${Boost_LIBRARIES} ${LIB_LEVELDB} ${LIB_FMT} -lpthread -lrt)
+      ${Boost_LIBRARIES} ${LIB_ROCKSDB} ${LIB_LEVELDB} ${LIB_LZ4} ${LIB_ZLIB} ${LIB_SNAPPY} ${LIB_JEMALLOC}
+      ${LIB_BZ2} ${LIB_FMT} -lpthread -lrt)
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 

@@ -34,7 +34,7 @@ namespace {
     template <typename Container, typename Filter> void print(Container &data, Filter &f) {
         for (auto item : data) {
             if (f.isValid(item)) {
-                fmt::print("{}\n", std::get<utils::filesystem::PATH>(item));
+                fmt::print("{}\n", item.Path);
             }
         }
     }
@@ -134,15 +134,15 @@ namespace {
         std::vector<std::string> deletedFiles;
 
         for (auto const &item : allEditedFiles) {
-            modifiedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));
+            modifiedFiles.emplace_back(item.Path);
         }
 
         for (auto const &item : allNewFiles) {
-            modifiedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));
+            modifiedFiles.emplace_back(item.Path);
         }
 
         for (auto const &item : allDeletedFiles) {
-            deletedFiles.emplace_back(std::get<utils::filesystem::PATH>(item));
+            deletedFiles.emplace_back(item.Path);
         }
 
         return std::make_tuple(modifiedFiles, deletedFiles);
