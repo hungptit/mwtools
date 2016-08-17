@@ -9,19 +9,15 @@
 class ServerAcesss {
   public:
     ServerAcesss() : UserMap() { init(); }
-    ~ServerAcesss() {}
 
     void access(const std::string &serverName, const std::string &userName = "hungptit") {
-        utils::run(getSshCommand(serverName, userName), {});
+        auto command = getSshCommand(serverName, userName);
+        std::system(command.c_str());
     }
 
   private:
     std::map<std::string, std::string> UserMap;
-
-    void init() {
-        UserMap["bioemag.nmsu.edu"] = "hungptit";
-        UserMap["c-24-60-165-128.hsd1.ma.comcast.net"] = "hungptit";
-    }
+    void init() { UserMap["hungdang-deb8-64.dhcp.mathworks.com"] = "hungdang"; }
 
     const std::string getSshCommand(const std::string &serverName,
                                     const std::string &userName) {
@@ -70,7 +66,7 @@ int main(int ac, char *av[]) {
     if (vm.count("server")) {
         serverName = vm["server"].as<std::string>();
     } else {
-        serverName = "c-24-60-165-128.hsd1.ma.comcast.net";
+        serverName = "hungdang-deb8-64.dhcp.mathworks.com";
     }
 
     std::string userName;

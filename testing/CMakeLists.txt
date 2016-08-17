@@ -24,6 +24,7 @@ include_directories ("${PROJECTS_FOLDER}/3p/gtest/include")
 include_directories ("${PROJECTS_FOLDER}/3p/fmt/include")
 include_directories ("${PROJECTS_FOLDER}/3p/cereal/include")
 include_directories ("${PROJECTS_FOLDER}/3p/sparsehash/include/")
+include_directories ("${PROJECTS_FOLDER}/3p/snappy/include/")
 
 # Used libraries
 set(LIB_GTEST "${PROJECTS_FOLDER}/3p/gtest/lib/libgtest.a")
@@ -35,6 +36,7 @@ set(LIB_POCO_DATA "${PROJECTS_FOLDER}/3p/poco/lib/libPocoData.a")
 set(LIB_POCO_SQLITE "${PROJECTS_FOLDER}/3p/poco/lib/libPocoDataSQLite.a")
 set(LIB_POCO_XML "${PROJECTS_FOLDER}/3p/poco/lib/libPocoXML.a")
 set(LIB_POCO_NET "${PROJECTS_FOLDER}/3p/poco/lib/libPocoNet.a")
+set(LIB_SNAPPY "${PROJECTS_FOLDER}/3p/snappy/lib/libsnappy.a")
 set(LIB_FMT "${PROJECTS_FOLDER}/3p/fmt/lib/libfmt.a")
 
 # Libraries used by rocksdb
@@ -74,7 +76,7 @@ message(STATUS "${Boost_LIBRARY_DIRS}")
 
 if (Boost_FOUND)
   # Compile all binaries
-  set(COMMAND_SRC_FILES gotoServer createPdfFile getGeckFiles getEdgCaseFiles
+  set(COMMAND_SRC_FILES vncViewer gotoServer createPdfFile getGeckFiles getEdgCaseFiles
     regenerateGlobalDatabase runMatlab searchGeck
     geckoSearch openCluster openOutlook codeSearch
     runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles 
@@ -83,14 +85,14 @@ if (Boost_FOUND)
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
       ${Boost_LIBRARIES}       
-      ${LIB_FMT}
+      ${LIB_FMT} ${LIB_SNAPPY}
       ${LIB_POCO_UTIL}
       ${LIB_POCO_NET}
       ${LIB_POCO_XML}
       ${LIB_POCO_SQLITE}
       ${LIB_POCO_FOUNDATION}
       ${LIB_POCO_DATA}
-      ${LIB_POCO_SQLITE} -ldl -lpthread) 
+      ${LIB_POCO_SQLITE} ${LIB_SNAPPY} -ldl -lpthread) 
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
@@ -115,15 +117,10 @@ if (Boost_FOUND)
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
       ${Boost_LIBRARIES} 
-      ${LIB_FMT}
-      ${LIB_GTEST} 
-      ${LIB_GTEST_MAIN}       
-      ${LIB_POCO_UTIL}
-      ${LIB_POCO_NET}
-      ${LIB_POCO_XML}
-      ${LIB_POCO_SQLITE}
-      ${LIB_POCO_FOUNDATION}
-      ${LIB_POCO_DATA}
+      ${LIB_FMT} ${LIB_GTEST} ${LIB_GTEST_MAIN}       
+      ${LIB_POCO_UTIL} ${LIB_POCO_NET}
+      ${LIB_POCO_XML} ${LIB_POCO_SQLITE}
+      ${LIB_POCO_FOUNDATION} ${LIB_POCO_DATA}
       ${LIB_POCO_SQLITE} -ldl -lpthread)
     ADD_TEST(${src_file} ./${src_file})
   endforeach (src_file)
