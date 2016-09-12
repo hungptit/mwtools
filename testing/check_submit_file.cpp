@@ -19,7 +19,6 @@
 #include "boost/thread/future.hpp"
 #include "boost/unordered_set.hpp"
 
-#include "utils/FileSearch.hpp"
 #include "utils/FolderDiff.hpp"
 #include "utils/LevelDBIO.hpp"
 #include "utils/Timer.hpp"
@@ -50,8 +49,8 @@ namespace {
 
       private:
         std::vector<std::string> ExcludedExtensions = {
-            ".p",    ".d",  ".o",   ".ts",  ".m~",  ".m#",  ".xml~",   ".cpp~",
-            ".hpp~", ".so", ".dbg", ".log", ".tmp", ".dot", ".mexa64", ""};
+            ".p",   ".d",   ".o",   ".ts",  ".m~",     ".m#", ".xml~", ".cpp~", ".hpp~", ".so",
+            ".dbg", ".log", ".tmp", ".dot", ".mexa64", "", ".wpc", ".wdf", ""};
     };
 
     template <typename Filter>

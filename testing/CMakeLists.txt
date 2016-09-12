@@ -47,11 +47,14 @@ set(LIB_BZ2 "${PROJECTS_FOLDER}/3p/bzip2/lib/libbz2.a")
 set(LIB_SNAPPY "${PROJECTS_FOLDER}/3p/snappy/lib/libsnappy.a")
 set(LIB_JEMALLOC "${PROJECTS_FOLDER}/3p/jemalloc/lib/libjemalloc.a")
 
+set(LIB_TBB "${PROJECTS_FOLDER}/3p/tbb/lib/libtbb.so")
+
 include_directories ("${PROJECTS_FOLDER}/3p/rocksdb/include")
 include_directories ("${PROJECTS_FOLDER}/3p/zlib/include")
 include_directories ("${PROJECTS_FOLDER}/3p/lz4/include")
 include_directories ("${PROJECTS_FOLDER}/3p/bzip2/include")
 include_directories ("${PROJECTS_FOLDER}/3p/jemalloc/include")
+include_directories ("${PROJECTS_FOLDER}/3p/tbb/include/")
 
 # Find Boost libraries
 set(Boost_USE_STATIC_LIBS ON)
@@ -101,7 +104,7 @@ if (Boost_FOUND)
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
       ${Boost_LIBRARIES} ${LIB_ROCKSDB} ${LIB_LEVELDB} ${LIB_LZ4} ${LIB_ZLIB} ${LIB_SNAPPY} ${LIB_JEMALLOC}
-      ${LIB_BZ2} ${LIB_FMT} -lpthread -lrt)
+      ${LIB_BZ2} ${LIB_FMT} ${LIB_TBB} -lpthread -lrt)
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
