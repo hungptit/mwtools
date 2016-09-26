@@ -80,7 +80,7 @@ message(STATUS "${Boost_LIBRARY_DIRS}")
 if (Boost_FOUND)
   # Compile all binaries
   set(COMMAND_SRC_FILES vncViewer gotoServer createPdfFile getGeckFiles getEdgCaseFiles
-    regenerateGlobalDatabase runMatlab searchGeck
+    regenerateGlobalDatabase runMatlab searchGeck parseTestLog
     geckoSearch openCluster openOutlook codeSearch
     runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles 
     web_browser createSBSSandbox deleteSBSSandbox cloneSandbox syncMasterSandbox)
