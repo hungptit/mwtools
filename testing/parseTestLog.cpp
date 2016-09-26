@@ -8,16 +8,14 @@
 int main(int ac, char *av[]) {
     namespace po = boost::program_options;
     using path = boost::filesystem::path;
-
-    po::options_description desc("Allowed options");
     boost::system::error_code errcode;
-    path currentFolder = boost::filesystem::current_path();
-    std::string logFolder;
+    path currentFolder = boost::filesystem::current_path(errcode);
     std::string defaultDataFolder = (currentFolder / path("data")).string();
     std::string defaultViewFolder = (currentFolder / path("views")).string();;
     std::string defaultCommand("/local/projects/testloganalyzer/bin/logdb.pl");
+    std::string logFolder, dataFolder, viewFolder, command;
 
-    std::string dataFolder, viewFolder, command;
+    po::options_description desc("Allowed options");
     
     // clang-format off
     desc.add_options()

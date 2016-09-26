@@ -33,7 +33,7 @@ namespace {
         std::string Info;
     };
 
-    void backupSandbox(const std::string &comment, const boost::filesystem::path &database) {
+    void backupSandbox(std::string &&comment, const boost::filesystem::path &database) {
         const boost::filesystem::path backupDir = getBackupDir(comment);
         const boost::filesystem::path backupPath = getBackupPath();
         std::string results =
@@ -62,19 +62,25 @@ namespace {
         std::cout << "Backup folder ==> " << backupFolder << "\n";
     }
 
-    template <typename T> void parseInputParameters(int ac, char *av[]) {
+    void parseInputParameters(int ac, char *av[]) {
         using namespace boost;
         namespace po = boost::program_options;
+        using path = boost::filesystem::path;
+        
+        path database, defaultDatabase = getBackupPath() / boost::filesystem::path(".database.db");
+        std::vector<std::string> comments;
+        
         po::options_description desc("Allowed options");
-        desc.add_options()(
-            "help,h",
-            "backupSandbox - Run sbbackup to backup all changes for a curent sandbox.")(
-            "comment,c", po::value<std::string>(),
-            "Comment for back up changes. No special character except the white space.")(
-            "database,d", po::value<std::string>(), "Database used to log all information.");
 
+        // clang-format off
+        desc.add_options()
+            ("help,h", "backupSandbox - Run sbbackup to backup all changes for a curent sandbox.")
+            ("comments,c", po::value<std::vector<std::string>>(&comments), "Comment for back up changes. No special character except the white space.")
+            ("database,d", po::value<path>(&database)->default_value(defaultDatabase), "Database used to log all information.");
+        // clang-format on
+        
         po::positional_options_description p;
-        p.add("comment", -1);
+        p.add("comments", -1);
 
         po::variables_map vm;
         po::store(po::command_line_parser(ac, av).options(desc).positional(p).run(), vm);
@@ -86,31 +92,27 @@ namespace {
             return;
         }
 
-        std::string comment;
-        if (vm.count("comment")) {
-            comment = vm["comment"].as<std::string>();
+        std::string commentStr;
+        if (comments.empty()) {
+            commentStr = utils::getTimeStampString();
         } else {
-            std::cout << "Usage: backupSandbox [options]\n";
-            std::cout << desc;
-            return;
+            if (comments.size() < 2) {
+                commentStr = std::move(comments[0]);
+            } else {
+                auto iter = comments.begin();
+                commentStr = *iter;
+                std::for_each(++iter, comments.end(), [&commentStr](auto &&item) {
+                    commentStr += " " + item;
+            });
+            }
         }
 
-        boost::filesystem::path database;
-        if (vm.count("database")) {
-            database = boost::filesystem::path(vm["database"].as<std::string>());
-        } else {
-            std::string sandboxPath = std::string(std::getenv("DEFAULT_SANDBOX"));
-            if (sandboxPath.empty()) {
-                std::cerr << "DEFAULT_SANDBOX environment variable is not set or invalid.\n";
-            }
-            database = getBackupPath() / boost::filesystem::path(".database.db");
-        }
-        backupSandbox(comment, database);
+        backupSandbox(std::move(commentStr), database);
         return;
     }
 }
 
 int main(int ac, char *av[]) {
-    parseInputParameters<std::string>(ac, av);
+    parseInputParameters(ac, av);
     return EXIT_SUCCESS;
 }

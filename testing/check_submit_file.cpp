@@ -10,17 +10,10 @@
 #include <unordered_set>
 #include <vector>
 
-#define BOOST_THREAD_VERSION 4
-#include "boost/config.hpp"
 #include "boost/filesystem.hpp"
 #include "boost/program_options.hpp"
-#include "boost/thread.hpp"
-#include "boost/thread.hpp"
-#include "boost/thread/future.hpp"
-#include "boost/unordered_set.hpp"
 
 #include "utils/FolderDiff.hpp"
-#include "utils/LevelDBIO.hpp"
 #include "utils/Timer.hpp"
 
 #include "fmt/format.h"
@@ -56,7 +49,6 @@ namespace {
     template <typename Filter>
     void print_results(std::vector<std::string> &results, const std::string &title) {
         BasicFilter filter;
-        using path = boost::filesystem::path;
         fmt::MemoryWriter writer;
         fmt::print("---- {} ----\n", title);
         for (auto const &item : results) {
