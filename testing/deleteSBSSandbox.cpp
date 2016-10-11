@@ -1,3 +1,4 @@
+#include "boost/filesystem.hpp"
 #include "boost/lexical_cast.hpp"
 #include "boost/program_options.hpp"
 
@@ -7,9 +8,6 @@
 #include <iterator>
 
 #include "tools/Resources.hpp"
-#include "utils/FileUtils.hpp"
-#include "utils/Process.hpp"
-#include "utils/Utils.hpp"
 
 int main(int argc, char *argv[]) {
     using namespace boost;
@@ -41,11 +39,19 @@ int main(int argc, char *argv[]) {
     }
 
     std::for_each(sandboxes.begin(), sandboxes.end(), [&cluster](const auto &aSandbox) {
+        using path = boost::filesystem::path;
+        path aPath(aSandbox);
         std::string userName = std::getenv("USER");
-        const std::string cmdStr = "mw -using " + cluster + " sbs clone discard " + userName +
-                                   "." + utils::normalize_path(aSandbox);
+        const std::string cmdStr = "mw -using " + cluster + " sbs clone discard " +
+                                   boost::filesystem::canonical(aPath).stem().string() +
+                                   boost::filesystem::canonical(aPath).extension().string();
+        std::cout << "Executed command: " << cmdStr << "\n";
         std::system(cmdStr.c_str());
-        std::cout << "Command: " << cmdStr << std::endl;
+
+        // Remove the symbolic link if needed.
+        if (boost::filesystem::exists(aPath)) {
+            boost::filesystem::remove(aPath);
+        }        
     });
 
     return EXIT_SUCCESS;
