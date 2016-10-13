@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
         path oldPath(aSandbox);
         if (boost::filesystem::exists(oldPath)) {
             boost::filesystem::remove(oldPath);
-        }        
+        }
     });
 
     return EXIT_SUCCESS;
