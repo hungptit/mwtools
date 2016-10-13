@@ -133,7 +133,7 @@ if (Boost_FOUND)
     regenerateGlobalDatabase runMatlab searchGeck parseTestLog
     geckoSearch openCluster openOutlook codeSearch mrdesktop
     runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles 
-    web_browser createSBSSandbox deleteSBSSandbox cloneSandbox syncMasterSandbox)
+    web_browser createSBSSandbox deleteSBSSandbox cloneSandbox syncMasterSandbox mrun_tests mget_test_results)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
@@ -145,7 +145,7 @@ if (Boost_FOUND)
       ${LIB_POCO_SQLITE}
       ${LIB_POCO_FOUNDATION}
       ${LIB_POCO_DATA}
-      ${LIB_POCO_SQLITE} ${LIB_SNAPPY} -ldl -lpthread) 
+      ${LIB_POCO_SQLITE} ${LIB_SNAPPY} ${LIB_TBB} -ldl -lpthread) 
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 

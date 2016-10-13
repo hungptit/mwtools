@@ -49,8 +49,9 @@ int main(int argc, char *argv[]) {
         std::system(cmdStr.c_str());
 
         // Remove the symbolic link if needed.
-        if (boost::filesystem::exists(aPath)) {
-            boost::filesystem::remove(aPath);
+        path oldPath(aSandbox);
+        if (boost::filesystem::exists(oldPath)) {
+            boost::filesystem::remove(oldPath);
         }        
     });
 
