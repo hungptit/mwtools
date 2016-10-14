@@ -18,11 +18,7 @@
 #include "spdlog/spdlog.h"
 #include "tbb/tbb.h"
 
-#include "Poco/Data/SQLite/Connector.h"
-#include "Poco/Data/Session.h"
-
 auto console = spdlog::stdout_color_mt("console");
-auto logger = spdlog::basic_logger_mt("basic_logger", "logs/basic.txt");
 
 namespace {
 
@@ -52,16 +48,16 @@ namespace {
         return files;
     }
 
-    std::tuple<std::string, std::string> exec(const std::string &sandbox, const std::string &aTestFile, const int displayNum) {
+    std::tuple<std::string, std::string> exec(const std::string &, const std::string &aTestFile,
+                                              const int display, const std::string &logDir) {
         fmt::MemoryWriter writer;
         auto logFile = boost::filesystem::temp_directory_path() /
                        boost::filesystem::unique_path("%%%%-%%%%-%%%%-%%%%");
-        writer << "xterm -display :" << displayNum << " -l -lf " << logFile.string()
-               << " -e mrun_tests -s " << sandbox << " -t " << aTestFile;
+        writer << "xterm -display :" << display << " -e mw -using pwd runlikebat -testlist "
+               << aTestFile << " -logs " << logDir;
         console->info("Run {0} test using command: {1}\n", aTestFile, writer.str());
-        logger->info("Run command: {}\n", writer.str());
         std::system(writer.str().c_str());
-        return std::make_tuple(aTestFile, utils::read(logFile.string()));
+        return std::make_tuple(aTestFile, logDir);
     }
 }
 
@@ -70,24 +66,23 @@ int main(const int argc, char *argv[]) {
 
     po::options_description desc("Allowed options");
     std::vector<std::string> folders;
-    std::vector<int> displayIDs;
 
-    constexpr int NumberOfDisplay = 12;
-    std::vector<int> defaultDisplayIDs(NumberOfDisplay, 0);
-    int n = 0;
-    std::generate(defaultDisplayIDs.begin(), defaultDisplayIDs.end(), [&n] { return ++n; });
-
+    int display;
     auto sandboxPath = boost::filesystem::current_path();
-    std::string sandbox;
+    std::string sandbox, logDir;
+    // Create the log folder
+    auto defaultLogDir = boost::filesystem::temp_directory_path() /
+                         boost::filesystem::unique_path("%%%%-%%%%-%%%%-%%%%");
 
     // clang-format off
     desc.add_options()
         ("help,h", "runTests - run tests using sbruntests script.")
         ("verbose,v", "Display detail information.")
         ("locale_ja_utf8,j", "Use Japanese locale for all sessions.")
-        ("display,d", po::value<std::vector<int>>(&displayIDs), "A list of display IDs")
         ("folders,t", po::value<std::vector<std::string>>(&folders), "Folders and test files users want to run.")
-        ("sanbox,s", po::value<std::string>(&sandbox)->default_value(sandboxPath.string()), "A sandbox want to use to run tests. The default value is the current folder");
+        ("log-dir,l", po::value<std::string>(&logDir)->default_value(defaultLogDir.string()), "An output log folder")
+        ("display,d", po::value<int>(&display)->default_value(0), "An output display ID")
+        ("sanbox,s", po::value<std::string>(&sandbox)->default_value(sandboxPath.string()), "A sandbox want to use to run tests. ");
     // clang-format on
 
     po::positional_options_description p;
@@ -106,48 +101,40 @@ int main(const int argc, char *argv[]) {
         throw(std::runtime_error("Need to provide folders and/or tests want to run."));
     }
 
-    auto files = getTestFiles(folders);
+    auto aFolder(logDir);
+    if (!boost::filesystem::exists(aFolder)) {
+        boost::filesystem::create_directories(aFolder);
+    }
 
-    if (displayIDs.empty())
-        displayIDs = defaultDisplayIDs;
+    auto files = getTestFiles(folders);
 
     const bool verbose = vm.count("help");
     tbb::concurrent_vector<std::tuple<std::string, std::string>> results;
 
     // Welcome message
-    console->info("Welcome to mget_test_results!");
+    console->info("Welcome to a multithreaded runlikebat!");
+    console->info("All results will be logged to \"{}\"!", logDir);
 
     // Run all tests
-    auto runTestObj = [&sandbox, &files, &displayIDs, &results, verbose](const int idx) {
+    auto runTestObj = [&sandbox, &files, &results, &logDir, display, verbose](const int idx) {
         std::string aTestFile = files[idx];
-        auto testResults = exec(sandbox, aTestFile, displayIDs[idx % displayIDs.size()]);
+        auto testResults = exec(sandbox, aTestFile, display, logDir);
         results.push_back(testResults);
 
         // Log  to the console
-        console->info("{} is finished!", aTestFile);
-        console->info("Current job status -> {0}/{1} tests are completed!\n", results.size(),
-                      files.size());
-        // Log to files
-        logger->info("{} is finished!", aTestFile);
-        logger->info("{} test log:", std::get<1>(testResults));
+        if (verbose) {
+            console->info("{} is finished!", aTestFile);
+            console->info("==> {0}/{1} tests are completed!\n", results.size(),
+                          files.size());
+        }
     };
 
     const int size = files.size();
     tbb::parallel_for(0, size, 1, runTestObj);
 
-    // Write results to SQLite database
-    using namespace Poco::Data::Keywords;
-    Poco::Data::SQLite::Connector::registerConnector();
-    Poco::Data::Session session("SQLite", "logs/database.db");
-    session << "CREATE TABLE IF NOT EXISTS TestLog (Sandbox VARCHAR(1024), Test "
-               "VARCHAR(1024), Log VARCHAR(102400));",
-        now;
-    Poco::Data::Statement insert(session);
-    for (auto &item : results) {
-        insert << "INSERT INTO TestLog VALUES(?, ?, ?)", use(sandbox), use(std::get<0>(item)),
-            use(std::get<1>(item));
-    }
-    insert.execute();
-
+    // Scan the log folder when all tests are finished.
+    std::string command = "sbscanlog -c " + logDir;
+    std::system(command.c_str());
+    
     return EXIT_SUCCESS;
 }
