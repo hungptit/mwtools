@@ -2,6 +2,7 @@ PROJECT (TOOLS)
 CMAKE_MINIMUM_REQUIRED (VERSION 3.4)
 
 set(PROJECTS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../../")
+set(SANDBOX_FOLDER "/sandbox/hungdang/")
 
 set(EXTRA_COMPILE_OPTIONS "-Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef -DCEREAL_RAPIDJSON_HAS_CXX11_RVALUE_REFS -DFMT_HEADER_ONLY ")
 
@@ -98,7 +99,7 @@ set(LIB_SNAPPY "${PROJECTS_FOLDER}/3p/snappy/lib/libsnappy.a")
 set(LIB_JEMALLOC "${PROJECTS_FOLDER}/3p/jemalloc/lib/libjemalloc.a")
 
 # set(LIB_TBB "${PROJECTS_FOLDER}/3p/tbb/lib/libtbb.so")
-set(LIB_TBB "-ltbb")
+set(LIB_TBB "${SANDBOX_FOLDER}/3p/tbb/lib/libtbb.so")
 
 include_directories ("${PROJECTS_FOLDER}/3p/rocksdb/include")
 include_directories ("${PROJECTS_FOLDER}/3p/zlib/include")
@@ -135,7 +136,7 @@ if (Boost_FOUND)
     regenerateGlobalDatabase runMatlab searchGeck parseTestLog
     geckoSearch openCluster openOutlook codeSearch mrdesktop
     runTests backupSandbox scanTestLog reviewBoard restoreSandbox pcodeFiles 
-    web_browser createSBSSandbox deleteSBSSandbox cloneSandbox syncMasterSandbox mrun_tests mget_test_results mrunlikebat)
+    web_browser createSBSSandbox deleteSBSSandbox cloneSandbox syncMasterSandbox)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
@@ -151,11 +152,23 @@ if (Boost_FOUND)
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
 
+    set(COMMAND_SRC_FILES mrun_tests mget_test_results mrunlikebat)
+  foreach (src_file ${COMMAND_SRC_FILES})
+    ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
+    TARGET_LINK_LIBRARIES(${src_file} 
+      ${Boost_LIBRARIES}
+      ${LIB_ROCKSDB} ${LIB_LZ4} ${LIB_ZLIB} ${LIB_SNAPPY} ${LIB_JEMALLOC} ${LIB_BZ2}
+      ${LIB_FMT}
+      ${LIB_POCO_UTIL} ${LIB_POCO_NET} ${LIB_POCO_XML} ${LIB_POCO_SQLITE} ${LIB_POCO_FOUNDATION} ${LIB_POCO_DATA} ${LIB_POCO_SQLITE}
+      ${LIB_TBB} -ldl -lpthread) 
+  endforeach (src_file)
+  INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
+
   set(COMMAND_SRC_FILES check_submit_file)
   foreach (src_file ${COMMAND_SRC_FILES})
     ADD_EXECUTABLE(${src_file} ${src_file}.cpp)
     TARGET_LINK_LIBRARIES(${src_file} 
-      ${Boost_LIBRARIES} ${LIB_ROCKSDB} ${LIB_LEVELDB} ${LIB_LZ4} ${LIB_ZLIB} ${LIB_SNAPPY} ${LIB_JEMALLOC}
+      ${Boost_LIBRARIES} ${LIB_ROCKSDB} ${LIB_LZ4} ${LIB_ZLIB} ${LIB_SNAPPY} ${LIB_JEMALLOC}
       ${LIB_BZ2} ${LIB_FMT} ${LIB_TBB} -lpthread -lrt)
   endforeach (src_file)
   INSTALL_PROGRAMS(//$ENV{HOME}/Public/sbtools FILES ${COMMAND_SRC_FILES})
