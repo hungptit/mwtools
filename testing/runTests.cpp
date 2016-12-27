@@ -28,6 +28,8 @@ namespace {
         } else {
             args.emplace_back("-autofarm");
             args.emplace_back("devel");
+            args.emplace_back("-massively-parallel");
+            args.emplace_back("-sort-by-test-time");
         }
 
         if (boost::filesystem::is_directory(aPath)) {

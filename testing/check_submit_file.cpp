@@ -12,6 +12,7 @@
 
 #include "boost/filesystem.hpp"
 #include "boost/program_options.hpp"
+#include "boost/algorithm/string.hpp"
 
 #include "utils/FolderDiff.hpp"
 #include "utils/Timer.hpp"
@@ -76,10 +77,11 @@ namespace {
         while (pos < buflen) {
             if (buffer[pos] == '\n') {
                 auto aLine = buffer.substr(begin, pos - begin);
+                boost::trim(aLine);
                 if (!aLine.empty()) {
                     auto it = aLine.find(deleteSign);
                     if (it != std::string::npos) {
-                        path aFile(aLine.substr(it + 3));
+                        path aFile((aLine.substr(it + 3)));
                         if (boost::filesystem::is_regular_file(aFile)) {
                             // fmt::print("Deleted file: {0}\n", aLine.substr(it + 3));
                             deletedFiles.emplace_back(aLine.substr(it + 3));

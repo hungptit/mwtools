@@ -26,6 +26,20 @@
 #include "utils/Process.hpp"
 
 namespace Tools {   
+    const std::string ReportFile("report.html");
+
+    // Send an email to the runner using mail command. This is onlu applied for Linux.
+    int sendMail(const std::string logDir) {
+        using path = boost::filesystem::path;
+        const path aPath = path(logDir) / path(ReportFile);
+        fmt::MemoryWriter writer;
+        writer << "mail --append=\"Content-type: text/html\" -s \"mrunlikebat results => http://" << std::getenv("HOST") << ".dhcp.mathworks.com/" ;
+        writer << aPath.string() << "\"";
+        writer << " " << std::getenv("USER") << "@mathworks.com < " << aPath.string();
+        fmt::print("{}\n", writer.str());
+        return std::system(writer.str().c_str());
+    }
+
     bool isLocalSandbox(const boost::filesystem::path &p) {
         using boost::filesystem::path;
         path local("/local"), localssd("/local-ssd");

@@ -20,7 +20,7 @@ int main(int ac, char *av[]) {
 
     if (vm.count("help")) {
         std::cout << desc;
-        return false;
+        return EXIT_FAILURE;
     }
 
     std::string serverName;

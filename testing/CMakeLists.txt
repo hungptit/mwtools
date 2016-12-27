@@ -4,7 +4,7 @@ CMAKE_MINIMUM_REQUIRED (VERSION 3.4)
 set(PROJECTS_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../../")
 set(SANDBOX_FOLDER "/sandbox/hungdang/")
 
-set(EXTRA_COMPILE_OPTIONS "-Wno-deprecated-register -Wno-keyword-macro -Wno-unused-local-typedef -DCEREAL_RAPIDJSON_HAS_CXX11_RVALUE_REFS -DFMT_HEADER_ONLY ")
+set(EXTRA_COMPILE_OPTIONS "-Wno-deprecated-register -Wno-keyword-macro")
 
 # set (CMAKE_BUILD_TYPE Debug)
 set (CMAKE_BUILD_TYPE Release)
@@ -37,9 +37,12 @@ add_cxx_compiler_flag(-std=c++14)
 add_cxx_compiler_flag(-Wall)
 add_cxx_compiler_flag(-Wextra)
 add_cxx_compiler_flag(-Wshadow)
+
 add_cxx_compiler_flag(-Werror RELEASE)
 add_cxx_compiler_flag(-Werror RELWITHDEBINFO)
 add_cxx_compiler_flag(-Werror MINSIZEREL)
+
+add_cxx_compiler_flag(-Wno-unused-local-typedef)
 
 add_cxx_compiler_flag(-pedantic)
 add_cxx_compiler_flag(-pedantic-errors)
@@ -51,12 +54,14 @@ add_cxx_compiler_flag(-fstrict-aliasing)
 if (HAVE_CXX_FLAG_FSTRICT_ALIASING)
   add_cxx_compiler_flag(-Wstrict-aliasing)
 endif()
+
 add_cxx_compiler_flag(-Wthread-safety)
 if (HAVE_WTHREAD_SAFETY)
   add_definitions(-DHAVE_WTHREAD_SAFETY)
   cxx_feature_check(THREAD_SAFETY_ATTRIBUTES)
 endif()
 
+# Use header only libraries
 add_cxx_compiler_flag(-DFMT_HEADER_ONLY)
 add_cxx_compiler_flag(-DCEREAL_RAPIDJSON_HAS_CXX11_RVALUE_REFS)
 

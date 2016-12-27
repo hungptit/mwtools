@@ -82,7 +82,7 @@ int main(int ac, char *av[]) {
     if (vm.count("help")) {
         std::cout << "Usage: createPdfFile [options]\n";
         std::cout << desc;
-        return false;
+        return EXIT_SUCCESS;
     }
 
     // Process input parameters
@@ -106,7 +106,7 @@ int main(int ac, char *av[]) {
     } else {
         std::cout << "Usage: createPdfFile [options]\n";
         std::cout << desc;
-        return false;
+        return EXIT_SUCCESS;
     }
 
     // Generate PDF file.
